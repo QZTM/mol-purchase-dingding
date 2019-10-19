@@ -1,0 +1,435 @@
+@import '/util/underLineUserPriceCompare/underLineUserPriceCompare.acss';
+@import '/util/approve-templet/approve-templet.acss';
+@import '/pages/common/common.acss';
+.beizhu{
+  max-lines: 140;
+  border: 1px solid  #F4F4F5;
+  height: 160px;
+}
+
+.tijiao{
+  align-content: center;
+  clear: both;
+}
+.common{
+  padding-top:0px;
+}
+.big-bottom-line{
+  height:8px;
+  background-color:#ff9800;
+}
+.images-view{
+  margin-bottom:10px;
+}
+.state-view{
+    font: 26px;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+.approver-out-view-out{
+  background-color:#258663;
+  margin-left: 13px;
+  margin-right: 20px;
+  margin-top: 10px;
+  
+}
+.approver-out-view{
+    width: 100%;
+    /* height: 60px; */
+    /* display: inline-block; */
+}
+.approver{
+    font:20px;
+}
+.approver_kuang{
+    display: inline-block;
+    width: 50px;
+    font: 24px;
+    margin-left: 20px;
+    margin-top: 22px;
+}
+.approver_pic{
+  width:45px;
+  height:45px;
+}
+.user-avatar-img{
+  width:45px;
+  height:45px;
+  top: 10px;
+  border-radius: 30px;
+}
+.close-icon{
+  top: 0px;
+  left: 30px;
+  width:15px;
+  height:15px;
+}
+.stream-line-img{
+  left: 47px;
+  top: 16px;
+  width:20px;
+  height:34px;
+}
+.user-name-text{
+  width:57px;
+  text-align: center;
+  color:#666;
+  font:16px;
+  top:60px;
+}
+.suggestion-view{
+  border:1px solid rgb(221, 221, 221);
+  font:18px;
+  margin:10px 20px 5px;
+  height:80px;
+  border-radius:3px;
+  padding:5px;
+  padding-left:5px;
+}
+
+
+.grid{
+  obrder-bottom: solid 3px #ddd;
+}
+/* .clearthings{
+  height: 33px;
+   font: 20px;
+   margin-top: 17px;
+   background-color: #FFFFFF;
+   padding-left: 20px;
+   padding-top: 10px;
+} */
+
+.section{
+  height: 32px;
+  padding: 0px;
+  border: none;
+  margin:0px;
+}
+.section-innerview{
+  display:inline-block;
+  width:88%;
+  line-height:200%;
+  height:100%;
+  margin-left:6%;
+  padding-top:5px;
+}
+    .section_title{
+        float: left;
+      font: 17px;
+    }
+    .section_order{
+      margin-top: 1px;
+      margin-right:23px;
+    }
+    .section_name{
+      clear: both;
+    }
+        .section_name_title{
+            float: left;
+            font: 17px;
+        }
+        .section_name_extra{
+            margin-top: 2px;
+            margin-right:23px;
+        }
+.input_spec{
+    margin-top: 14px;
+    height: 33px;
+    float: none;
+    clear: both;
+    background-color: #FFFFFF;
+    padding-left: 23px;
+    padding-top: 9px;
+}
+        .input_spec_title{
+              float: left;
+              font: 17px;
+        }
+        .input_spec_text{
+          margin-top: -4px;
+        }
+.input_num{
+    margin-top: 14px;
+    height: 43px;
+    float: none;
+    clear: both;
+      background-color: #FFFFFF;
+}
+        .input_num_title{
+              float: left;
+              font: 17px;
+        }
+        .input_num_text{
+          margin-top: -4px;
+        }
+
+.input_depar{
+     margin-top: 14px;
+    height: 45px;
+   
+    float: none;
+    clear: both;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #F4F4F5;
+}
+        .input_depar_title{
+              float: left;
+              font: 17px;
+        }
+        .input_depar_text{
+          margin-top: -4px;
+          
+        }
+     .grid_input{
+        padding-top: 14px;
+        background-color: #FFFFFF;
+        height: 293px;
+        
+    }
+      .sellerId{
+          font: 20px;
+          margin-left: 23px;
+           /* border-bottom: 3px solid #F4F4F5; */
+      }
+      .grid_input_zong{       
+          padding-top: 10px;
+          margin-left: 20px;
+           border-bottom: 1px solid #F4F4F5;
+          padding-bottom: 16px;
+      }
+          .grid_input_1_left{
+              font: 17px;
+              float: left;
+               /* border-bottom: 3px solid #F4F4F5; */
+          }
+          .grid_input_1_right{
+              float: right;
+              margin-top: -4px;
+          }
+          .seller_temple_price{
+              width: 138px;
+              height:40px;
+              margin-left: 20px;
+              padding-left: 10px;
+              padding-top: 3px;
+              background-color: rgb(33, 150, 241);
+              margin-top: 1px;
+              border-radius: 10px;
+              line-height: 100%;
+          }
+          .seller_temple_word{
+            width:32px;
+            height:32px;
+            margin-top: 2px;
+          }
+          .seller_temple_tele{
+            font-weight: bolder;
+            display: inline-block;
+            width: 90px;
+            height: 30px;
+            float: right;
+            /* font: 20px; */
+            line-height: 100%;
+            margin-top: 8px;
+            margin-right: 3px;
+            color: rgb(255, 255, 255);
+            /* font-family: fantasy; */
+          }
+      .grid_picture{
+         margin-top: 15px;
+         margin-left:20px;
+      }
+      .grid_picture_word{
+         margin-left: 9px;
+         width: 138px;
+         font: 16px;
+      }
+      .grid_picture_button{
+          margin-top: 0.25rem;
+          margin-bottom: 0.2rem;
+          margin-left: -108px;
+      }
+
+
+.addSellerTempleButton{
+    padding-top: 6px;
+    text-align: center;
+    font: 16px;
+    background-color: rgb(33, 150, 241);
+    height: 24px;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    color:#fff;
+}
+.top-btn{
+  width: 80px;
+  margin-left: 38%;
+  border-radius: 5px;
+}
+.addItemText{
+ color: #fff;
+ margin-top:15px;
+}
+/* 只能推荐 */
+  .aituijian{
+    height: 62px;
+  }
+.ask-seller-title{
+  font:17px;
+}
+.ask-seller-name{
+  margin-top: 2px;
+  font:14px;
+  float:right;
+  margin-right: 23px;
+
+}
+.autoRecView{
+    font:18px;
+    margin-right:20px;
+    text-align:right;
+    color:rgb(33, 150, 243);
+    font-weight:bolder;
+    margin-top:10px;
+}
+.autoRecView2{
+    font:18px;
+    margin-right:20px;
+    text-align:right;
+    color:rgb(33, 150, 243);
+    font-weight:bolder;
+    margin-top:10px;
+}
+.tele-line{
+}
+.addImage{
+    height: 56px;
+    width: 56px;
+    margin-top: 10px;
+    margin-left: 2%;
+}
+.empty-circle{
+   position: absolute;
+   height: 24px;
+   width: 24px;
+   right: 30px;
+   top: 8px;
+}
+.bottom-line{
+  margin-bottom: 3px;
+  height:1px;
+  width:88%;
+  background-color:#ddd;
+  margin-left:6%;
+}
+.float-right-20{
+  float:right;
+  text-align:right;
+  margin-right:0px !important;
+}
+.line80{
+  width:88%;
+  margin:5px 0px 5px 6%;
+  height:1px;
+  background-color:#ddd;
+}
+
+.common2{
+  /* margin-top: 17px; */
+  /*border-bottom: 1px solid #F4F4F5; 
+  font: 14px;
+  font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important; */
+}
+.common_histroyprice{
+    margin-left: 23px;
+    line-height: 30px;
+    letter-spacing:1px;
+}
+.common_button{
+    float: right;
+    width: 105px;
+    margin-top: -80px;
+    margin-right: 20px;
+    
+}
+.common_price{
+    margin-left: 23px;
+    float: left;
+    margin-top: 46px;
+        letter-spacing:2px;
+        line-height: 24px;
+    
+} 
+    .common_price_l{
+
+    }
+    .common_price_h{
+
+    }
+    .common_price_a{
+      
+    }
+  .common_sellerPrice{
+    float: left;
+    margin-left: 11px;
+    margin-top: 21px;
+    text-align: center;
+    line-height: 24px;
+  }
+.common_white{
+  height: 15px;
+  margin-top: 70px;
+}
+.one-line{
+  width:74%;
+  background-color:#777;
+  float:right;
+  margin-right:20px;
+}
+/**大框**/
+.compare-view{
+    height: 28px;
+    width: 90%;
+    margin-top: 20px;
+    margin-left:20px;
+    text-align: center;
+}
+.compare-line{
+  width:100%;
+  height:28px;
+}
+.compare-line-left{
+  text-align: -webkit-center;
+  line-height: 200%;
+  width:18%;
+  height:28px;
+  float:left;
+}
+.compare-line-right{
+  float:right;
+  width:82%;
+  height:28px;
+}
+.compare-a-price{
+  width:33%;
+  height:28px;
+  float:left;
+}
+.compare-icon-view{
+  display: inline-block;
+  width:16px;
+  height:16px;
+  margin-top: 7%;
+  margin-left: 20%;
+  float: left;
+}
+.compare-icon{
+  width:16px;
+  height:16px;
+}
+.compare-result-price-text{
+  float:left;
+  margin-left: 5%;
+  margin-top: 7%;
+}

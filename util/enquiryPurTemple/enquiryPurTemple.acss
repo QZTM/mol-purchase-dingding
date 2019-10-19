@@ -1,0 +1,28 @@
+.grid{
+  
+}
+
+      .section_name22{
+          clear: both;
+          height: 60px;
+      }
+        .section_name_title22{
+            float: left;
+            padding-top: 17px;
+            padding-left: 20px;
+            font: 20px;
+        }
+        .section_name_extra22{
+            float: right;
+            padding-top: 15px;
+            padding-right: 15px;
+        }
+  .input_spec{
+      clear: none;
+  }
+    .input_spec_title{
+      float: left;
+    }
+    .input_spec_text{
+      float: right
+    }

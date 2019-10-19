@@ -1,0 +1,32 @@
+page{
+   font-style: inherit ;
+   font-synthesis: weight;
+}
+
+
+
+
+.pur_record{
+      background-color: #FFFFFF;
+      height: 100px;
+      width: 100%;
+}
+      .pur_record_lower{
+          margin-top: 17px;
+          margin-left: 10px;
+      }
+      .pur_record_higher{
+          margin-top: 17px;
+          margin-left: 10px;
+      }
+      .pur_record_avg{
+          margin-top: 17px;
+          margin-left: 10px;
+      }
+
+
+
+
+
+
+

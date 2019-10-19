@@ -1,0 +1,24 @@
+@import '../biz/components/scheduleList/index.acss';
+.swiper-tab{ 
+ width: 100%; 
+ text-align: center; 
+ line-height: 80rpx; 
+ border-bottom: 1px solid #000; 
+ display: flex; 
+ flex-direction: row; 
+ justify-content: center; 
+} 
+.tab-item{ 
+ flex: 1; 
+ font: 30rpx; 
+ display: inline-block;  
+ color: #777777; 
+} 
+.on{ 
+ color: red; 
+ border-bottom: 5rpx solid red; 
+} 
+.swiper{ display: block; height: 100%; width: 100%; overflow: hidden; } 
+.swiper view{ 
+ text-align: left; 
+}

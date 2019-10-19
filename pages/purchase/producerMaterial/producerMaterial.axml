@@ -1,0 +1,4 @@
+<view>
+  <web-view id="web-view-1" src="http://fyycg1.vaiwan.com/index/findAll" onMessage="test"></web-view>
+</view>
+

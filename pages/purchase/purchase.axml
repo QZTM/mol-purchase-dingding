@@ -1,0 +1,106 @@
+<import src="../biz/components/grid/index.axml"/>
+
+<view class="page" style="width:{{systemInfo.windowWidth}}px;">
+  <view class="page-section">
+    <view class="page-section-demo" style="margin-top:0rpx;padding-top:20px;margin-bottom:0rpx">
+      <swiper
+        style="height:150px;"
+        class="demo-swiper"
+        autoplay="true"
+      >
+        <block a:for="{{background}}">
+          <swiper-item key="swiper-item-{{index}}">
+            <view class="swiper-item">
+                <image mode="scaleToFill" src="../../images/back-image_{{item}}.jpg" style="width:100%"/>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+ 
+      <!--公告-->
+      <swiper
+        class="bottom-line"
+        autoplay="true"
+        style="color:#666;"
+      >
+        <block a:for="{{msgList}}">
+          <swiper-item  style="margin:-10px;padding:-10px;height:50px;">
+            <navigator url="/pages/index/index?title={{item.url}}">
+            <view class="page-section">
+                <view class="page-section-demo">
+                   <text class="swiper_item2">{{item.title}}</text>
+            </view>
+                </view>
+            </navigator>
+          </swiper-item>
+        </block>
+      </swiper>
+   
+  <!--本地采购-->
+  <!-- <view class="toPruView page-section" onTap="goToLocalPruchase">本地采购</view> -->
+   <view class="page-section" style="margin-bottom:0px">
+    <view class="page-section-demo">
+      <view class="big_title">工作台</view>
+    </view>
+  </view>
+   <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="workbench" data={{...workbenchPur}}>
+    </view>
+  </view>
+  <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="Grid" data={{...localPur}}>
+    </view>
+  </view>
+   <view class="page-section" style="margin-bottom:0px">
+    <view class="page-section-demo">
+      <view class="big_title">云采购</view>
+    </view>
+  </view>
+  <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="Grid" data={{...yunPur}}>
+    </view>
+  </view>
+  <!--云招标-->
+<view class="page-section" style="margin-bottom:0px;">
+    <view class="page-section-demo">
+      <view  class="big_title">中标公告</view>
+    </view>
+  </view>
+  <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="Grid" data={{...yunBids}}>
+    </view>
+  </view>
+<!--供应商查询-->
+<view class="page-section" style="margin-bottom:0px;">
+    <view class="page-section-demo">
+      <view  class="big_title">供应商查询</view>
+    </view>
+  </view>
+  <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="Grid" data={{...vendorSearch}}>
+    </view>
+  </view>
+  <!--采购部议价-->
+<view class="page-section" style="margin-bottom:0px;">
+    <view class="page-section-demo">
+      <view  class="big_title">采购部</view>
+    </view>
+  </view>
+  <view class="page-section bottom-line">
+    <view class="page-section-demo">
+      <template is="Grid" data={{...bargain}}>
+    </view>
+  </view>
+</view>
+
+
+
+
+  

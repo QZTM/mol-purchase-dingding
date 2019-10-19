@@ -1,0 +1,31 @@
+<template name="Grid">
+    <view class="grid">
+        <block a:for="{{list}}">
+            <view
+            style="width:{{100/(columnNum || 4)}}%;padding-top:{{100/(6)}}%;margin-top:12px" 
+            class="grid-item" id="{{item.url}}" onTap="handleItemTap"
+            data-index={{index}}>
+                <view class="grid-item-wrapper">
+                    <image src="{{item.icon}}" class="grid-icon" mode="aspectFit" data-variable="{{item.url}}" onTap="goToStyle"/>
+                    <text class="grid-text">{{item.text}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+<template name="workbench">
+    <view class="grid">
+        <block a:for="{{list}}">
+            <view
+            style="width:{{100/(columnNum || 4)}}%;padding-top:{{100/(6)}}%;" 
+            class="grid-item" id="{{item.url}}" onTap="handleItemTap"
+            data-index={{index}}>
+                <view class="grid-item-wrapper">
+                    <!-- <image src="{{item.icon}}" class="grid-icon" mode="aspectFit" data-variable="{{item.url}}" onTap="goToStyle"/> -->
+                    <view>{{item.icon}}</view>
+                    <text class="grid-text">{{item.text}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>

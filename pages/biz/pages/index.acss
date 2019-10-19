@@ -1,0 +1,69 @@
+
+
+.input_reason{
+  height: 46px;
+  
+  background-color: #FFFFFF;
+  padding-top:5%;
+  padding-left:10%;
+  line-height: 100%;
+  position: relative;
+}
+    .section__title1{
+      width:25%;
+      /* font: 17px; */
+      height:50%;
+      float: left;
+      line-height:100%;
+      margin-top:4%;
+    }
+    .section__input{
+      width:65%;
+      height:50%;
+      float:right;
+      margin-top:3%;
+    }
+
+
+.pur_function{
+  height: 46px;
+
+  margin-top: 5%;
+  background-color: #FFFFFF;
+  float: left;
+  padding-left:24px; 
+}
+    .pur__title{
+      float: left;
+      margin-top: 12px;
+      margin-left: 15px;
+      /* font: 17px; */
+      margin-right:15px;
+    }
+    .pur_group{
+      margin-top: 7px;
+      float: left;
+      margin-left: 20px;
+
+    }
+.redictpage{
+    margin-top: 50px;
+    height: 50px;
+}
+.caigoumethod_temple{
+  height: 50px;
+  width: 100%;
+  margin-top: 10px;
+}
+.redioChecks{
+  margin-top:5px;
+  margin-left:15px;
+}
+.video-view{
+  margin-top:10px;
+  margin-bottom:10px;
+  width:100%;
+}
+.video{
+  width:100%;
+}

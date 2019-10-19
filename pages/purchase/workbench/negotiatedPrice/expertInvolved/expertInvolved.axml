@@ -1,0 +1,29 @@
+<view class="top">
+  专家评审费：<text style="color:red">200</text>元
+</view>
+
+<view a:for="{{expertList}}" class="every">
+    <view class="line">
+      <span>{{item.name}}</span>
+      <span><text style="margin-left:10px">金牌专家</text></span>
+      <!-- <span>{{item.expertGrade}}</span> -->
+    </view>
+    <view class="line">
+      <span>推荐：</span>
+      <span>公司{{supplierName}}</span>
+    </view>
+    <view class="line">
+      <span>推荐理由：</span>
+      <span>{{item.recommendReason}}</span>
+    </view>
+    <view class="line2">
+      <image mode="scaleToFill" src="{{item.checked?'/images/workBench/checked.png':'/images/workBench/fangkuang.png'}}" style="width:30px;height:30px;float;left" data-id="{{item.id}}" onTap="selectExpert"/>                        
+      <!-- <image mode="scaleToFill" src="/images/workBench/fangkuang.png" style="width:30px;height:30px;float;left"/>    -->
+      <button class="btn" size="default" data-index="{{item.mobile}}"  onTap="callExpert" hover-class='btn_hover'>钉钉电话</button>
+    </view>
+    
+</view>
+
+<view>
+   <button class="btn2" size="default"   onTap="submit" hover-class='btn_hover'>确定</button>
+</view>

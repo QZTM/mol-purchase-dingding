@@ -1,0 +1,31 @@
+<import src="../biz/components/scheduleList/index.axml"/>
+<view class="swiper-tab"> 
+ <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" onTap="swichNav">进行中</view> 
+ <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" onTap="swichNav">已完成</view> 
+</view> 
+  
+<swiper current="{{currentTab}}" class="swiper" duration="300" style="height:{{winHeight - 30}}px" onChange="bindChange"> 
+ <swiper-item> 
+  <!-- <view onTap="toSeeLocalPurDetail">等待审批</view> 
+  <view onTap="toSeeBidsDetail">等待报价</view> -->
+
+    <view class="page-section">
+      <view class="page-section-demo schOne">
+        <template is="schedule" data={{...scheduleList}}>
+      </view>
+    </view>
+
+
+
+
+ </swiper-item> 
+ <swiper-item> 
+  <!-- <view>已完成</view>  -->
+  <view class="page-section">
+      <view class="page-section-demo schOne">
+        <template is="schedule" data={{...schedule_overList}}>
+      </view>
+    </view>
+ </swiper-item> 
+ 
+</swiper>

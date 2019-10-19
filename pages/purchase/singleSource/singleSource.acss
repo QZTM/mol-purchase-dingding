@@ -1,0 +1,73 @@
+@import '/util/zhanlueTemplet/zhanlueTemplet.acss';
+@import '/app.acss';
+.strategy{
+      /* font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important; */
+}
+.shenqing{
+ margin-top: 6px;
+    font: 24px;
+    padding-left: 23px;
+}
+.caigoufangshi{
+   margin-top: 17px;
+    font: 17px;
+    padding-left: 41px;
+
+}
+.caigouxieyi{
+   margin-top: -23px;
+    font: 17px;
+
+    float: right;
+    padding-right: 42px;
+}
+.add{
+  text-align: center;
+  color: blue;
+  margin-top: 23px;
+
+}
+.zhinengtuijian{
+  padding-left: 20px;
+  color: red;
+  font: 15px;
+  margin-top: 15px;
+  border-bottom: 1px solid #dddddd;
+}
+.need{
+  margin-top: 17px;
+  font: 18px;
+  margin-left: 23px;
+  
+}
+.need_text{
+  border: 1px solid #F4F4F5;
+  margin-left: 26px;
+  margin-right: 20px;
+  margin-top: 7px;
+  padding-top: 5px;
+  height: 180px;
+}
+.il{
+  float: left;
+  font: 18px;
+}
+.ir{
+  float: right;
+  /* margin-right: -100px; */
+  margin-top: -6px;
+}
+
+.sl{
+  float: left;
+  font: 18px;
+  margin-left: -4px;
+}
+.sr1{
+  float: right;
+  width: 138px;
+}
+.sr2{
+  float: right;
+  margin-right: 20px;
+}

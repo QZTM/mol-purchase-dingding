@@ -1,0 +1,42 @@
+<template name="approve-template">
+  <view class="approver-out-view">
+    <view class="approver">审批人
+    </view>
+    <block a:if="{{approversList.length<4}}">
+        <block a:for="{{approversList}}" a:for-index="userInd" a:for-item="user">
+            <image class="user-avatar-img " src="{{user.avatar==''?'/images/load/no-avatar.png':user.avatar}}" style="right:{{80+(approversList.length-userInd-1)*60}}px"/>
+            <image class="close-icon" src="/images/load/toprightclose.png" style="right:{{78+(approversList.length-userInd-1)*60}}px" data-ruserid="{{user.userid}}" onTap="removeUser"/>
+            <block a:if="{{userInd != approversList.length-1}}">
+                <image class="stream-line-img" src="/images/load/more-than.png" style="right:{{62+(approversList.length-userInd-1)*60}}px"/>
+            </block>
+            <view class="user-name-text" style="right:{{74+(approversList.length-userInd-1)*60}}px">{{user.name}}</view>
+        </block>
+    </block>
+
+
+    <block a:if="{{approversList.length>3}}">
+        <block a:for="{{approversList}}" a:for-index="userInd" a:for-item="user">
+          <block a:if="{{userInd == 0}}">
+            <image class="user-avatar-img " src="/images/load/all.png" style="right:200px;border-radius:0px" onTap="seeAllApprovers"/>
+            <!-- <image class="close-icon" src="/images/load/toprightclose.png" style="right:{{78+(approversList.length-userInd-1)*60}}px" data-ruserid="{{user.userId}}" onTap="removeUser"/> -->
+            <image class="stream-line-img" src="/images/load/more-than.png" style="right:182px"/>
+            <view class="user-name-text" style="right:194px;width:66px;right:190px;" onTap="seeAllApprovers">查看全部</view>
+          </block>
+            <block a:if="{{userInd>approversList.length-3}}">
+              <image class="user-avatar-img " src="{{user.avatar==''?'/images/load/no-avatar.png':user.avatar}}" style="right:{{80+((approversList.length-1)-userInd)*60}}px"/>
+              <image class="close-icon" src="/images/load/toprightclose.png" style="right:{{78+((approversList.length-1)-userInd)*60}}px" data-ruserid="{{user.userid}}" onTap="removeUser"/>
+              <block a:if="{{userInd != approversList.length-1}}">
+                <image class="stream-line-img" src="/images/load/more-than.png" style="right:{{62+((approversList.length-1)-userInd)*60}}px"/>
+              </block>
+              <view class="user-name-text" style="right:{{74+((approversList.length-1)-userInd)*60}}px">{{user.name}}</view>
+            </block>
+            
+            
+        </block>
+    </block>
+    <block>
+        <image class="approver_pic" onTap="getUser" mode="scaleToFill" src='/images/load/add-2.png'/>
+    </block>
+      
+  </view>
+</template>

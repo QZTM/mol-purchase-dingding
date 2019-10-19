@@ -1,0 +1,103 @@
+{
+  "pages": [
+    "pages/purchase/purchase",
+    "pages/biz/pages/index",
+    "pages/biz/pages/onlinepage/index",
+    "pages/biz/pages/underlinepage/index",
+    "pages/biz/pages/incluedstep/index",
+    "pages/schedule/schedule",
+    "pages/my/my",
+    "pages/purchase/strategyPur/strategyPur",
+    "pages/purchase/enquiryPur/enquiryPur",
+    "pages/purchase/singleSource/singleSource",
+    "pages/purchase/onlineBids/onlineBids",
+    "pages/purchase/producerMaterial/producerMaterial",
+    "pages/purchase/installationKit/installationKit",
+    "pages/my/supplierCollect/supplierCollect",
+    "pages/schedule/onloadDetail/onloadDetail",
+    "pages/schedule/underLoadDetail/underLoadDetail",
+    "pages/common/common",
+    "pages/schedule/onloadSuccessDetail/onloadSuccessDetail",
+    "pages/biz/pages/userList/userList",
+    "util/approve-templet/approve-templet",
+    "pages/biz/pages/all-approver-list/all-approver-list",
+    "pages/schedule/underlineApproveScheduleDetail/underlineApproveScheduleDetail",
+    "pages/biz/pages/underlinepage/chooseItemType/chooseItemType",
+    "pages/biz/pages/underlinepage/itemTypeTemplate/itemTypeTemplate",
+    "util/zhanlueTemplet/zhanlueTemplet",
+    "pages/purchase/strategyPur/chooseItemType/chooseItemType",
+    "pages/biz/pages/onlinepage/onlineTemplet/onlineTemplet",
+    "util/grid/onlineItemType/onlineItemType",
+    "pages/purchase/bargain/bargain",
+    "pages/purchase/bargain/orderList/orderList",
+    "pages/purchase/workbench/approved/approved",
+    "pages/purchase/workbench/copied/copied",
+    "pages/purchase/workbench/negotiatedPrice/negotiatedPrice",
+    "pages/purchase/workbench/tobeapproved/tobeapproved",
+    "pages/purchase/workbench/tobenegotiated/tobenegotiated",
+    "pages/purchase/equipment/equipment",
+    "pages/purchase/workbench/templet/list/list",
+    "pages/purchase/workbench/templet/list_addwancheng/list",
+    "pages/purchase/workbench/templet/materielTable/materielTable",
+    "pages/purchase/workbench/templet/quotationCompanyTable/quotationCompanyTable",
+    "pages/purchase/workbench/templet/getUsers/getUsers",
+    "pages/purchase/workbench/templet/getCallUserList/getCallUserList",
+    "pages/purchase/workbench/templet/seeAllCaller/seeAllCaller",
+    "pages/purchase/workbench/templet/bigDate/bigDate",
+    "pages/purchase/workbench/negotiatedPrice/bigDataShow/bigDataShow",
+    "pages/purchase/workbench/completeBargainingList/completeBargainingList",
+    "pages/purchase/workbench/completeBargainingList/completeBargaining/completeBargaining",
+    "pages/purchase/workbench/templet/quotationCompanyTable_yjwc/quotationCompanyTable_yjwc",
+    "pages/purchase/workbench/templet/showCallUsers/showCallUsers",
+    "pages/purchase/workbench/tobeapproved/tobeapprovedDetail/tobeapprovedDetail",
+    "pages/purchase/workbench/templet/quotationCompany_daishengpi/quotationCompany_daishengpi",
+    "pages/purchase/workbench/templet/list_passOrNot/list_passOrNot",
+    "pages/purchase/workbench/approved/approvedDetail/approvedDetail",
+    "pages/purchase/machining/machining",
+    "pages/purchase/repair/repair",
+    "util/machiningTemplet/machiningTemplet",
+    "util/repairTemplet/repairTemplet",
+    "pages/scheduleRepair/scheduleRepair",
+    "pages/scheduleRepair/scheduleDetail/scheduleDetail",
+    "pages/scheduleRepair/templet/quoteTable/quoteTable",
+    "pages/purchase/workbench/negotiatedPrice/expertInvolved/expertInvolved"
+  ],
+  "window": {
+    "enableWK": "YES",
+    "enableDSL": true,
+    "defaultTitle": "云采购",
+    "backgroundColor": "#F5F5F9",
+    "pullRefresh": false,
+    "allowsBounceVertical": true
+  },
+  "tabBar": {
+    "textColor": "#404040",
+    "selectedColor": "#108ee9",
+    "backgroundColor": "#F5F5F9",
+    "items": [
+      {
+        "pagePath": "pages/purchase/purchase",
+        "icon": "images/icon_purchase.png",
+        "activeIcon": "images/icon_purchase_HL.png",
+        "name": "采购"
+      },
+      {
+        "pagePath": "pages/scheduleRepair/scheduleRepair",
+        "icon": "images/icon_schedule.png",
+        "activeIcon": "images/icon_schedule_HL.png",
+        "name": "进度"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "icon": "images/icon_my.png",
+        "activeIcon": "images/icon_my_HL.png",
+        "name": "我的"
+      }
+    ]
+  },
+  
+"networkTimeout": {
+    "request": 20000
+},
+  "debug": true
+}

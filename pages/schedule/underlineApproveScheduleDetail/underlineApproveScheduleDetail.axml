@@ -1,0 +1,153 @@
+<import src="/util/underlinepageTemple/underlinepageTemple.axml"/>
+<import src="/util/underLineUserPriceCompare/underLineUserPriceCompare.axml"/>
+<import src="/util/approve-templet/approve-templet.axml"/>
+<view class="seller" style="width:{{systemInfo.windowWidth}}px;background-color:#fff">
+  
+  <!--审批状态大字-->
+  <view class="state-view">
+    <text class="state-text">{{approveStatusName}}</text>
+  </view>
+
+  <!--审批人-->
+  <view class="approver-out-view">
+    <block a:for="{{approversList}}" a:for-index="userInd" a:for-item="user">
+      <image class="user-avatar-img " src="{{user.avatar==''?'/images/load/no-avatar.png':user.avatar}}" style="left:{{20+userInd*60}}px"/>
+      <view class="user-name-text" style="left:{{17+userInd*60}}px">{{user.name}}</view>
+    </block>
+  </view>
+
+  <!--意见-->
+  <view class="suggestion-view">
+    <text class="suggestion-text">意见：</text>
+  </view>
+
+
+  <!--循环pageObject-->
+  <block class="seller_temple" a:for="{{arr.pageObjectArray}}" a:for-index="iddx" a:for-item="aPageObj">
+    
+    <!--区分每一个purTop-->
+    <block a:if="{{arr.pageObjectArray.length>1 && iddx>0}}">
+        <view class="big-bottom-line"></view>
+    </block>
+
+
+    <view>
+      <!--循环输出采购商品(purTopArray)-->
+        <block class="seller_temple" a:for="{{aPageObj.purTopArray}}" a:for-index="iddxx" a:for-item="aPur">
+            <view class="grid" key="grid">
+            <view class="section">
+              <view class="section-innerview">
+                <view class="section_title">采购类型</view>
+                <view class="float-right-20">{{aPur.typeName}}</view>
+              </view>
+            </view>
+            <view class="line80"></view>
+            <view class="section">
+                <view class="section-innerview">
+                  <view class="section_name_title">名称</view>
+                  <view class="float-right-20">{{aPur.itemName}}</view>
+                </view>
+            </view>
+            <view class="line80"></view>
+            <view class="section">
+              <view class="section-innerview">
+                <view class="input_spec_title">规格</view>
+                <view class="float-right-20">{{aPur.norms}}</view>
+              </view>
+            </view>
+            <view class="line80"></view>
+            <view class="section">
+              <view class="section-innerview">
+                <view class="input_num_title">数量</view>
+                <view class="float-right-20">{{aPur.count}}</view>
+              </view>
+            </view>
+            <view class="line80"></view>
+            <view class="section">
+            <view class="section-innerview">
+                <view class="input_depar_title">单位</view>
+                <view class="float-right-20">{{aPur.unit}}</view>
+              </view>
+            </view>
+            <view class="line80"></view>
+          </view>
+        </block>
+        <!-- <view class="addSellerTempleButton top-btn" onTap="addPurTemple" data-iddx="{{iddx}}">
+          <text class="addItemText">增加明细</text>
+        </view> -->
+    </view>
+
+    <!-- 商家明细表(sellerArray) -->
+    <view>
+      <block class="seller_temple" a:for="{{aPageObj.sellerArray}}" a:for-index="sellerIndex" a:for-item="aseller">
+        
+        <!--询价商家和价格-->
+        <view class="grid" key="grid">
+            <view class="section">
+              <view class="section-innerview">
+              <text class="ask-seller-title">询价商家{{sellerIndex+1}}</text>
+              <text class="float-right-20">{{aseller.name}}    
+              </view>
+              </text>
+            </view>
+            <view class="line80"></view>
+
+            <view class="section" style="border-bottom:0px;padding-top:2px">
+              <view class="section-innerview">
+                <text class="grid_input_1_left">价格</text>
+                <text class="float-right-20">{{aseller.quote}}</view>
+              </view>
+              <view class="line80"></view>
+        </view>
+
+        <!--是否智能推荐或者确认商家，商品图片-->
+        <view class="tele-line">
+              <!-- <view class="seller_temple_price" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller">
+                <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/phone-white.png"/>
+                <text class="seller_temple_tele">发起询价        
+                </text>
+              </view> -->
+              
+                <block a:if="{{aseller.autoRec}}">
+                  <view class="autoRecView">
+                  <text>智能推荐</text>
+                  </view>
+                </block>
+                <block a:if="{{aseller.checked}}">
+                  <view class="autoRecView2">
+                  <text>确认商家</text>
+                  </view>
+                </block>
+              
+              <view class="grid_picture">
+                <view class="images-view">
+                  <block a:for="{{aseller.inquiryUrl}}" a:for-index="urlIndex" a:for-item="aimageUrl">
+                    <image class="addImage" src="{{aimageUrl}}" data-imageIndex="{{urlIndex}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onTap="previewImage">
+                  </block>
+                </view>
+              </view>
+        </view>
+
+        <view class="bottom-line"></view>
+      </block>
+    </view>
+      
+
+    <view>
+      <block class="price-compares-view" a:for="{{aPageObj.purTopArray}}" a:for-index="aItemIndex" a:for-item="aItem">
+        <block a:if="{{aItemIndex>0}}">
+            <view style="height:5px;border-bottom: 3px double rgb(33, 150, 241);margin-bottom: 10px;">
+
+            </view>
+        </block>
+          <template is="itemPriceCompare" data="{{...arr,iddx,aItemIndex,aPageObj,aItem}}"/>
+      </block>
+    </view>
+  </block>
+<!-- 定位绝对位置 -->
+
+
+<view>
+  <text class="beizhu">{{remarks}}</text>
+</view>
+</view>

@@ -1,0 +1,31 @@
+@import '../biz/components/grid/index.acss';
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+
+.margin-t {
+  margin-top: 24px;
+}
+.toPruView{
+  height:30px;
+}
+.noticeLine{
+  height:30px;
+
+}
+.swiper_container2 {
+  height: 55rpx;
+  width: 80vw;
+}
+  
+.swiper_item2 {
+  font: 25rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 2px;
+}
+
+.demo-swiper{
+  border-radius: 10px;
+}

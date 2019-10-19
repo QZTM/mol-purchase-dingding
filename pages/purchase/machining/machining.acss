@@ -1,0 +1,55 @@
+@import '/util/zhanlueTemplet/zhanlueTemplet.acss';
+.strategy{
+      font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important;
+}
+.shenqing{
+ margin-top: 6px;
+    font-size: 24px;
+    padding-left: 23px;
+}
+.caigoufangshi{
+   margin-top: 17px;
+    font-size: 17px;
+    padding-left: 41px;
+
+}
+.caigouxieyi{
+   margin-top: -23px;
+    font-size: 17px;
+
+    float: right;
+    padding-right: 42px;
+}
+.add{
+  text-align: center;
+  color: blue;
+  margin-top: 23px;
+  
+}
+.need{
+  margin-top: 17px;
+  margin-left: 19px;
+  
+}
+.need_text{
+  
+  border: 1px solid #F4F4F5;
+  margin-left: 22px;
+  margin-right: 20px;
+  margin-top: 7px;
+  padding-top: 5px;
+  height: 180px;
+}
+
+.sl{
+  float: left;
+  margin-left: -4px;
+}
+.sr1{
+  float: right;
+  width: 143px;
+}
+.sr2{
+  float: right;
+  margin-right: 20px;
+}

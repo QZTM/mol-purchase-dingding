@@ -1,0 +1,11 @@
+<template name="bargain">
+  <view>
+    <block a:for="{{orderList}}">
+      <view class="aSchedule" onTap="toSeePurDetail" data-gotype="{{item.goType}}" data-userId="{{item.userId}}" data-piid="{{item.processInstanceId}}">
+        <view class="schPurType">{{item.title}}</view>
+          <view class="schItemCount">{{"单号："+item.count}}<text style="white-space:pre-wrap;margin-left:30px;">{{"类型："+item.unit}}</text></view>
+          <view class="schItemCount">{{item.count}}<text style="white-space:pre-wrap;margin-left:30px;">{{item.unit}}</text></view>
+      </view>
+    </block>
+  </view>
+</template>

@@ -1,0 +1,92 @@
+<template name="zhanlueTemplet">
+  <view class="grid" key="grid">
+    <view class="section">
+      <view class="section_title">采购类型      
+      </view>
+      <!-- <picker onChange="bindPickerChange" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-apur="{{aPur}}" value="{{aPur.typeIndex}}" range="{{itemArray}}" range-key="name">
+        <view class="section_order float-right-20">             {{itemArray[aPur.typeIndex].name}}                    
+        </view>
+      </picker> -->
+      <text class="input_spec_text float-right-20"  onTap="goToChooseItemType" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}">{{aPur.typeName?aPur.typeName:'请选择采购类型'}}</text>
+    </view>
+    <!-- <view class="section">
+      <picker onChange="bindObjPickerChange"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" value="name"  range="{{itemArray}}" range-key="name">
+        <view class="section_name">
+          <view class="section_name_title">采购品牌          
+          </view>
+          <view class="section_name_extra float-right-20">{{aPur.brandName?aPur.brandName:''}}          
+          </view>
+        </view>
+      </picker>
+    </view> -->
+     <view class="section">
+      <picker onChange="bindObjNameChange"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" value="name"  range="{{itemArray}}" range-key="name">
+        <view class="section_name">
+          <view class="section_name_title">加工物品          
+          </view>
+          <view class="section_name_extra float-right-20">{{aPur.itemName?aPur.itemName:''}}          
+          </view>
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <view class="input_spec_title">规格      
+      </view>
+      <text class="input_spec_text float-right-20" >{{aPur.norms?aPur.norms:''}}</text>
+      <!-- <input class="input_spec_text float-right-20" name="input" placeholder="请输入采购规格" value="{{aPur.norms}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeNorms"/> -->
+    </view>
+    <view class="section">
+      <view class="input_num_title">数量      
+      </view>
+      <input class="input_num_text float-right-20" name="input" placeholder="请输入采购数量" value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+    </view>
+    <view class="section" style="border-bottom:double 3px rgb(33, 150, 241)">
+      <view class="input_depar_title">单位      
+      </view>
+      <text class="input_spec_text float-right-20" >{{aPur.unit?aPur.unit:''}}</text>
+      <!-- <input class="input_depar_text float-right-20" name="input" placeholder="请输入采购单位" value="{{aPur.unit}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/> -->
+    </view>
+  </view>
+</template>
+
+<template name="machining">
+  <view style='margin-top:10px;clear:both;'>
+    
+    <view>
+      <view style='float:left;margin:7px 0 0 6px'>采购明细</view>
+      <view data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onTap="deletOne" style='float:right;margin:7px 6px 0 0px'>删除</view>
+    </view>
+
+    <view style="margin-top:6px;clear:both;">
+
+        <view class="section">
+          <view class="input_spec_title">加工物品      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.itemName}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeName"/>
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">规格      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"   value="{{aPur.norms}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeNorms"/>
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">数量      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">单位      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.unit}}"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/>
+
+        </view>
+
+    </view>
+
+  </view>
+  
+</template>

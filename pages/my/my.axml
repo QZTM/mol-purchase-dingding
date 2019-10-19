@@ -1,0 +1,49 @@
+<import src="../biz/components/grid/index.axml"/>
+<view class="page" style="width:{{systemInfo.windowWidth}}px;">
+  <view class="page-section" style="padding-top:20px;">
+    <view class="page-section-demo page-session-stylea">
+      <!--头像-->
+      <image class="head-sculpture" src="{{user.avatar}}" mode="widthFix">
+    </view>
+    <view>
+      <view class="user-name color444">姓名：{{user.name}}</view>
+      <view class="dept-posi color444">职位：{{user.position}}</view>
+    </view>
+  </view>
+  <!--横线-->
+  <!-- <view class="page-section">
+    <view class="page-section-demo">
+      <view class="line"></view>
+      
+    </view>
+  </view> -->
+  <!--采购进度-->
+  <view class="page-section">
+    <view class="page-section-demo  page-session-stylea">
+
+      <view class="color666 font20 toShowSche big_title">
+        <navigator url="/pages/schedule/schedule?title=navigate" hover-class="navigator-hover">采购进度</navigator>
+      </view>
+    </view>
+  </view>
+
+<!--进度列表-->
+  <view class="page-section">
+    <view class="page-section-demo page-session-stylea">
+      <view class="scheStates">
+          <template is="Grid" data={{...yunPur}}>
+      </view>
+    </view>
+  </view>
+
+  <!--供应商收藏夹-->
+  <view class="page-section">
+    <view class="page-section-demo  page-session-stylea">
+
+      <view class="color666 font20 toShowSche ">
+        <navigator url="/pages/my/supplierCollect/supplierCollect?title=navigate" hover-class="navigator-hover">供应商收藏夹</navigator>
+      </view>
+    </view>
+  </view>
+
+</view>

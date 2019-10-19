@@ -1,0 +1,27 @@
+@font-face{
+/* font-family:'iconfont';  project id 574440 */
+src: url('//at.alicdn.com/t/font_574440_tfpxmjz5dna.eot');
+src: url('//at.alicdn.com/t/font_574440_tfpxmjz5dna.eot?#iefix')format('embedded-opentype'),
+url('//at.alicdn.com/t/font_574440_tfpxmjz5dna.woff') format('woff'),
+url('//at.alicdn.com/t/font_574440_tfpxmjz5dna.ttf') format('truetype' ),
+url('//at.alicdn.com/t/font_574440_tfpxmjz5dna.svg#iconfont') format('svg');
+
+}
+.iconfont{
+  /* font-family:"iconfont" ! important;
+  font :16px; */
+  font-style:normal;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.icon-jiantouyou:before{content : "\e622";}
+.icon-ren3:before{content: "\e624";}
+.icon-fenlei3:before{content: "\e60b";} 
+.icon-cuo:before{content: "\e63d";}
+.icon-arrow-right-copy:before{content:"\e602";}
+.icon-bofang:before{content: "\e653";}
+.icon-combinedshapecopy2:before{content: "\e652";}
+.icon-xingxing3:before{content: "\e63a";}
+.icon-erweima:before{content: "\e605";}
+.icon-zhengshu-copy: before{content: "\e65c";}
+

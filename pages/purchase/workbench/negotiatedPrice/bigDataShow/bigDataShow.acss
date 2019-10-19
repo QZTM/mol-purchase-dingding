@@ -1,0 +1,24 @@
+.qiun-charts {
+  width: 750rpx;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
+.charts {
+  width: 750rpx;
+  height: 500rpx;
+  background-color: #FFFFFF;
+}
+.shuoming{
+  margin: 10px 0px 3px 6px ;
+  font-size: 12px;
+}
+.guige{
+  clear: both;
+  margin-left: 6px;
+  font-size: 12px;
+}
+.title2{
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+}

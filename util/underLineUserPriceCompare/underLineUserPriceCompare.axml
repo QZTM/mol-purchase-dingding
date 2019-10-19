@@ -1,0 +1,163 @@
+<template name="itemPriceCompare">
+  <view class="common2">
+    <view class="common_histroyprice">
+      <view>历史采购最低价:{{aItem.hisPurLow}}</view>
+      <view>历史采购最高价:{{aItem.hisPurHigh}}</view>
+      <view>物品采购平均价:{{aItem.hisPurAvg}}</view>
+    </view>
+    
+  
+  <view class="common_button">
+    <button size="default" type="primary">查看市场价</button>
+  </view>
+  <!-- <view class="one-line">
+    <view class="seller-pri-text">商家3报价</view>
+    <view class="seller-pri-text">商家2报价</view>
+    <view class="seller-pri-text">商家1报价</view>
+  </view> -->
+
+<view class="compare-view">
+     <view class="compare-line">
+       <view class="compare-line-left">
+
+       </view>
+       <view class="compare-line-right">
+         <block a:for="{{aPageObj.sellerArray}}" a:for-index="selIndex" a:for-item="sel">
+            <view class="compare-a-price" style="font-weight: bolder;">
+            商家{{selIndex+1}}报价
+          </view>
+         </block>
+       </view>
+     </view>
+
+     <view class="compare-line">
+       <view class="compare-line-left">
+          最低价
+       </view>
+       <view class="compare-line-right">
+         <block a:for="{{aPageObj.sellerArray}}" a:for-index="sellIndex" a:for-item="sell">
+           <block a:if="{{!sell.quote || !aItem.hisPurLow}}">
+             <view></view>
+          </block>
+            <block a:elif="{{aItem.hisPurLow<sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-down.png"> -->
+                    <text>▼</text>
+                </view>
+                <text class="compare-result-price-text">{{sell.quote-aItem.hisPurLow}}元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurLow==sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-equal.png">〓 -->
+                    <text>〓</text>
+                </view>
+                <text class="compare-result-price-text">0元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurLow>sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-up.png"> -->
+                    <text>▲</text>
+                </view>
+                <text class="compare-result-price-text">{{aItem.hisPurLow-sell.quote}}元</text>
+            </view>
+            </block>
+         </block>
+       </view>
+     </view>
+
+     <view class="compare-line">
+       <view class="compare-line-left">
+          最高价
+       </view>
+       <view class="compare-line-right">
+          <block a:for="{{aPageObj.sellerArray}}" a:for-index="sellIndex" a:for-item="sell">
+           <block a:if="{{!sell.quote || !aItem.hisPurHigh}}">
+             <view></view>
+           </block>
+            <block a:elif="{{aItem.hisPurHigh<sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-down.png"> -->
+                    <text>▼</text>
+                </view>
+                <text class="compare-result-price-text">{{sell.quote-aItem.hisPurHigh}}元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurHigh==sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-equal.png"> -->
+                    <text>〓</text>
+                </view>
+                <text class="compare-result-price-text">0元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurHigh>sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-up.png"> -->
+                    <text>▲</text>
+                </view>
+                <text class="compare-result-price-text">{{aItem.hisPurHigh-sell.quote}}元</text>
+            </view>
+            </block>
+          </block>
+         </block>
+       </view>
+     </view>
+
+     <view class="compare-line">
+       <view class="compare-line-left">
+          平均价
+       </view>
+       <view class="compare-line-right">
+          <block a:for="{{aPageObj.sellerArray}}" a:for-index="sellIndex" a:for-item="sell">
+           <block a:if="{{!sell.quote || !aItem.hisPurAvg}}">
+             <view></view>
+          </block>
+            <block a:elif="{{aItem.hisPurAvg<sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-down.png"> -->
+                    <text>▼</text>
+                </view>
+                <text class="compare-result-price-text">{{sell.quote-aItem.hisPurAvg}}元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurAvg==sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-equal.png"> -->
+                    <text>〓</text>
+                </view>
+                <text class="compare-result-price-text">0元</text>
+            </view>
+            </block>
+
+            <block a:elif="{{aItem.hisPurAvg>sell.quote}}">
+                <view class="compare-a-price">
+                <view class="compare-icon-view">
+                    <!-- <image class="compare-icon" src="/images/purchase/underline/triangle-up.png"> -->
+                    <text>▲</text>
+                </view>
+                <text class="compare-result-price-text">{{aItem.hisPurAvg-sell.quote}}元</text>
+            </view>
+            </block>
+          
+         </block>
+       </view>
+     </view>
+</view>
+  <view class="common_white"></view>
+  </view>
+</template>

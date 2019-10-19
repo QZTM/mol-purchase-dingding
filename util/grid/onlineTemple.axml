@@ -1,0 +1,105 @@
+<template name="underlinepageTempleTop">
+  <view class="grid" key="grid">
+    <view class="section">
+      <view class="section_title">采购类型      
+      </view>
+      <picker onChange="bindPickerChange" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-apur="{{aPur}}" value="{{aPur.typeIndex}}" range="{{itemArray}}" range-key="name">
+        <view class="section_order float-right-20">             {{itemArray[aPur.typeIndex].name}}                    
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <picker onChange="bindObjPickerChange" data-typeindex="{{aPur.typeIndex}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" value="{{aPur.nameIndex}}" range="{{itemArray[pageObjectArray[iddx].purTopArray[iddxx].typeIndex].items}}" range-key="name">
+        <view class="section_name">
+          <view class="section_name_title">采购名称          
+          </view>
+          <view class="section_name_extra float-right-20">{{itemArray[aPur.typeIndex].items[aPur.nameIndex].name}}          
+          </view>
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <view class="input_spec_title">规格      
+      </view>
+      <input class="input_spec_text float-right-20" name="input" placeholder="请输入采购规格" value="{{aPur.norms}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeNorms"/>
+    </view>
+    <view class="section">
+      <view class="input_num_title">数量      
+      </view>
+      <input class="input_num_text float-right-20" name="input" placeholder="请输入采购数量" value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+    </view>
+    <view class="section" style="border-bottom:double 3px rgb(33, 150, 241)">
+      <view class="input_depar_title">单位      
+      </view>
+      <input class="input_depar_text float-right-20" name="input" placeholder="请输入采购单位" value="{{aPur.unit}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/>
+    </view>
+    <!-- 添加按钮 天猫 京东  淘宝  拼多多 -->
+    <view class="shopping">
+      
+      <button size="default" type="primary"  class="shopping_n" onTap="selectPlatForm"  data-iddx="{{iddx}}" data-platfrom="天猫">天猫</button>
+      <button size="default" type="primary"  class="shopping_n" onTap="selectPlatForm"  data-iddx="{{iddx}}" data-platfrom="淘宝">淘宝</button>
+      <button size="default" type="primary"  class="shopping_n" onTap="selectPlatForm"  data-iddx="{{iddx}}" data-platfrom="京东">京东</button>
+      <button size="default" type="primary"  class="shopping_n" onTap="selectPlatForm"  data-iddx="{{iddx}}" data-platfrom="拼多多">拼多多</button>
+    </view>
+  </view>
+</template>
+<template name="underlinepageTempleCenter">
+  <view class="grid" key="grid">
+    <view>
+      </text>
+       <text class="plat">{{aseller.plat}}    
+      </text>
+    </view>
+    <view class="section" style="border-bottom:0px;padding-top:2px;margin-top:10px;">
+      <text class="ask-seller-title">商家{{sellerIndex+1}}      
+      </text>
+      <text class="ask-seller-name float-right-20">{{aseller.name}}    
+      </text>
+    </view>
+    <view class="section" style="border-bottom:0px;padding-top:2px">
+      <text class="grid_input_1_left">价格      
+      </text>
+      <input class="grid_input_1_right float-right-20" placeholder="请输入商品价格" value="{{aseller.quote}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onBlur="sellerChangeQuote"/>
+    </view>
+    <view class="section" style="border-bottom:0px;padding-top:2px">
+      <text class="grid_input_1_left">链接      
+      </text>
+      <input class="grid_input_1_right float-right-20" placeholder="请输入商品链接" value="{{aseller.link}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onBlur="sellerChangeQuote"/>
+    </view>
+    <view class="tele-line">
+      <!-- <view class="seller_temple_price" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller">
+        <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/phone-white.png"/>
+        <text class="seller_temple_tele">发起询价        
+        </text>
+      </view> -->
+      <view class="autoRecView">
+        <block a:if="{{aseller.autoRec}}">
+          <text>智能推荐          
+          </text>
+        </block>
+      </view>
+      <view class="grid_picture">
+        <text>商品相关图片        
+        </text>
+        <view class="images-view">
+          <block a:for="{{aseller.inquiryUrl}}" a:for-index="urlIndex" a:for-item="aimageUrl">
+            <image class="addImage" src="{{aimageUrl}}" data-imageIndex="{{urlIndex}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" >
+          </block>
+          <!-- <block a:if="{{aseller.inquiryUrl.length<5}}">
+            <image class="addImage" mode="aspectFit" src="{{src}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onTap="chooseImage"/>
+          </block> -->
+        </view>
+      </view>
+      <view class="circleView">
+        <block a:if="{{aseller.checked}}">
+          <image class="empty-circle" src="/images/purchase/underline/circle.png" onTap="checkThisSeller" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}">
+        </block>
+        <block a:if="{{!aseller.checked}}">
+          <image class="empty-circle" src="/images/purchase/underline/circle-empty.png" onTap="checkThisSeller" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}">
+        </block>
+      </view>
+    </view>
+  <view class="bottom-line">
+</view>
+</view>
+</template>

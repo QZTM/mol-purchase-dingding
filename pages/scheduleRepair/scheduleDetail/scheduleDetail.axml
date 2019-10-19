@@ -1,0 +1,48 @@
+<import src="../../purchase/workbench/templet/showCallUsers/showCallUsers.axml"/>
+<import src="../../purchase/workbench/templet/materielTable/materielTable.axml"/>
+<import src="../templet/quoteTable/quoteTable.axml"/>
+<view class="top">
+  <view class="top_left">订单编号：<text>{{pur.orderNumber}}</text></view>
+  <view class="top_right">当前进度：<text style='color:red'>{{statusName}}</text></view>
+</view>
+
+<view style='clear:both;border:1px solid #dddddd;margin-top:30px;'>
+    <view class="big">审核流程</view>
+    <template is="showApproveList" data="{{callListUsers}}"/>
+</view>
+    <view class="new">
+      <view class="big">抄送人</view>
+        <view style="margin:6px 0px 0px 13px;">
+          <image   mode="scaleToFill" src="{{top.avatar?top.avatar:'/images/workBench/shiping.png'}}" style="width:40px;height:40px;" />
+          <view style="margin-top:6px;margin-left:7px; ">**</view>
+       </view>
+    </view>
+  
+
+    <view class="new">
+       <view class="big">审核评论:</view>
+        <view style="margin:6px 0px 0px 26px;" a:for="{{appvoverList}}">
+          <view>姓名：{{item.userid}}</view>
+          <textarea placeholder="{{item.message}}" style='margin-left:30px;' disabled="disabled"></textarea>
+        </view>
+    </view>
+ 
+</view>
+
+<view  class="method">
+  <view  class="top_left">采购方式</view>
+  <view class="top_right">{{buyChannelName}}</view>
+</view>
+
+<view>
+  <view style="height:20px;margin-top:8px">申请清单</view>
+   <template is="materielTabel" data="{{...materielList,isShow}}"/>
+</view>
+
+<!-- <view a:if="{{isPass==true}}">
+  <template is="quoteTable" data="{{...supplier,isShow}}" />
+</view> -->
+
+ <block a:for="{{supplier}}" a:for-item="item" a:for-index="ix">
+        <template is="quoteTable" data="{{item,ix}}">
+</block>

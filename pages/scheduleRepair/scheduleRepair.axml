@@ -1,0 +1,6 @@
+<import src="../purchase/workbench/templet/list/list.axml"/>
+<view class="page-section">
+      <view class="page-section-demo schOne">
+        <template is="schList" data={{...schList}}>
+      </view>
+    </view>

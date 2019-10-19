@@ -1,0 +1,78 @@
+
+<view style="margin:3px 0px 0px 6px;font-weight:bold;font-size=18px;">公司{{pur.gongsi}}报价数据分析</view>
+
+<view a:for="{{maList}}" >
+    <button style="float:left;width:{{100/(maList.length*2)}}%;font-size:12px;height:24px;margin-left:6px" a:for-item="{{item}}" data-index="{{item.pkMaterialId}}" size="default" type="primary" onTap="getServerData"><text style="margin-top=3px;position:relative;top:-10px">{{item.nameAndNorms}}</text></button>
+</view>
+
+<view class="guige">规格：<text> {{pur.norms}}</text></view>
+
+<view class="title2">
+  <view>{{pur.itemName}}</view>
+  <view>历史报价数据</view>
+</view>
+
+<view class="qiun-charts">
+  <!-- <canvas id="canvasColumn" width="750" height="500" style="width:750rpx;height:500rpx;" onTouchStart="touchColumn"></canvas> -->
+  <canvas  width="750" height="500" id="LineA" style="width:750rpx;height:500rpx;"  disable-scroll=true onTouchStart="touchLineA" onTouchMove="moveLineA" onTouchEnd="touchEndLineA"></canvas>
+</view>
+<view style="margin-left:6px">
+
+  <view class="shuoming">
+      <text style="color:red;">{{pur.itemName}}</text> 
+      对比上次报价涨幅 
+      <text a:if="{{pur.gainStatus==1}}" style="color:red">涨幅</text> 
+      <text a:elif="{{pur.gainStatus==2}}" style="color:green">降幅</text>
+      <text a:elif="{{pur.gainStatus==0}}" style="color:black">无变化</text>
+      <text style="color:red;" a:if="{{pur.gainStatus!=0}}">{{pur.gain}}%</text>
+  </view>
+  <view class="shuoming">
+    本次报价  <text style="color:red;">{{pur.quote}}</text>元 
+    </view>
+    
+  <view class="shuoming">
+      涨幅原因： <text>{{pur.reason}}</text>
+    </view>
+  <view class="shuoming">
+      该公司上次报价  <text style="color:red;">{{pur.quote_lastTime}}</text>元  
+    </view>
+  <view class="shuoming">
+      该公司往期最低报价  <text style="color:red;">{{pur.quote_lowest}}</text> 元（ <text>{{pur.quote_lowest_time}}</text>）
+    </view>
+  <view class="shuoming">
+      该公司往期最高报价  <text style="color:red;">{{pur.quote_heighest}}</text> 元（ <text>{{pur.quote_heighest_time}}</text>）
+  </view>
+
+</view>
+
+<view class="title2">
+  <view>{{pur.itemName}}</view>
+  <view>ERP历史报价数据</view>
+</view>
+
+<view class="qiun-charts" style="margin-top:20px">
+  <!-- <canvas id="canvasColumn" width="750" height="500" style="width:750rpx;height:500rpx;" onTouchStart="touchColumn"></canvas> -->
+  <canvas  width="750" height="500" id="LineB" style="width:750rpx;height:500rpx;"  disable-scroll=true onTouchStart="touchLineB" onTouchMove="moveLineB" onTouchEnd="touchEndLineB"></canvas>
+</view>
+
+<view style="margin-left:6px;margin-bottom:24px">
+
+  <view class="shuoming">
+      <text style="color:red;">{{pur.itemName}}</text> 
+      上次报价对比该公司本次报价 
+      <text a:if="{{pur.gainStatusInAll==1}}" style="color:red">涨幅</text> 
+      <text a:elif="{{pur.gainStatusInAll==2}}" style="color:green">降幅</text>
+      <text a:elif="{{pur.gainStatusInAll==0}}" style="color:black">无变化</text>
+      <text style="color:red;" a:if="{{pur.gainStatusInAll!=0}}">{{pur.gainInAll}}%</text>
+  </view>
+  <view class="shuoming">
+      该商品上次报价  <text style="color:red;">{{pur.quoteLastTimeInAll}}</text>元 
+  </view>
+  <view class="shuoming">
+      该商品往期最低报价  <text style="color:red;">{{pur.quoteLowestInAll}}</text> 元（ <text>{{pur.quoteLowestTimeInAll}}</text>）
+  </view>
+  <view class="shuoming">
+      该商品往期最高报价  <text style="color:red;">{{pur.quoteHeighestInAll}}</text> 元（ <text>{{pur.quoteHeighestTimeInAll}}</text>）
+  </view>
+
+</view>

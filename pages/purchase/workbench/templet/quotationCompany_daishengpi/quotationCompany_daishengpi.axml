@@ -1,0 +1,129 @@
+<template name="quoteTable">
+  
+  <!-- <block a:for="{{item}}"  a:for-item="ite" a:for-index="idx">遍历订单 -->
+
+<block a:for="{{item[0]}}" a:for-item="top" a:for-index="ix">
+  <view class="{{top.isShow?'table11':'table22'}}">
+  <view class="tr2 bg-g1">
+      <view class="gongsi">公司<text style="color:red">{{top.gongsi}}</text>报价</view>
+      
+      <view class="zongji">供货周期<text style='color:red'>{{top.supplyCycle}}</text>天</view>
+      <view class="zongji">总计<text style='color:red'>{{top.totalMoneys}}</text>元</view>
+      <image data-index="{{idx}}" class="click_img" src="{{top.isShow?'/images/workBench/close.png' : '/images/workBench/open.png'}}" onTap="toggleQuote" />
+  </view>
+
+    <!-- <image mode="scaleToFill" src=""/ onclick="a()" data-img=""> -->
+    <view class="table11">
+      <view class="tr bg-w1">
+        <view class="th1_index">序号</view>
+        <view class="th1">名称</view>
+        <view class="th1">规格</view>
+        <!-- <view class="th">单位</view> -->
+        <view class="th1">数量</view>
+        <view class="th1">报价</view>
+        <view class="th1">总计</view>
+
+        <!-- 多商家选择 -->
+        <view class="{{multimerchant?'duoshangjChecked':'duoshangjNo'}}"></view>        
+
+      </view>
+      <block a:for="{{item[1]}}" a:for-item="ite" a:for-index="iddx">
+        <view class="tr bg-g1">
+          <view class="td1_index">{{iddx+1}}</view>
+          <view class="td1">{{ite.itemName}}</view>
+          <view class="td1">{{ite.norms}}</view>
+          <view class="td1_index">{{ite.count}}</view>
+          <view class="td1">{{ite.quote}}<text class="{{ite.priceboolean?'priceup':'pricedown'}}">{{ite.priceChange}}</view>
+          <view class="td1">{{ite.oneMoney}}</view>
+            <!-- 多商家选择 -->
+        <view class="{{multimerchant?'duoshangjChecked':'duoshangjNo'}}">
+          <!-- <checkbox-group onChange="onChange"> -->
+            <!-- <label class="checkbox" a:for="{{ite.checkStatus}}"> -->
+              <!-- <checkbox data-gongsiId="{{top.gongsiId}}" data-pkMaterialId="{{ite.pkMaterialId}}" value="gongsiId:{{top.gongsiId}},pkMaterialId:{{ite.pkMaterialId}}" checked="{{ite.checkStatus}}"  disabled="{{ite.disabled}}" onChange="onChange"/> -->
+              <checkbox data-gongsiId="{{top.gongsiId}}" data-pkMaterialId="{{ite.pkMaterialId}}" checked="{{ite.checkStatus}}"   disabled="{{ite.disabled}}" onChange="onChange" />
+            <!-- </label> -->
+          <!-- </checkbox-group> -->
+        </view>
+        </view>
+      </block>
+      <view class="tr bg-g1">
+          <view class="td2" >总价</view>
+          <view class="td2_r">{{top.totalMoneys}}</view>
+      </view>
+  </view>
+</block> 
+       
+<block a:for="{{item[0]}}" a:for-item="top" a:for-index="ix">
+      <view style="clear:both;margin:6px 0px 250px 0px">
+         <!-- 左边 -->
+           <view style="float:left;width:70%;">
+              <!-- <view class="click_zhineng_you" a:if="{{top.recoReason}}">
+                    <image mode="scaleToFill" src="/images/workBench/dian.png" style="width:20px;height:11px;float;left"/><text style="margin-top:6px;float;left">智能推荐({{top.recoReason}})</text>  
+              </view> -->
+                    <view style="float:left" a:if="{{multimerchant==false}}">
+                    <image mode="scaleToFill" src="{{top.isChecked?'/images/workBench/dian.png':'/images/workBench/white.png'}}" style="width:30px;height:30px;float;left" data-id="{{top.gongsiId}}" />                        
+                    </view>
+                    <view style="float:left" a:elif="{{multimerchant==true}}">
+                    <image mode="scaleToFill" src="/images/workBench/white.png" style="width:30px;height:30px;float;left"/>                        
+                    </view>
+                    <view style="margin-top:8px" a:if="{{top.isShow==true}}">
+                      <text style="color:red">确认商家
+                      
+                        <text style="color:red" a:if="{{top.recoReason!=null && top.recoReason!=''}}">({{top.recoReason}})</text>
+                        <text style="color:red" a:if="{{top.shortSupplyCycle!='' && top.shortSupplyCycle!=null}}">({{top.shortSupplyCycle}})</text>
+                        <text style="color:red" a:if="{{top.expertRecommendation!='' && top.expertRecommendation!=null}}">({{top.expertRecommendation}})</text>
+                        <text style="color:red" a:if="{{top.highestQuotation!='' && top.highestQuotation!=null}}">({{top.highestQuotation}})</text>
+                      </text>
+                    </view>
+                    <view style="float:left;margin-top:8px" a:if="{{top.isShow==false}}">
+                      <text style="color:red">已淘汰
+                      
+                        <text style="color:red" a:if="{{top.recoReason!=null&&top.recoReason!=''}}">({{top.recoReason}})</text>
+                        <text style="color:red" a:if="{{top.shortSupplyCycle!=''}}">({{top.shortSupplyCycle}})</text>
+                        <text style="color:red" a:if="{{top.expertRecommendation!=''}}">({{top.expertRecommendation}})</text>
+                        <text style="color:red" a:if="{{top.highestQuotation!=''}}">({{top.highestQuotation}})</text>
+                      </text>
+                    </view>
+              <!-- 提示 -->
+              <block a:for="{{item[1]}}" a:for-item="ite_two" a:for-index="iddx">
+                <view a:if="{{ite_two.reason}}" class="tishi_you">
+                   <view>
+                      提示：<text>{{ite_two.itemName}}较上次报价
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}" a:if="{{ite_two.priceboolean==true}}">上浮</text>
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}" a:if="{{ite_two.priceboolean==false}}">下浮</text>
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}">{{ite_two.priceChange}}%</text>
+                        </text>
+                    </view>
+                    <view style="margin-top:10px">
+                      原因：<text>{{ite_two.reason}}</text>
+                    </view>
+                </view>
+                <view a:else>
+                  <view class="tishi_you">
+                       提示：<text>{{ite_two.itemName}}较上次报价
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}" a:if="{{ite_two.priceboolean==true}}">上浮</text>
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}" a:if="{{ite_two.priceboolean==false}}">下浮</text>
+                        <text class="{{ite_two.priceboolean?'priceup1':'pricedown1'}}">{{ite_two.priceChange}}%</text>
+                        </text>
+                    </view>
+                </view>
+              </block>
+          </view>
+          <!-- 右边 -->
+          <view style="float:right;width:20%;margin-right:3%;">
+            <!-- 大数据 -->
+              <view >
+                <button class="btn" size="default" data-index="{{top.gongsiId}}"  onTap="getBigData" hover-class='btn_hover'>大数据</button>
+              </view>
+
+              <!-- 专家评审 -->
+              <view >
+                <button class="btn" size="default" data-index="{{top.gongsiId}}"  onTap="getExpertReview"  hover-class='btn_hover'>专家评审<text></text></button>
+              </view>
+          </view>
+      </view>
+  </block> 
+<!-- </view>
+   </block>  -->
+</template>
+

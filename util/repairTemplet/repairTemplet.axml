@@ -1,0 +1,43 @@
+
+
+<template name="repair">
+  <view style='margin-top:10px;clear:both;'>
+    
+    <view>
+      <view style='float:left;margin:7px 0 0 6px'>采购明细</view>
+      <view data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onTap="deletOne" style='float:right;margin:7px 6px 0 0px'>删除</view>
+    </view>
+
+    <view style="margin-top:6px;clear:both;">
+
+        <view class="section">
+          <view class="input_spec_title">维修物品      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.itemName}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeName"/>
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">规格      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"   value="{{aPur.norms}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeNorms"/>
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">数量      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+
+        </view>
+
+        <view class="section">
+          <view class="input_spec_title">单位      
+          </view>
+          <input class="input_spec_text float-right-20" name="input" placeholder="请输入"  value="{{aPur.unit}}"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/>
+
+        </view>
+
+    </view>
+
+  </view>
+  
+</template>

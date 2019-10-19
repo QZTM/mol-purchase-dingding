@@ -1,0 +1,55 @@
+.stutas{
+  margin-top: 7px;
+  padding-left: 25px;
+  font:31px;
+  color: red;
+  /* border-bottom:1px solid #F4F4F5; */
+  
+}
+.chickList{
+
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.textarea{
+  
+  border-bottom:1px solid #F4F4F5;
+  padding-left: 25px;
+  font: 15px;
+  clear: both;
+  padding-right: 12px;
+  text-indent: 38px;
+  margin-top: 8px;
+}
+.forzong{
+  margin-top: 30px;
+  padding-left:25px;
+  border-bottom:1px solid #F4F4F5;
+}
+.fongzong_left{
+   /* font: 18px;
+   font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important; */
+}
+.fongzong_right{
+  float: right;
+  margin-top: -20px;
+  font: 18px;
+  padding-right: 18px;
+}
+.money{
+  padding-left: 197px;
+  margin-top: 25px;
+   border-bottom:1px solid #F4F4F5;
+}
+.money_left{
+    /* font: 18px;
+    font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important; */
+}
+.money_right{
+    float: right;
+    margin-top: -20px;
+    padding-right: 20px;
+    font: 18px;
+}

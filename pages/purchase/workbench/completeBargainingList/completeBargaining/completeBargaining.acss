@@ -1,0 +1,85 @@
+@import '../../templet/materielTable/materielTable.acss';
+@import '../../templet/quotationCompanyTable_yjwc/quotationCompanyTable_yjwc.acss';
+@import '../../templet/showCallUsers/showCallUsers.acss';
+.top{
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  border-bottom: 1px solid #dddddd;
+  padding-bottom: 9px;
+}
+.onestep{
+  clear: both;
+  border-bottom: 1px solid #dddddd;
+  height: 60px;
+}
+.title{
+  text-align: center;
+  font-size: 14px;
+  margin-top:10px;
+}
+.ind{
+  float: left;
+  margin-left:12px;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.shenqing{
+  float:right;
+  margin-right:12px;
+  font-size: 12px;
+  margin-top:6px;
+}
+.num{
+  margin-left:12px;
+  font-size: 12px;
+  margin-top:6px;
+  float: left;
+}
+.date{
+  float:right;
+  margin-right:12px;
+  font-size: 12px;
+  margin-top:6px;
+}
+.twostep{
+  clear: both;
+  font-size: 11px;
+  margin-top:10px;
+  height: 24px
+}
+.leibie{
+  float: left;
+  padding-left: 6px;
+  color: blue;
+  
+}
+.fukuan{
+  float: right;
+  padding-right: 6px;
+  color: blue;
+}
+.title_icon {
+   display: block;
+   width: 36px;
+   height: 16px;
+   margin-left: 46%;
+  }
+.call{
+  width:32px;
+  height:32px;
+  margin-top:2px;
+  margin-left:20px;
+}
+.shiping_text{
+  margin: 6px 0px 5px 16px ;
+  font-size: 13px;
+}
+.notAdmin{
+  display: none;
+}
+.pl{
+  font-size: 12px;
+  color: black;
+}

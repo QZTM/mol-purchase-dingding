@@ -1,0 +1,30 @@
+@import '../../purchase/workbench/templet/showCallUsers/showCallUsers.acss';
+@import '../../purchase/workbench/templet/materielTable/materielTable.acss';
+@import '../templet/quoteTable/quoteTable.acss';
+
+
+
+.top{
+  padding:6px 13px 0px 13px ;
+}
+.top_left{
+  margin-top: 6px;
+  float: left;
+}
+.top_right{
+  margin-top: 6px;
+  float: right;
+}
+.new{
+  clear: both;
+}
+.big{
+  margin-top: 5px;
+  margin-left: 12px;
+  font-weight: bold;
+}
+.method{
+  border: 1px solid #dddddd;
+  margin-top: 6px;
+  height: 24px;
+}

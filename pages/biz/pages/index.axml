@@ -1,0 +1,27 @@
+<!-- 视图层 -->
+<view style='width:{{systemInfo.windowWith}}px'>
+  <form onSubmit="onSubmit" onReset="onReset">
+   <view class="input_reason" >
+    <view class='section__title1'>申请事由</view>
+    <input class="section__input" name="input" placeholder="请输入采购事由" onBlur="changeInputVal"/>
+  </view> 
+  <view class="pur_function">
+    <view class="pur__title" >采购方式</view>
+    <radio-group class="pur_group"  name="radio" onChange="radioChange">
+        <label class="radio redioChecks" a:for="{{items}}">
+             <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+        </label>
+    </radio-group>
+  </view>
+ 
+    <!-- <view>
+      <button type="primary" size="default" formType="submit" >确定</button>
+    </view> -->
+ 
+    <!-- <view>
+      <button size="default" type="primary" onTap="tapname">跳转</button>
+    </view> -->
+
+ </form>
+</view>
+

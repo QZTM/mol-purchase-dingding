@@ -1,0 +1,104 @@
+<import src="/util/repairTemplet/repairTemplet.axml"/>
+<view class="strategy">
+  <view class="input_spec" > 
+  <view class="sl">采购方式</view>
+  <view class="sr2">维修</view>
+</view>
+
+
+<view class="input_spec" style="border-bottom:double 3px rgb(33,150,241)"> 
+  <view class="sl">申请事由</view>
+  <input class="sr1" onBlur="reasonBlur" placeholder="请输入申请事由" />
+</view>
+ 
+<view>
+   <block class="seller_temple" a:for="{{arr.pageArray.purchaseArray}}" a:for-index="iddx" a:for-item="aPur">
+    <template is="repair" data="{{...arr,iddx,iddx,aPageObj,aPur}}"/>
+    </block>
+</view>
+
+<view onTap="addSellerTemple" class="add">增加明细</view>
+
+
+
+<view class="input_spec">  
+  <view class="sl">截止日期</view>
+  <view class="sr1">
+    <picker mode="date" value="{{date}}" start="1978-01-01" end="2099-01-01" onChange="bindDateChange">  
+    <view class="picker">  
+      {{dates}}  
+    </view>  
+  </picker>  
+  </view>
+  
+</view>  
+  
+
+<view class="input_spec">  
+  <view class="sl">截止时间</view>
+  <view class="sr1">
+     <picker mode="time" value="{{time}}" start="00:00" end="23:59" onChange="bindTimeChange">  
+    <view class="picker">  
+    {{times}}
+    </view>  
+  </picker>  
+  </view>
+</view>  
+
+<view class="input_spec"> 
+  <view class="sl">供货周期</view>
+  <view class="sr1">
+    <input style='float:left;width:34px'  placeholder="" onBlur="supplyCycle" />
+    <view   style='float:right;margin-top:6px;margin-right:10px;'>天</view>
+  </view>
+  
+</view>
+
+<view class="input_spec">
+  <view class="sl">支付方式</view>
+  <view  class="sr1">
+     <picker onChange="bindPayChange" value="{{index}}" range="{{payList}}">
+    <view class="picker">
+      {{payList[index]}}
+    </view>
+    </picker>
+  </view>
+</view>
+
+
+<view class="input_spec"> 
+  <view class="sl">技术支持电话</view>
+  <input class="sr1" placeholder="请输入" onBlur="technicalSupportTelephone" />
+</view>
+
+
+
+<view class="input_spec">
+  <view class="sl">专家评审</view>
+  <view  class="sr1">
+   
+    <checkbox-group onChange="radioChange">
+      <label class="checkbox" a:for="{{items}}">
+        <checkbox value="{{item.name}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
+        <text class="checkbox-text">{{item.value}}</text>
+      </label>
+    </checkbox-group>
+  </view>
+</view>
+
+<view class="input_spec"> 
+  <view class="sl">评审奖励</view>
+  <view class="sr1">
+    <input style='float:left;width:70%'  placeholder="请输入" onBlur="rewardFun" />
+    <view  style='float:right;margin-top:6px;margin-right:10px;'>元</view>
+  </view>
+</view>
+
+
+<view>
+  <view class="need" >需求备注</view>
+  <textarea class="need_text" placeholder="备注：" auto-height onBlur="remakeFun" ></textarea>
+</view>
+
+<button class="button" size="default" type="primary" onTap="submit">提交申请</button>
+</view>

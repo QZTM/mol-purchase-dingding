@@ -1,0 +1,31 @@
+.top{
+  border-bottom: 1px solid #dddddd;
+  padding: 12px 0px 12px 12px;
+}
+.every{
+  border:1px solid #dddddd;
+  padding: 6px 0px 6px 10px;
+}
+.line{
+   margin-top: 12px;
+}
+.btn{
+float: right;
+font-size: 11px;
+margin-right: 20rpx; 
+height: 60rpx; 
+line-height: 60rpx; 
+background: #fff; 
+color:#1e82d2; 
+padding-right:0rpx;
+margin-top: 0px;
+}
+.btn2{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+.line2{
+  height: 30px;
+}

@@ -1,0 +1,90 @@
+<template name="underlinepageTempleTop">
+  <view class="grid" key="grid">
+
+      <view class="section">
+         
+          <picker  onChange="bindPickerChange" data-iddx="{{iddx}}" value="{{checkedIndex[iddx].arrIndex}}" range="{{array}}"  range-key="name">
+             <view class="section_name">
+               <view  class="section_name_title">采购类型</view>
+                <view class="section_name_extra">
+                {{array[checkedIndex[iddx].arrIndex].name}}
+                </view>
+             </view>
+             
+          </picker>
+          <picker onChange="bindObjPickerChange" data-iddx="{{iddx}}" value="{{checkedIndex[iddx].index}}" range="{{array[checkedIndex[iddx].arrIndex].items}}" range-key="name">
+            <view class="section_name">
+              <view class="section_name_title">品牌</view>  
+              <view class="section_name_extra">{{array[checkedIndex[iddx].arrIndex].items[checkedIndex[iddx].index].name}}</view>
+            </view>
+          </picker>
+           <picker onChange="bindObjThirdPickerChange" data-iddx="{{iddx}}" value="{{checkedIndex[iddx].thirdIndex}}" range="{{array[checkedIndex[iddx].arrIndex].items[checkedIndex[iddx].index].thirdItems}}" range-key="name">
+            <view class="section_name">
+              <view class="section_name_title">名称</view>  
+              <view class="section_name_extra">{{array[checkedIndex[iddx].arrIndex].items[checkedIndex[iddx].index].thirdItems[checkedIndex[iddx].thirdIndex].name}}</view>
+            </view>
+          </picker>
+           <view class="input_spec">
+            <view class="input_spec_title">规格</view>
+            <input class="input_spec_text" onBlur='purSpec' name="input" placeholder="请输入采购规格"  data-iddx="{{iddx}}" />
+      </view>
+    
+      <view class="input_spec">
+            <view class="input_spec_title">数量</view>
+            <input class="input_spec_text" onBlur="purNum"  name="input" placeholder="请输入采购数量"  data-iddx="{{iddx}}"/>
+      </view>
+
+      <view class="input_spec">
+            <view class="input_spec_title">单位</view>
+            <input class="input_spec_text" onBlur='purUnit'  name="input" placeholder="请输入采购单位" data-iddx="{{iddx}}"/>
+      </view>
+    </view>
+      </view>
+  </view>
+</template>
+<!--  -->
+<!-- <template name="underlinepageTempleTop">
+  <view class="grid" key="grid">
+    <view class="section">
+      <view class="section_title">采购类型      
+      </view>
+      <picker onChange="bindPickerChange" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-apur="{{aPur}}" value="{{aPur.typeIndex}}" range="{{itemArray}}" range-key="name">
+        <view class="section_order float-right-20">             {{itemArray[aPur.typeIndex].name}}                    
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <picker onChange="bindObjPickerChange" data-typeindex="{{aPur.typeIndex}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" value="{{aPur.nameIndex}}" range="{{itemArray[pageObjectArray[iddx].purTopArray[iddxx].typeIndex].items}}" range-key="name">
+        <view class="section_name">
+          <view class="section_name_title">品牌          
+          </view>
+          <view class="section_name_extra float-right-20">{{itemArray[aPur.typeIndex].items[aPur.nameIndex].name}}          
+          </view>
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+        <picker onChange="">
+          <view>
+            Current：{{'Autumn'}}
+          </view>
+        </picker>
+    </view>
+    <view class="section">
+      <view class="input_spec_title">规格      
+      </view>
+      <input class="input_spec_text float-right-20" name="input" placeholder="请输入采购规格" value="{{aPur.norms}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeNorms"/>
+    </view>
+    <view class="section">
+      <view class="input_num_title">数量      
+      </view>
+      <input class="input_num_text float-right-20" name="input" placeholder="请输入采购数量" value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+    </view>
+    <view class="section" style="border-bottom:double 3px rgb(33, 150, 241)">
+      <view class="input_depar_title">单位      
+      </view>
+      <input class="input_depar_text float-right-20" name="input" placeholder="请输入采购单位" value="{{aPur.unit}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/>
+    </view>
+  </view>
+</template> -->
+

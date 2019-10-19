@@ -1,0 +1,22 @@
+@import '/util/underlinepageTemple/underlinepageTemple.acss';
+@import '/util/underLineUserPriceCompare/underLineUserPriceCompare.acss';
+@import '/util/approve-templet/approve-templet.acss';
+.beizhu{
+  max-lines: 140;
+  border: 1px solid  #F4F4F5;
+  height: 160px;
+}
+
+.tijiao{
+  align-content: center;
+  clear: both;
+}
+.common{
+  padding-top:0px;
+}
+.big-bottom-line{
+  height:8px;
+  background-color:#ff9800;
+}
+.images-view{
+}

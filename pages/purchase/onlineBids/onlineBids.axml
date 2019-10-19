@@ -1,0 +1,5 @@
+<view>
+  在线招标页面
+    <web-view src="http://127.0.0.1:8848/thrid_zyfk/thirdPage_homePage.html" />
+
+</view>

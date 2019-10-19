@@ -1,0 +1,5 @@
+<!-- 小程序模拟器中不显示，请点击上方预览，推送到支付宝客户端预览 -->
+<favorite>收藏小程序，下次使用更方便</favorite>
+<view class="qiun-charts">
+  <canvas id="canvasColumn" width="750" height="500" style="width:750rpx;height:500rpx;" onTouchStart="touchColumn"></canvas>
+</view>

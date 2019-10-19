@@ -1,0 +1,22 @@
+
+<template name="materielTabel">
+  <!-- <view class="table"> -->
+    <view class="{{isShow?'table1':'table2'}}">
+  <view class="tr bg-w">
+    <view class="th">序号</view>
+    <view class="th">名称</view>
+    <view class="th">规格</view>
+    <view class="th">单位</view>
+    <view class="th">数量</view>
+  </view>
+  <block a:for="{{list}}" a:key="{{item}}">
+    <view class="tr bg-g">
+      <view class="td">{{item.index}}</view>
+      <view class="td">{{item.itemName}}</view>
+      <view class="td">{{item.norms}}</view>
+      <view class="td">{{item.unit}}</view>
+      <view class="td">{{item.count}}</view>
+    </view>
+  </block>
+</view>
+</template>

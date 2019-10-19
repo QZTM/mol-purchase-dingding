@@ -1,0 +1,27 @@
+<template name="schedule">
+  <view>
+    <block a:for="{{list}}">
+      <view class="aSchedule" onTap="toSeePurDetail" data-gotype="{{item.goType}}" data-userId="{{item.userId}}" data-piid="{{item.processInstanceId}}">
+        <view class="schPurType">{{item.purType}}</view>
+          <view class="schItemName">{{"物品："+item.item}}</view>
+          <view class="schItemCount">{{"数量："+item.count}}<text style="white-space:pre-wrap;margin-left:30px;">{{"单位："+item.unit}}</text></view>
+          <view class="schItemState">{{item.state}}</view>
+      </view>
+    </block>
+  </view>
+</template>
+
+<template name="schList">
+  <view>
+    <block a:for="{{list}}">
+      <view class="aSchedule" onTap="tolistdetail" data-gotype="{{item.goType}}" data-id="{{item.id}}" >
+        <view class="schPurType">{{item.title}}</view>
+        <view style="float:right;color:red;font-size:12px;margin-right:30px" a:if="{{item.status==statusPass}}">通过</view>
+        <view style="float:right;color:green;font-size:12px;margin-right:30px" a:if="{{item.status==statusRefuse}}">拒绝</view>
+          <view class="schItemName">{{"单号："+item.orderNumber}}<text style="white-space:pre-wrap;margin-left:30px;">{{"类型："+item.buyChannelName}}</text></view>
+          <view class="schItemCount"><text style="white-space:pre-wrap;background-color:#5B9BD5;border-radius:6px;padding:4px;color:white">{{item.goodsType}}</text><text style="white-space:pre-wrap;margin-left:30px;border-radius:6px;background-color:#F0AD4E;padding:4px;color:white">{{item.statusName}}</text></view>
+          <view class="schItemState">{{item.createTime}}</view>
+      </view>
+    </block>
+  </view>
+</template>

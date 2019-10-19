@@ -1,0 +1,16 @@
+  <view class="page-title">审批流程:</view>
+  <view class="approver-out-view-out">
+    <block a:for="{{checkedUserList}}" a:for-index="userInd" a:for-item="user">
+      
+        <view class="approver-out-view">
+            <image class="user-avatar-img " src="{{user.avatar==''?'/images/load/no-avatar.png':user.avatar}}"/>
+            <image class="close-icon" src="/images/load/toprightclose.png" data-ruserid="{{user.userid}}" onTap="removeUser"/>
+            <block a:if="{{userInd != checkedUserList.length-1}}">
+              <image class="stream-line-img" src="/images/load/more-than.png"/>
+            </block>
+            <view class="user-name-text">{{user.name}}</view>
+        </view>
+      
+    </block>
+  </view>
+</view>

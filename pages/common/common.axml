@@ -1,0 +1,24 @@
+<view class="common">
+  <view class="common_histroyprice">
+    <view>历史采购最低价{{approvalList.histroylower}}元/吨</view>
+    <view>历史采购最高价{{approvalList.histroyheigher}}元/吨</view>
+    <view>物品采购平均价{{approvalList.histroyavg}}元/吨</view>
+  </view>
+  
+
+<view class="common_button">
+  <button size="default" type="primary">查看市场价</button>
+</view>
+<view class="common_price">
+    <view class="common_price_l">最低价</view>
+    <view class="common_price_h">最高价</view>
+    <view class="common_price_a">平均价</view>
+</view>
+<view a:for='{{approvalList.sellerList}}' class="common_sellerPrice">
+  <view>商家{{index+1}}报价</view>
+  <view>{{approvalList.sellerList[index].lower}}元</view>
+  <view>{{approvalList.sellerList[index].heigher}}元</view>
+  <view>{{approvalList.sellerList[index].avg}}元</view>
+</view>
+<view class="common_white"></view>
+</view>

@@ -1,0 +1,127 @@
+<template name="underlinepageTempleTop">
+  <view class="grid" key="grid">
+    <view class="section">
+      <view class="section_title">采购类型      
+      </view>
+      <!-- <picker onChange="bindPickerChange" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-apur="{{aPur}}" value="{{aPur.typeIndex}}" range="{{itemArray}}" range-key="name">
+        <view class="section_order float-right-20">             {{itemArray[aPur.typeIndex].name}}                    
+        </view>
+      </picker> -->
+      <text class="input_spec_text float-right-20"  onTap="goToChooseItemType" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}">{{aPur.typeName?aPur.typeName:'请选择采购类型'}}</text>
+    </view>
+    <view class="section">
+      <picker onChange="bindObjPickerChange"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-typeIndex="{{aPur.typeIndex}}" value="name"  range="{{itemType[aPur.typeIndex]}}" range-key="name">
+        <view class="section_name">
+          <view class="section_name_title">采购名称          
+          </view>
+          <view class="section_name_extra float-right-20 overtextellipsis">{{aPur.itemName?aPur.itemName:''}}          
+          </view>
+        </view>
+      </picker>
+    </view>
+    
+    
+    <view class="section">
+      <picker onChange="bindObjPickerChangeItemSpec" data-itemId="{{itemType[aPur.typeIndex][aPur.nameIndex].itemList[aPur.itemIndex].pkMaterial}}"  data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" data-typeIndex="{{aPur.typeIndex}}" data-nameIndex="{{aPur.nameIndex}}" value="spec"  range="{{itemType[aPur.typeIndex][aPur.nameIndex].itemList}}" range-key="materialspec">
+        <view class="section_name">
+          <view class="section_name_title">规格          
+          </view>
+          <view class="section_name_extra float-right-20 overtextellipsis">{{aPur.norms?aPur.norms:''}}          
+          </view>
+        </view>
+      </picker>
+    </view>
+    
+    
+    
+    <view class="section">
+      <view class="input_num_title">数量      
+      </view>
+      <input class="input_num_text float-right-20" name="input" placeholder="请输入采购数量" value="{{aPur.count}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeCount"/>
+    </view>
+    <view class="section" style="border-bottom:double 3px rgb(33, 150, 241)">
+      <view class="input_depar_title">单位      
+      </view>
+      <text class="input_spec_text float-right-20" >{{aPur.unit?aPur.unit:''}}</text>
+      <!-- <input class="input_depar_text float-right-20" name="input" placeholder="请输入采购单位" value="{{aPur.unit}}" data-iddx="{{iddx}}" data-iddxx="{{iddxx}}" onBlur="changeUnit"/> -->
+    </view>
+  </view>
+</template>
+<template name="underlinepageTempleCenter">
+  <view class="grid" key="grid">
+    <view class="section" style="border-bottom:0px;padding-top:2px;margin-top:10px;">
+      <text class="ask-seller-title">询价商家{{sellerIndex+1}}      
+      </text>
+      <!-- <text class="ask-seller-name float-right-20">{{aseller.name}}    
+      </text> -->
+      <input class="grid_input_1_right float-right-20" placeholder="请输入单位名称" value="{{aseller.name}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onBlur="sellerChangeName"/>
+    </view>
+    <view class="section" style="border-bottom:0px;padding-top:2px">
+      <text class="grid_input_1_left">价格      
+      </text>
+      <input class="grid_input_1_right float-right-20" placeholder="请输入商品价格" value="{{aseller.quote}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onBlur="sellerChangeQuote"/>
+    </view>
+
+    <view class="section" style="border-bottom:0px;padding-top:2px">
+      <text class="grid_input_1_left">联系方式      
+      </text>
+      <input class="grid_input_1_right float-right-20" placeholder="请输入联系方式" value="{{aseller.phone}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onInput="phoneChange"/>
+    </view>
+   
+    <view class="tele-line clearfix">
+      <!-- <view class="seller_temple_price" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller">
+        <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/phone-2.png" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller"/>
+        
+      </view> -->
+      <block a:if="{{aseller.callAble}}">
+          <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/phone-call-enable.png" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller"/>
+      </block>
+      <block a:else>
+          <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/phone-call-disable.png" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="callSeller"/>
+      </block>
+      <image class="seller_temple_word" mode="scaleToFill" src="/images/purchase/underline/camera-1.png" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" data-seller="{{aseller}}" onTap="toRecod"/>
+      <view class="autoRecView">
+        <block a:if="{{aseller.autoRec}}">
+          <text>智能推荐          
+          </text>
+        </block>
+      </view>
+      <!-- <view>videoWidth:{{videoWidth}}</view>
+      <view>phoneWidth:{{systemInfo.windowWidth}}</view>
+      <view>width:{{(systemInfo.windowWidth-videoWidth)/2}}</view> -->
+      <!-- <view hidden="{{aseller.videoUrl==''}}" class="video-view" style="width:80%">
+            <video class="video" bindfullscreenchange="bindVideoScreenChange" objectFit='fill' src="{{aseller.videoUrl}}" style="width:100%;margin-left:10%;margin-top:10px;margin-bottom:10px;" ></video>
+          </view> -->
+      <block a:if="{{aseller.videoUrl!=''}}">
+        <view class="classX"  onTap="delVideo"  data-url="{{aseller.videoUrl}}" data-imageIndex="{{urlIndex}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}">✖</view>
+        <view>
+            <video  class="video" bindfullscreenchange="bindVideoScreenChange" objectFit='contain' src="{{aseller.videoUrl}}" style="width:{{systemInfo.windowWidth}};margin-top:10px;margin-bottom:10px;" controls="true"></video>
+        </view>
+      </block>
+      
+        
+      <view class="grid_picture">
+        <text>商品相关图片        
+        </text>
+        <view class="images-view">
+          <block a:for="{{aseller.inquiryUrl}}" a:for-index="urlIndex" a:for-item="aimageUrl">
+            <image class="addImage" onLongTap="deleteImage" src="{{aimageUrl}}" data-url="{{aimageUrl}}" data-imageIndex="{{urlIndex}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onTap="previewImage">
+          </block>
+          <block a:if="{{aseller.inquiryUrl.length<5}}">
+            <image class="addImage" mode="aspectFit" src="{{src}}" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}" onTap="chooseImage"/>
+          </block>
+        </view>
+      </view>
+      <view class="circleView">
+        <block a:if="{{aseller.checked}}">
+          <image class="empty-circle" src="/images/purchase/underline/circle.png" onTap="checkThisSeller" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}">
+        </block>
+        <block a:if="{{!aseller.checked}}">
+          <image class="empty-circle" src="/images/purchase/underline/circle-empty.png" onTap="checkThisSeller" data-iddx="{{iddx}}" data-sellerIndex="{{sellerIndex}}">
+        </block>
+      </view>
+    </view>
+  <view class="bottom-line">
+</view>
+</view>
+</template>

@@ -1,0 +1,11 @@
+<import src="/pages/biz/pages/underlinepage/itemTypeTemplate/itemTypeTemplate"/>
+<view style="width:{{systemInfo.windowWidth}}px;background-color:#fff;padding-left:20px;">
+    <template is="itemTypeTemp" data="{{...itemTypes}}"></template>
+    <!-- <view class="mix-tree-list">
+      <block a:for="{{testList}}" a:key="id" a:for-item="item" a:for-index="index">
+        <view class="mix-tree-item" data-cid="{{item.id}}" catchTap="clickLastItemType">
+          <image class="mix-tree-icon" />{{item.name}}
+        </view>
+      </block>
+    </view> -->
+  </view>

@@ -1,0 +1,49 @@
+<import src="/util/underlinepageTemple/underlinepageTemple.axml"/>
+<import src="/util/underLineUserPriceCompare/underLineUserPriceCompare.axml"/>
+<import src="/util/approve-templet/approve-templet.axml"/>
+<view class="seller" style="width:{{systemInfo.windowWidth}}px;background-color:#fff">
+  <!--循环pageObject-->
+  <block class="seller_temple" a:for="{{arr.pageObjectArray}}" a:for-index="iddx" a:for-item="aPageObj">
+    <block a:if="{{arr.pageObjectArray.length>1 && iddx>0}}">
+        <view class="big-bottom-line"></view>
+    </block>
+    <view>
+      <!--循环输出采购商品(purTopArray)-->
+        <block class="seller_temple" a:for="{{aPageObj.purTopArray}}" a:for-index="iddxx" a:for-item="aPur">
+            <template is="underlinepageTempleTop" data="{{...arr,iddx,iddxx,aPageObj,aPur}}"/>
+        </block>
+        <view class="addSellerTempleButton top-btn" onTap="addPurTemple" data-iddx="{{iddx}}">
+          <text class="addItemText">增加明细</text>
+        </view>
+    </view>
+    
+    <view>
+      <!-- 商家明细表(sellerArray) -->
+      <block class="seller_temple" a:for="{{aPageObj.sellerArray}}" a:for-index="sellerIndex" a:for-item="aseller">
+        <template is="underlinepageTempleCenter" data="{{...arr,iddx,sellerIndex,aseller,...video,...appData}}"/>
+      </block>
+    </view>
+    <view>
+      <block class="price-compares-view" a:for="{{aPageObj.purTopArray}}" a:for-index="aItemIndex" a:for-item="aItem">
+        <block a:if="{{aItemIndex>0}}">
+            <view style="height:5px;border-bottom: 3px double rgb(33, 150, 241);margin-bottom: 10px;">
+
+            </view>
+        </block>
+          <template is="itemPriceCompare" data="{{...arr,iddx,aItemIndex,aPageObj,aItem}}"/>
+      </block>
+    </view>
+  </block>
+<!-- 定位绝对位置 -->
+
+<view class="addSellerTempleButton bottom-btn" onTap="addObjTemple" style="">增加明细</view>
+
+<view>
+  <textarea placeholder="备注说明" class="beizhu" onBlur="remarkInput"></textarea>
+</view>
+<template is="approve-template" data="{{approversList}}"/>
+<view class="tijiao">
+<button size="default" type="primary" onTap="subPruData">提交审批</button>
+</view>
+
+</view>

@@ -1,0 +1,156 @@
+
+page {
+  box-sizing: border-box;
+  width:100vw;
+  background-color: #fff;
+  font-family:"SimSun";
+  font-size:26rpx; 
+  color:#333;  
+}
+.page {
+  /* font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  font: 24rpx; */
+  /* font-family:"DFKai-SB"; */
+  font-family:"SimSun";
+  font-size:26rpx;          /*小程序中，使用rpx做单位*/
+  flex: 1;
+  background-color: #fff;
+}
+
+.page-description {
+  margin-bottom: 4rpx;
+  background-color: #fff;
+}
+
+.page-section {
+  background: #fff;
+  margin-bottom: 4rpx;
+}
+
+.page-section-title {
+  padding: 6rpx 6rpx;
+  background-color: #fff;
+
+}
+
+.page-section-demo {
+  background-color: #fff;
+  margin:40rpx;
+
+}
+
+.page-section-btns {
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.page-section-btns > view {
+  flex: 1;
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #49a9ee;
+}
+.page-section-btns > view + view {
+  border-left: 1px solid #ddd;
+}
+
+button {
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}
+
+.bc_blue {
+  background-color: #49A9EE;
+}
+
+.bc_red {
+  background-color: #F04134;
+}
+
+.bc_yellow {
+  background-color: #FFBF00;
+}
+
+.bc_green {
+  background-color: #00A854;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  height: 88rpx;
+  align-items: center;
+}
+
+.form-row-label {
+  width: 180rpx;
+  /* font: 34rpx; */
+  margin-right: 10rpx;
+  text-align: left;
+  color: #000;
+}
+
+.form-row-content {
+  flex: 1;
+  /* font: 34rpx; */
+}
+
+.form-line {
+  height: 1px;
+  background-color: #ddd;
+  margin-left: 30rpx;
+}
+.color-666{
+  color:#666;
+}
+.font24{
+  /* font: 24px; */
+}
+.font20{
+  /* font: 20px; */
+}
+.font28{
+  /* font: 28px; */
+}
+.font30{
+  font: 30px;
+}
+view{
+  background-color: #fff;
+}
+.bottom-line{
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: #000;
+}
+.color666{
+  color:#666;
+}
+.colorfff{
+  color:#fff;
+}
+.color888{
+  color:#888;
+}
+.color444{
+  color:#444;
+}
+.big_title{
+  color:#333;
+  margin-left:24px;
+  /* font: 20px; 
+  font-weight: 300px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+}
+.float-right-20{
+  float: right;
+  margin-right: 20px;
+  text-align: right;
+}
+
+

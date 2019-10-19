@@ -1,0 +1,69 @@
+<view style="width:{{systemInfo.windowWith}}px;">
+    <view class="status">等待审批</view>
+    <!-- 头像 -->
+    <view class="headSrc">
+      <image mode="aspectFit" src="{{approvalList.headSrc}}" style="width:52px;height:75px;margin-left:37px"/>
+    </view>
+    <!-- 意见 -->
+    <view class="adviceText">
+        <textarea onBlur="bindTextAreaBlur" auto-height style="font:15px;" placeholder="意见 ：" />
+    </view>
+    <!-- 申请事由 -->
+    <view class="view_f">
+          <view class="view_l">申请事由</view>
+          <view class="view_r">{{approvalList.application}}</view>
+    </view>
+    <!-- 采购类型 -->
+    <view class="view_f">
+          <view class="view_l">采购类型</view>
+          <view class="view_r">{{approvalList.type}}</view>
+    </view>
+    <!-- 名称 -->
+     <view class="view_f">
+          <view class="view_l">名称</view>
+          <view class="view_r">{{approvalList.name}}</view>
+    </view>
+    <!-- 规格 -->
+     <view class="view_f">
+          <view class="view_l">规格</view>
+          <view class="view_r">{{approvalList.speci}}</view>
+    </view>
+    <!-- 数量 -->
+     <view class="view_f">
+          <view class="view_l">数量</view>
+          <view class="view_r">{{approvalList.num}}</view>
+    </view>
+    <!-- 计量单位 -->
+     <view class="view_f">
+          <view class="view_l">计量单位</view>
+          <view class="view_r">{{approvalList.unit}}</view>
+    </view>
+    <!-- 电商店铺  -->
+    <view a:for='{{approvalList.sellerList}}' >
+      <view class="view_l">电商电铺{{approvalList.sellerList[index].sellerName}}</view>
+      <!--价格-->
+      <view class="view_f">
+          <view class="view_l">价格</view>
+          <view class="view_r">{{approvalList.sellerList[index].price}}</view>
+      </view>
+      <!-- 链接 -->
+      <view class="view_f">
+          <view class="view_l">链接</view>
+          <view class="view_r">{{approvalList.sellerList[index].link}}</view>
+      </view>
+      <!-- 图片 -->
+      <view class="view_sellerSrc">
+         <image mode="aspectFit" src="{{approvalList.sellerList[index].sellerSrc}}" style="width:66px;height:66px;margin-left:37px;margin-top:17px;"/>
+      </view>
+    </view>
+    <!-- 总金额 -->
+    <view  class="totalMoney">总价：{{approvalList.totalMoney}}元</view>
+     <!-- 备注说明 -->
+    <view>
+      <view class="beizhu">备注说明：</view>
+      <view class="view_remarks">{{approvalList.remarks}}</view>
+    </view>
+    
+    <include src="/pages/common/common.axml"/>
+    <button size="default" type="primary">提交</button>
+</view>  

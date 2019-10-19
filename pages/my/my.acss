@@ -1,0 +1,40 @@
+@import '../biz/components/grid/index.acss';
+.head-sculpture {
+  width:30%;
+  background-color:black;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left:20px;
+}
+.user-name{
+  position: absolute;
+  display: inline-block;
+  top:10%;
+  right:40%;
+}
+.dept-posi{
+  position: absolute;
+  display: inline-block;
+  top:15%;
+  right:40%;
+}
+.oneLine{
+}
+.line{
+  width:100%;
+  border-bottom: 1px solid #ddd;
+}
+.page-session-stylea{
+  padding:0px;
+  border-bottom:1px solid #ddd;
+  margin:0px;
+  padding-bottom:20px;
+}
+.toShowSche{
+  margin-left:36px;
+  margin-top:20px;
+  /* font: 20px; */
+}
+.scheStates{
+  margin-top:20px;
+}

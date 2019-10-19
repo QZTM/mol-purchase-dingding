@@ -1,0 +1,224 @@
+@import '/pages/common/common.acss';
+.grid{
+  obrder-bottom: solid 3px #ddd;
+}
+/* .clearthings{
+  height: 33px;
+   font: 20px;
+   margin-top: 17px;
+   background-color: #FFFFFF;
+   padding-left: 20px;
+   padding-top: 10px;
+} */
+
+.section{
+  height: 32px;
+  padding-left: 20px;
+  padding-top: 14px;
+  border-bottom: solid 1px #ddd;
+}
+    .section_title{
+        float: left;
+      font: 17px;
+    }
+    .section_order{
+      margin-top: 1px;
+      margin-right:23px;
+    }
+    .section_name{
+      clear: both;
+    }
+        .section_name_title{
+            float: left;
+            font: 17px;
+        }
+        .section_name_extra{
+            margin-top: 2px;
+            margin-right:23px;
+        }
+.input_spec{
+    margin-top: 14px;
+    height: 33px;
+    float: none;
+    clear: both;
+    background-color: #FFFFFF;
+    padding-left: 23px;
+    padding-top: 9px;
+    border-bottom: 1px solid #dddddd;
+}
+        .input_spec_title{
+              float: left;
+              font: 17px;
+        }
+        .input_spec_text{
+          margin-top: 2px;
+        }
+.input_num{
+    margin-top: 14px;
+    height: 43px;
+    float: none;
+    clear: both;
+      background-color: #FFFFFF;
+}
+        .input_num_title{
+              float: left;
+              font: 17px;
+        }
+        .input_num_text{
+          margin-top: -4px;
+        }
+
+.input_depar{
+     margin-top: 14px;
+    height: 45px;
+   
+    float: none;
+    clear: both;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #F4F4F5;
+}
+        .input_depar_title{
+              float: left;
+              font: 17px;
+        }
+        .input_depar_text{
+          margin-top: -4px;
+          
+        }
+     .grid_input{
+        padding-top: 14px;
+        background-color: #FFFFFF;
+        height: 293px;
+        
+    }
+      .sellerId{
+          font: 20px;
+          margin-left: 23px;
+           /* border-bottom: 3px solid #F4F4F5; */
+      }
+      .grid_input_zong{       
+          padding-top: 10px;
+          margin-left: 20px;
+           border-bottom: 1px solid #F4F4F5;
+          padding-bottom: 16px;
+      }
+          .grid_input_1_left{
+              font: 17px;
+              float: left;
+               /* border-bottom: 3px solid #F4F4F5; */
+          }
+          .grid_input_1_right{
+              float: right;
+              margin-top: -4px;
+          }
+          .seller_temple_price{
+              width: 138px;
+              height:40px;
+              margin-left: 20px;
+              padding-left: 10px;
+              padding-top: 3px;
+              background-color: rgb(33, 150, 241);
+              margin-top: 1px;
+              border-radius: 10px;
+              line-height: 100%;
+          }
+          .seller_temple_word{
+            width:32px;
+            height:32px;
+            margin-top: 2px;
+          }
+          .seller_temple_tele{
+            font-weight: bolder;
+            display: inline-block;
+            width: 90px;
+            height: 30px;
+            float: right;
+            /* font: 20px; */
+            line-height: 100%;
+            margin-top: 8px;
+            margin-right: 3px;
+            color: rgb(255, 255, 255);
+            /* font-family: fantasy; */
+          }
+      .grid_picture{
+         margin-top: 15px;
+         font:16px;
+         margin-left:20px;
+
+      }
+      .grid_picture_word{
+         margin-left: 9px;
+         width: 138px;
+         font: 16px;
+      }
+      .grid_picture_button{
+          margin-top: 0.25rem;
+          margin-bottom: 0.2rem;
+          margin-left: -108px;
+      }
+
+
+.addSellerTempleButton{
+    padding-top: 6px;
+    text-align: center;
+    font: 16px;
+    background-color: rgb(33, 150, 241);
+    height: 24px;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    color:#fff;
+}
+.top-btn{
+  width: 80px;
+  margin-left: 38%;
+  border-radius: 5px;
+}
+.addItemText{
+ color: #fff;
+ margin-top:15px;
+}
+/* 只能推荐 */
+  .aituijian{
+    height: 62px;
+  }
+.ask-seller-title{
+  font:17px;
+}
+.ask-seller-name{
+  margin-top: 2px;
+  font:14px;
+  float:right;
+  margin-right: 23px;
+
+}
+.autoRecView{
+    position: absolute;
+    top: 11px;
+    left: 200px;
+    font: 18px;
+    color: #2196f3;
+}
+.tele-line{
+  position: relative;
+  height: 150px;
+}
+.addImage{
+    height: 56px;
+    width: 56px;
+    margin-top: 10px;
+    margin-left: 2%;
+}
+.empty-circle{
+   position: absolute;
+   height: 24px;
+   width: 24px;
+   right: 30px;
+   top: 8px;
+}
+.bottom-line{
+  margin-bottom: 3px;
+  height:1px;
+  width:88%;
+  background-color:#ddd;
+  margin-left:6%;
+}

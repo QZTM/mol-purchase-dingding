@@ -1,0 +1,40 @@
+.table1 {
+  border: 1px solid #dddddd;
+  font: 12px;
+  color:  #888888;
+}
+.table2 {
+  border: 1px solid #dddddd;
+  font: 12px;
+  color:  #888888;
+  height: 79px;
+  overflow: hidden;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 38px;
+   border: 1px solid #dddddd;
+
+  align-items: center;
+}
+.td {
+    width:20%;
+    justify-content: center;
+    text-align: center;
+}
+.bg-w{
+  /* background: snow; */
+}
+.bg-g{
+  
+}
+.th {
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  height: 15px;
+  align-items: center;
+   
+}

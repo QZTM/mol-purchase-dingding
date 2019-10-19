@@ -1,0 +1,61 @@
+
+.approver-out-view-out{
+  background-color:#258663;
+  margin-left: 13px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.approver-out-view{
+    width: 20%;
+    /* height: 60px; */
+    /* display: inline-block; */
+    float: left;
+    height: 80px;
+    position: relative;
+}
+.approver{
+    position: absolute;
+    /* font:20px; */
+}
+.approver_kuang{
+    display: inline-block;
+    float: right;
+    width: 50px;
+    /* font: 24px; */
+    margin-left: 20px;
+    margin-top: 22px;
+}
+.approver_pic{
+  position: absolute;
+  width:45px;
+  height:45px;
+}
+.user-avatar-img{
+  width:45px;
+  height:45px;
+  top: 10px;
+  border-radius: 30px;
+  position:absolute;
+}
+.close-icon{
+  position: absolute;
+  top: 0px;
+  left: 30px;
+  width:15px;
+  height:15px;
+}
+.stream-line-img{
+  position: absolute;
+  left: 47px;
+  top: 16px;
+  width:20px;
+  height:34px;
+}
+.user-name-text{
+  width:57px;
+  text-align: center;
+  color:#666;
+  /* font:16px; */
+  position: absolute;
+  top:60px;
+}

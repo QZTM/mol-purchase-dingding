@@ -1,0 +1,28 @@
+<template name="itemTypeTemp">
+  <block a:for="{{list}}" a:for-item="itemType" a:for-index="index">
+    <view class="a-collapse">
+      <!-- <image mode="scaleToFill" src=""/> -->
+      <view class="a-collapse-title itemTypeClass" data-cid="{{itemType.id}}" data-cparentid="{{itemType.pkParent}}" onTap="clickItemType">
+        <block a:if="{{itemType.canOpen}}">
+          <block a:if="{{itemType.open}}">
+              <image  src="/images/purchase/underline/Triangle-down-2.png" style="width:12px;height:14px;margin-right:5px;"/>
+          </block>
+          <block a:else>
+              <image  src="/images/purchase/underline/Triangle-right-2.png" style="width:14px;height:12px;margin-right:5px;"/>
+          </block>
+
+        </block>
+        <block a:else>
+            <image  src="/images/purchase/underline/point.png" style="width:12px;height:12px;margin-right:5px;"/>
+        </block>
+        
+        
+        {{itemType.name}}
+      </view>
+    </view>
+    <view class="a-collapse-content" a:if="{{itemType.list.length>0 && itemType.open}}">
+        <template is="itemTypeTemp" data-path="{{path?path+'-index':index}}" data="{{...itemType,path}}"></template>
+      </view>
+  </block>
+
+</template>

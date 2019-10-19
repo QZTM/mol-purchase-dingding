@@ -1,0 +1,29 @@
+<view>
+   <view class="stutas">{{arr.status}}</view>
+   <view a:for="{{arr.checkList}}" class="chickList">
+     <image mode="scaleToFill" src="{{item.src}}" style='width:53px;height:50px;float:left;margin-left:24px;margin-top:13px'/>
+   </view>
+    <view style="margin-top:84px;margin-left:25px;font:22px;clear:both;">意见：</view>
+   <view  class="textarea">{{arr.messages}}</view>
+   <view a:for="{{arr.procurementList}}" class="forzong">
+     <view class="fongzong_left">{{item.name}}</view>
+     <view class="fongzong_right">{{item.value}}</view>
+   </view>
+   <view  class="forzong">
+     <view  class="fongzong_left">数量</view>
+     <input placeholder="请输入购买的数量"  class="fongzong_right" style="text-align:right"/>
+   </view>
+<!-- 确定单一来源供应商 -->
+ <view style='margin-top:27px;padding-left:17px;font:22px;'>确定单一来源供应商</view>
+    <view a:for="{{arr.supplierList}}" class="forzong">
+      <view  class="fongzong_left">{{item.name}}</view>
+      <view   class="fongzong_right" >{{item.value}}{{item.unit}}</view>
+    </view>
+     <view a:for="{{arr.cachList}}" class="money">
+      <view  class="money_left">{{item.name}}</view>
+      <view   class="money_right" >{{item.value}}元</view>
+    </view>
+
+    <!-- 联系供应商 -->
+    <button size="default" type="primary" style="margin:auto;margin-top:30px;margin-bottom:34px">联系供应商</button>
+</view>

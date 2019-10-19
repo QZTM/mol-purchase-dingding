@@ -1,0 +1,20 @@
+
+
+<view class="card">
+  <view class="header">
+    <h1>PDF</h1>
+  </view>
+
+  <view class="container">
+    <p>{{file_name}}</p>
+  </view>
+</view>
+
+<button class="classa" onTap="tapname" size="default" type="primary"> 
+   下载PDF
+  </button>
+  <button class="classb" onTap="cloes" size="default" type="primary">
+    返  回
+  </button>
+
+<web-view a:if="{{ennable}}" id="web-view-1" src="{{url}}" onMessage="test"></web-view>

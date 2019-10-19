@@ -1,0 +1,105 @@
+<import src="../../templet/materielTable/materielTable.axml"/>
+<import src="../../templet/quotationCompany_daishengpi/quotationCompany_daishengpi.axml"/>
+<import src="../../templet/getUsers/getUsers.axml"/>
+<import src="../../templet/showCallUsers/showCallUsers.axml"/>
+<view class="top">
+  采购部议价
+</view>
+
+<view class="onestep">
+  <!-- 标题 -->
+  <view class="title">{{pur.title}}</view>
+  <view style="clear:both">
+  <!-- 订单编号 -->
+  <view  class="num">订单编号：<text>{{pur.orderNumber}}</text></view>
+  <!-- 申请人 -->
+  <view  class="date">申请人：<text>{{pur.staffId}}</text></view>
+  </view>
+
+  <view style="clear:both">
+  <!-- 报价商家 -->
+  <view  class="num">报价商家：<text>{{pur.quoteCounts}}</text></view>
+  <!-- 发布日期 -->
+  <view  class="date">发布日期：<text>{{pur.createTime}}</text></view>
+  </view>
+
+</view>
+
+
+<view class="twostep">
+  <!-- 类别 -->
+  <view class="leibie">类型：<text style="color:black">{{pur.goodsType}}</text></view>
+  <!-- 状态 -->
+  <view class="leibie">状态：<text style="color:black">{{pur.statusName}}</text></view>
+  <!-- 付款方式 -->
+  <view class="fukuan">付款方式：<text style="color:black">{{pur.payMent}}</text></view>
+  <!-- 供货周期 -->
+  <view class="fukuan">供货周期：<text style="color:black">{{pur.supplyCycle}}</text>天</view>
+</view>
+
+ <view >
+        <template is="materielTabel" data={{...materielList,isShow}}>
+ </view>
+ <view>
+        <image class="title_icon" src="{{isShow?'/images/workBench/close.png' : '/images/workBench/open.png'}}" onTap="toggle" />
+ </view>
+
+ <!-- 多商家采购 -->
+ <view>
+   <view style="float:left;margin:3px 0px 0px 6px ">
+     多商家采购
+   </view>
+
+   <!-- <view style="float:right;margin:-4px 8px 3px 0px ">
+     <view class="page">
+        <view class="switch-list">
+          <view class="switch-item">
+            <switch  onChange="switchChange"/>
+          </view>
+        </view>
+      </view>
+   </view> -->
+   <view style="float:right;margin:-4px 8px 3px 0px  ;color:red;font-size:12px" a:if="{{multimerchant==true}}">
+     已开启
+   </view> 
+   <view style="float:right;margin:-4px 8px 3px 0px ;color:red;font-size:12px " a:elif="{{multimerchant==false}}">
+     未开启
+   </view>
+
+ </view>
+
+ <block a:for="{{materielList.quoteSupplierList}}" a:for-item="item" a:for-index="idx">
+        <template is="quoteTable" data={{item,idx,multimerchant}}>
+</block>
+ 
+<!-- 视频议价 -->
+
+  
+<view style="border:1px solid #dddddd;clear:both">
+  <view class="shiping_text">视频议价讨论</view>
+  <template is="showCallUsers" placeholder-class="pl" data="{{...manager,callListUsers}}"/>
+</view>
+<!-- 负责人说明 -->
+<view style="border:1px solid #dddddd;clear:both;">
+   <view class="shiping_text">负责人说明：</view>
+   <!-- <textarea  disabled="disabled" style="heigh:80px;" onBlur="explain">{{negotiatedExplain}}</textarea> -->
+  <!-- <input placeholder="{{negotiatedExplain}}" placeholder-class="pl" disabled="disabled"/> -->
+   <textarea placeholder="{{negotiatedExplain}}"  placeholder-class="pl"  disabled="disabled" />
+</view>
+
+<!-- 审批人建议 -->
+<view style="border:1px solid #dddddd;clear:both;">
+   <view class="shiping_text">建议：</view>
+   <textarea placeholder="{{pur.approverProposal}}"  placeholder-class="pl"  disabled="disabled" />
+</view>
+
+<view style="border:1px solid #dddddd;clear:both;" a:for="{{appvoverList}}" >
+   <view class="shiping_text">{{item.userid}}(已审核人意见)：</view>
+   <textarea  placeholder="{{item.message}}" placeholder-class="placeholder"   disabled="disabled" ></textarea>
+  <!-- <input disabled="disabled"/> -->
+</view>
+
+<view style="color:red;font-size:12px;margin-top:20px;margin-bottom:10px;text-align:center;" a:if="{{pur.status==statusPass}}">已通过</view>
+<view style="color:green;font-size:12px;margin-top:20px;margin-bottom:10px;text-align:center;" a:if="{{pur.status==statusRefuse}}">已拒绝</view>
+
+

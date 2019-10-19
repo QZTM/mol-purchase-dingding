@@ -1,0 +1,38 @@
+<template name="showCallUsers">
+  <view style="margin:12px 0px 10px 12px;float:left;">
+    <image   mode="scaleToFill" src="{{avatar?'avatar':'/images/workBench/shiping.png'}}" style="width:40px;height:40px;" />
+    <view style="margin-top:6px;text-align:center;">{{name}}</view>
+  </view>
+   
+    <block a:for="{{callListUsers}}" a:for-item="top" a:for-index="ix">
+      <view style="float:left;margin:12px 0px 10px 3px;">
+        <view style="float:left;">
+         <image mode="scaleToFill" src='/images/workBench/right.png'  style="width:40px;height:40px;"/>
+        </view>
+        <view style="float:left;margin:0px 0px 0px 3px;">
+           <image   mode="scaleToFill" src="{{top.avatar?top.avatar:'/images/workBench/shiping.png'}}" style="width:40px;height:40px;" />
+           <view style="margin-top:6px;text-align:center;">{{top.name}}</view>
+        </view>
+      </view>
+       
+    </block>
+</template >
+<template name="showApproveList">
+  <!-- <view style="margin:12px 0px 10px 12px;float:left;">
+    <image   mode="scaleToFill" src="{{avatar?'avatar':'/images/workBench/shiping.png'}}" style="width:40px;height:40px;" />
+    <view style="margin-top:6px;text-align:center;">{{name}}</view>
+  </view> -->
+   
+    <block a:for="{{callListUsers}}" a:for-item="top" a:for-index="ix">
+      <view style="float:left;margin:12px 0px 10px 3px;">
+        <view style="float:left;" a:if="{{ix!=0}}">
+         <image mode="scaleToFill" src='/images/workBench/right.png'  style="width:40px;height:40px;"/>
+        </view>
+        <view style="float:left;margin:0px 0px 0px 3px;">
+           <image   mode="scaleToFill" src="{{top.avatar?top.avatar:'/images/workBench/shiping.png'}}" style="width:40px;height:40px;" />
+           <view style="margin-top:6px;text-align:center;">{{top.name}}</view>
+        </view>
+      </view>
+       
+    </block>
+</template >

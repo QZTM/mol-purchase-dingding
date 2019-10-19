@@ -1,0 +1,103 @@
+.common2{
+  /* margin-top: 17px; */
+  /*border-bottom: 1px solid #F4F4F5; */
+  font: 14px;
+  /* font-family: "冬青黑体简体中文","Tahoma","Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif !important; */
+  margin-bottom: 10px;
+  border-bottom: double 3px blue;
+}
+.common_histroyprice{
+    margin-left: 23px;
+    line-height: 30px;
+    letter-spacing:1px;
+}
+.common_button{
+    float: right;
+    width: 105px;
+    margin-top: -80px;
+    margin-right: 20px;
+    
+}
+.common_price{
+    margin-left: 23px;
+    float: left;
+    margin-top: 46px;
+        letter-spacing:2px;
+        line-height: 24px;
+    
+} 
+    .common_price_l{
+
+    }
+    .common_price_h{
+
+    }
+    .common_price_a{
+      
+    }
+  .common_sellerPrice{
+    float: left;
+    margin-left: 11px;
+    margin-top: 21px;
+    text-align: center;
+    line-height: 24px;
+  }
+.common_white{
+  height: 15px;
+  margin-top: 70px;
+}
+.one-line{
+  width:74%;
+  background-color:#777;
+  float:right;
+  margin-right:20px;
+}
+/**大框**/
+.compare-view{
+    height: 28px;
+    width: 90%;
+    margin-top: 20px;
+    margin-left:20px;
+    text-align: center;
+}
+.compare-line{
+  width:100%;
+  height:28px;
+}
+.compare-line-left{
+  text-align: -webkit-center;
+  line-height: 200%;
+  width:18%;
+  height:28px;
+  float:left;
+}
+.compare-line-right{
+  float:right;
+  width:82%;
+  height:28px;
+}
+.compare-a-price{
+  width:33%;
+  height:28px;
+  float:left;
+}
+.compare-icon-view{
+  display: inline-block;
+  width:16px;
+  height:16px;
+  margin-top: 7%;
+  margin-left: 20%;
+  float: left;
+}
+.compare-icon{
+  width:16px;
+  height:16px;
+}
+.compare-result-price-text{
+  float:left;
+  margin-left: 5%;
+  margin-top: 7%;
+}
+
+
+
