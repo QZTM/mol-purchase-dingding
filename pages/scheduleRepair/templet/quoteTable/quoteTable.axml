@@ -45,7 +45,7 @@
       </view>
   </view>
 
+  <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="upload">上传合同</button>
   <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="callSupp">联系供应商</button>
-
 </template>
 

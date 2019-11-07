@@ -20,6 +20,8 @@ App({//E应用逻辑
       "Purchaseabolish":3,
       //待议价
       "tobenegotiated":4,
+      //专家审批
+      "expertRev":5,
       //已议价  待审批
       "completeBargaining":6,
       //通过
@@ -28,63 +30,74 @@ App({//E应用逻辑
       "refuse":8
     },
     //工作流的key
-    processKey:'csprocessId2'
+    processKey:'全新'
   },
+  
   onLaunch(options) {
-    //开发者后台设置的安全域名
-    var that = this;
-    //that.globalData.domain='http://127.0.0.1:8082';
-    //that.globalData.domain='http://127.0.0.1:8083';
-    //that.globalData.domain='http://2a529045z1.qicp.vip';
-    //that.globalData.domain='http://fyycg1.vaiwan.com';
-    that.globalData.domain='http://140.249.22.202:8082';
-    // 第一次打开，监听E应用初始化	当E应用初始化完成时触发，全局只触发一次
-    // options.query == {number:1}
-    console.info('app.js...onLaunch()...');
-    that.globalData.corpId = options.query.corpId;
-    //获取系统消息并存入全局变量
-    dd.getSystemInfo({
-      success: (res) => {
-        that.globalData.systemInfo = res;
-      }
-    })
-    //获取authCode,成功后登陆并获取token
-    dd.getAuthCode({
-      success: (res) => {
-        var urla = that.globalData.domain+"/app/login";
-        that.globalData.authCode = res.authCode;
-        dd.httpRequest({
-          url:urla,
-          method: 'POST',
-          data: {
-            authCode: res.authCode
-          },
-          dataType: 'json',
+    var that=this;
+    dd.showLoading({
+    content: '拼命加载用户信息中...',
+    success:function(e){
+        //开发者后台设置的安全域名
+        //that.globalData.domain='http://127.0.0.1:8082';
+        //that.globalData.domain='http://127.0.0.1:8083';
+        //that.globalData.domain='http://2a529045z1.qicp.vip';
+        //that.globalData.domain='http://fyycg1.vaiwan.com';
+        that.globalData.domain='http://140.249.22.202:8082';
+        // 第一次打开，监听E应用初始化	当E应用初始化完成时触发，全局只触发一次
+        // options.query == {number:1}
+        console.info('app.js...onLaunch()...');
+        that.globalData.corpId = options.query.corpId;
+        //获取系统消息并存入全局变量
+        dd.getSystemInfo({
           success: (res) => {
-            var eticket = res.data.result.eticket;
-            var ddUser = res.data.result.ddUser;
-            var appUser = res.data.result.user;
-            var ddOrg = res.data.result.ddOrg;
-            var appOrg = res.data.result.org;
-            var userlist = res.data.result.ddUsersOfDept;
-            that.globalData.user = ddUser;
-            that.globalData.eticket = eticket;
-            that.globalData.appUser = appUser;
-            that.globalData.ddOrg = ddOrg;
-            that.globalData.appOrg = appOrg;
-            that.globalData.userlist = userlist;
-          },
-          fail: (res) => {
-            dd.alert({ content: JSON.stringify(res) });
-          },
-          complete: (res) => {
-            dd.hideLoading();
+            that.globalData.systemInfo = res;
           }
+        })
+        //获取authCode,成功后登陆并获取token
+        dd.getAuthCode({
+          success: (res) => {
+            var urla = that.globalData.domain+"/app/login";
+            that.globalData.authCode = res.authCode;
+            dd.httpRequest({
+              url:urla,
+              method: 'POST',
+              data: {
+                authCode: res.authCode
+              },
+              dataType: 'json',
+              success: (res) => {
+                var eticket = res.data.result.eticket;
+                var ddUser = res.data.result.ddUser;
+                var appUser = res.data.result.user;
+                var ddOrg = res.data.result.ddOrg;
+                var appOrg = res.data.result.org;
+                var userlist = res.data.result.ddUsersOfDept;
+                that.globalData.user = ddUser;
+                that.globalData.eticket = eticket;
+                that.globalData.appUser = appUser;
+                that.globalData.ddOrg = ddOrg;
+                that.globalData.appOrg = appOrg;
+                that.globalData.userlist = userlist;
+                dd.hideLoading();
+              },
+              fail: (res) => {
+                dd.hideLoading();
+                dd.alert({ content: JSON.stringify(res) });
+              },
+              complete: (res) => {
+                dd.hideLoading();
+              }
 
-        });
+            });
+          },
+          fail: (err) => {
+            dd.alert({ content: JSON.stringify(err) })
+          }
+        })
       },
-      fail: (err) => {
-        dd.alert({ content: JSON.stringify(err) })
+      fail:function(e){
+
       }
     })
   },

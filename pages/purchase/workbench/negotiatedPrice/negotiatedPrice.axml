@@ -78,7 +78,6 @@
    <textarea placeholder="请输入..."  style="heigh:80px;" onBlur="explain"></textarea>
 </view>
 
-<button size="default" type="primary" onTap="submit">完成</button>
-<button size="default" type="primary" onTap="clear">清缓存</button>
+<button class="but" size="default" type="primary" onTap="submit">完成</button>
 </view>
 

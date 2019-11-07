@@ -26,17 +26,30 @@ Page({
     //审核人以及意见
     appvoverList:[
       
-    ]
-    
+    ],
+    //订单是否需要专家推荐
+    expertReview:''
 
   },
   onLoad(option) {
-    this.setData({
-      id:option.id
+    var that=this;
+    dd.showLoading({
+      content: '加载中...',
+      success:function(){
+        that.setData({
+          id:option.id
+        });
+        that.getComment(that.data.id);
+        
+        that.getpur(that.data.id);
+        that.getShengHeRen();
+        dd.hideLoading();
+      },
+      fail:function(){
+
+      }
     });
-    this.getComment(this.data.id);
-    this.getpur(this.data.id);
-    this.getShengHeRen();
+    
   },
   //获取流程审核人
   getShengHeRen(){
@@ -51,9 +64,12 @@ Page({
           },
           dataType: 'json',
           success: (res) => {
+            console.log("获取流程审核人:")
+            console.log(res)
               var slist=res.data.result;
               var ddList=app.globalData.userlist;
-
+            console.log("全局list:")
+            console.log(ddList)
               var overList=[];
               for(var i = 0;i<slist.length;i++){
                 for(var j=0;j<ddList.length;j++){
@@ -66,7 +82,7 @@ Page({
               that.setData({
                 [ss]:overList
               })
-              console.log("获取流程审核人"+JSON.stringify(that.data))
+              //console.log("获取流程审核人"+JSON.stringify(that.data))
 
           }
       })
@@ -84,22 +100,20 @@ Page({
           },
           dataType: 'json',
           success: (res) => {
-            console.log("res:"+JSON.stringify(res.data.result));
+            console.log("评论数据：")
+            console.log(res);
             var reList=res.data.result;
             if(reList!=null){
-              console.log("进来")
                 for(var i=0;i<reList.length;i++){
              
 
                   if(reList[i]!=null){
-                     console.log("进来",reList[i].message)
                     var obj={
                     'userid':reList[i].userId,
                     'message':reList[i].message
                   }
 
                   list.push(obj);
-                  console.log("list"+list)
                   }
                   
                 }
@@ -126,6 +140,8 @@ Page({
           dataType: 'json',
           success: (res) => {
               var pur=res.data.result.pur;
+              console.log("res")
+              console.log(res)
               // that.setData({
               //   pur:pur
               // });
@@ -154,6 +170,9 @@ Page({
                 }
                 if(pur.status==app.globalData.statusList.tobenegotiated){
                     statusName="待议价"
+                }
+                if(pur.status==app.globalData.statusList.expertRev){
+                    statusName="专家审批"
                 }
                 if(pur.status==app.globalData.statusList.completeBargaining){
                     statusName="待审批"
@@ -188,7 +207,8 @@ Page({
                   //console.log("newlist",JSON.stringify(new_mlist))
                    var str='materielList.list';
                   that.setData({
-                    [str]:new_mlist
+                    [str]:new_mlist,
+                    expertReview:pur.expertReview
                   });
                  
 
@@ -248,12 +268,18 @@ Page({
 
   //联系供应商
   callSupp(e){
+    console.log("点击联系供应商")
+    console.log(e)
+    var that=this;
+    var _expertR=that.data.expertReview;
     //公司id
     var _id=e.target.dataset.id;
-    var _purId=this.data.id;
-    //查询公司业务员list
-    dd.httpRequest({
-              url: app.globalData.domain+'/scheRe/findSaleManList',
+    var _purId=that.data.id;
+    //判断订单是否有专家推荐
+    if(_expertR){
+      //2.有，判断供应商是否已经支付
+      dd.httpRequest({
+              url: app.globalData.domain+'/scheRe/getPayresult',
               method: 'GET',
               data: {supplierId: _id,purId:_purId},
               headers: {
@@ -261,15 +287,72 @@ Page({
               },
               dataType: 'json',
               success: (res) => {
-               console.log("业务员："+JSON.stringify(res.data.result))
-               var tele=res.data.result.phone;
+                  if(res.data.result==null){
+                    console.log("查到数据为空")
+                    dd.alert({content: res.data.message});
+                    return;
+                  }
+                  console.log("联系供应商res:")
+                  console.log(res)
+                  if(res.data.result.payResult==0){
+                    //2.1.没支付，弹信息，返回
+                    console.log("没支付，弹信息，返回")
+                    dd.alert({content: "请等候供应商支付完成专家推荐费用"});
+                    return;
+                  }
+                  if(res.data.result.payResult==1){
+                    //2.2 支付，正常走逻辑
+                     console.log("支付，正常走逻辑")
+                    //查询公司业务员list
+                        dd.httpRequest({
+                                  url: app.globalData.domain+'/scheRe/getSaleMan',
+                                  method: 'GET',
+                                  data: {supplierId: _id,purId:_purId},
+                                  headers: {
+                                    'eticket': app.globalData.eticket
+                                  },
+                                  dataType: 'json',
+                                  success: (res) => {
+                                  //console.log("业务员："+JSON.stringify(res.data.result))
+                                  var tele=res.data.result.phone;
+                                    if(tele=="" || tele==null){
+                                      dd.alert({content: "该组织没有预留电话号码"});
+                                      return;
+                                    }
+                                    dd.showCallMenu({
+                                        phoneNumber: tele, // 期望拨打的电话号码
+                                        code: +86, // 国家代号，中国是+86
+                                        showDingCall: true, // 是否显示钉钉电话
+                                        success:function(res){   
+                                        },
+                                        fail:function(err){
+                                        }
+                                    });
+                                  },
+                                  
+                              })
+                  }
+              }
+      })
+    }else{
+          dd.httpRequest({
+              url: app.globalData.domain+'/scheRe/getSaleMan',
+              method: 'GET',
+              data: {supplierId: _id,purId:_purId},
+              headers: {
+                'eticket': app.globalData.eticket
+              },
+              dataType: 'json',
+              success: (res) => {
+              //console.log("业务员："+JSON.stringify(res.data.result))
+              var tele=res.data.result.phone;
                 if(tele=="" || tele==null){
                   dd.alert({content: "该组织没有预留电话号码"});
                   return;
                 }
                 dd.showCallMenu({
-                    phoneNumber: '19862385935', // 期望拨打的电话号码
-                    code: tele, // 国家代号，中国是+86
+                    phoneNumber: tele, // 期望拨打的电话号码
+                    code: +86, // 国家代号，中国是+86
                     showDingCall: true, // 是否显示钉钉电话
                     success:function(res){   
                     },
@@ -279,11 +362,26 @@ Page({
               },
               
           })
+    }
+    
+    //1.没有，正常走逻辑
+    //2.有，判断供应商是否已经支付
+    //2.1.没支付，弹信息，返回
+    //2.2 支付，正常走逻辑
+    
+    
     //订单id  报价的业务员id
     //电话号码
    
     //console.log("phone"+tele)
    
    
+  },
+  
+
+
+  //上传合同
+  upload(e){
+    dd.alert({content: "等待开发"});
   }
 });

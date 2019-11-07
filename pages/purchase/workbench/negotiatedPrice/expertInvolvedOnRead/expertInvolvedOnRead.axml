@@ -25,6 +25,3 @@
     
 </view>
 
-<view>
-   <button class="btn2" size="default"   onTap="submit" hover-class='btn_hover'>确定</button>
-</view>

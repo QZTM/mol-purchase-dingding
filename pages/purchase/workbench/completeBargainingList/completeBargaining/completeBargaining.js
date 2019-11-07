@@ -63,6 +63,8 @@ Page({
    ],
    //负责人说明
    negotiatedExplain:"",
+    //评审奖励
+   expertReward:"",
   },
   onLoad(option) {
     //获取登录用户
@@ -165,6 +167,9 @@ Page({
             console.log("getPur:"+JSON.stringify(res));
           var statusName="";
           var pur=res.data.fyPurchase;
+          that.setData({
+              expertReward:pur.expertReward
+           })
           var _appStatusList=app.globalData.statusList;
            if(pur.status==_appStatusList.tobenegotiated){
               statusName="等待议价";//  都没改
@@ -379,6 +384,7 @@ Page({
                       "expertRecommendation":"",
                       "highestQuotation":"",
                       "shortSupplyCycle":"",
+                       "expertAgreeCounts":map_list[0].expertAgreeCounts//专家推荐都人数
                     }
               
               // console.log("if====1")
@@ -418,6 +424,7 @@ Page({
                       "expertRecommendation":"",
                       "highestQuotation":"",
                       "shortSupplyCycle":"",
+                       "expertAgreeCounts":map_list[0].expertAgreeCounts//专家推荐都人数
                     }
               
                  
@@ -891,7 +898,21 @@ Page({
 
   //专家评审
   getExpertReview(e){
-    console.log("专家评审："+JSON.stringify(e));
+    //console.log("专家评审："+JSON.stringify(e));
+    //订单id
+    var _purId=this.data.id; 
+    //公司id
+    var _supplierId =e.target.dataset.index;
+    //公司名称
+    var _supplierName=e.target.dataset.name;
+     //评审奖励
+    var _expertReward=this.data.expertReward;
+    //是否为单商家采购
+    var _multimerchant= this.data.multimerchant;
+    var bigDataUrl="/pages/purchase/workbench/negotiatedPrice/expertInvolvedOnRead/expertInvolvedOnRead?supplierId="+_supplierId+"&purId="+_purId+"&supplierName="+_supplierName+"&multimerchant="+_multimerchant+"&expertReward="+_expertReward;
+    dd.navigateTo({
+        url:bigDataUrl,
+    });  
   },
 
   //多商家采购开关

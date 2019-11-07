@@ -136,6 +136,7 @@
 }
 .btn{
  width: 100%; 
+ font-size: 11px;
 margin-right: 20rpx; 
 height: 60rpx; 
 line-height: 60rpx; 

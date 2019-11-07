@@ -33,7 +33,7 @@
           <view class="td1">{{ite.itemName}}</view>
           <view class="td1">{{ite.norms}}</view>
           <view class="td1_index">{{ite.count}}</view>
-          <view class="td1">{{ite.quote}}<text class="{{ite.priceboolean?'priceup':'pricedown'}}">{{ite.priceChange}}</text></view>
+          <view class="td1">{{ite.quote}}<text class="{{ite.priceboolean?'priceup':'pricedown'}}">{{ite.priceChange}}%</text></view>
           <view class="td1">{{ite.oneMoney}}</view>
             <!-- 多商家选择 -->
         <view class="{{multimerchant?'duoshangjChecked':'duoshangjNo'}}">
@@ -108,7 +108,7 @@
 
               <!-- 专家评审 -->
               <view >
-                <button class="btn" size="default" data-index="{{top.gongsiId}}"  onTap="getExpertReview"  hover-class='btn_hover'>专家评审<text></text></button>
+                  <button class="btn" size="default" data-index="{{top.gongsiId}}" data-name="{{top.gongsi}}"  onTap="getExpertReview"  hover-class='btn_hover'>专家评审<text>{{top.expertAgreeCounts}}</text></button>
               </view>
           </view>
       </view>

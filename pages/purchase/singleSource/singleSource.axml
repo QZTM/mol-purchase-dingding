@@ -13,7 +13,7 @@
 
 <view>
    <block class="seller_temple" a:for="{{arr.pageArray.purchaseArray}}" a:for-index="iddx" a:for-item="aPur">
-    <template is="zhanlueTemplet" data="{{...arr,iddx,iddx,aPageObj,aPur}}"/>
+    <template is="zhanlueTemplet" data="{{...arr,iddx,iddx,aPur}}"/>
     </block>
 </view>
 
@@ -26,13 +26,14 @@
 </view>
 <view class="input_spec"> 
   <view class="il">单一供应商</view>
-  <input class="ir" placeholder="{{arr.pageArray.singleSource}}" onBlur="quoteSellerNumFun" />
+  <!-- <input class="ir" placeholder="{{supplierName}}" onBlur="quoteSellerNumFun" /> -->
+  <view  style="float:right;padding-right:20px">{{supplierName}}</view>
 </view>
 
-<view class="input_spec">
+<!-- <view class="input_spec">
   <view class="il">电话</view>
   <input  class="ir" placeholder="{{arr.pageArray.telePhone}}" />
-</view>
+</view> -->
 
 
 
@@ -49,7 +50,7 @@
 </view>  
   
 
-<view class="input_spec">  
+<!-- <view class="input_spec">  
   <view class="sl">截止时间</view>
   <view class="sr1">
      <picker mode="time" value="{{time}}" start="00:00" end="23:59" onChange="bindTimeChange">  
@@ -58,7 +59,7 @@
     </view>  
   </picker>  
   </view>
-</view>  
+</view>   -->
 
 <view class="input_spec"> 
   <view class="sl">供货周期</view>
@@ -99,12 +100,14 @@
   </view>
 </view>
 
+<view a:if="{{isExpert==true}}">
 <view class="input_spec"> 
   <view class="sl">评审奖励</view>
   <view class="sr1">
     <input style='float:left;width:70%'  placeholder="请输入" onBlur="rewardFun" />
     <view  style='float:right;margin-top:6px;margin-right:10px;'>元</view>
   </view>
+</view>
 </view>
 
 <!--  -->

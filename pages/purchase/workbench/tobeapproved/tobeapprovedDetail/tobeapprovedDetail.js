@@ -71,7 +71,9 @@ Page({
        userid:'人名',
        message:'信息'
      }
-   ]
+   ],
+    //评审奖励
+   expertReward:"",
   },
   onLoad(option) {
     //获取登录用户
@@ -113,31 +115,38 @@ Page({
           },
           dataType: 'json',
           success: (res) => {
-            
-            //console.log("管理员："+JSON.stringify(res.data.result));
-            var administratorId=res.data.result.id;
-                if(_appUserId==administratorId){
-                  that.setData({
-                    isAdmin:true,
-                    manager:res.data.result
-                  })
+                console.log("管理员：");
+                console.log(res);
+                var ddId=res.data.result.ddUserId;
+                  // var administratorId=res.data.result.id;
+                  //     if(_appUserId==administratorId){
+                  //       that.setData({
+                  //         isAdmin:true,
+                  //         manager:res.data.result
+                  //       })
+                  //     }
+                var _manager={};
+                var appList=app.globalData.userlist;
+                console.log("集团list:");
+                console.log(appList);
+                //var dduserId=res.data.result.ddUserId;
+                //以钉钉id判断 获取头像姓名等钉钉信息
+                for(var i=0;i<appList.length;i++){
+                    if(ddId==appList[i].userid){  
+                      _manager=appList[i];
+                      console.log(_manager)
+                      that.setData({
+                        manager:_manager
+                      })
+                      break;
+                  }
                 }
-          var _manager={};
-          var appList=app.globalData.userlist;
-          var dduserId=res.data.result.ddUserId;
-          //以钉钉id判断 获取头像姓名等钉钉信息
-          for(var i=0;i<appList.length;i++){
-              if(dduserId==appList[i].userid){  
-                _manager=appList[i];
-                that.setData({
-                  manager:_manager
-                })
-            }
-          }
+                console.log("议价发起人：")
+                console.log(that.data.manager)
             },
            
        })
-       //console.log("管理员：+"+this.data.isAdmin)
+       
   },
 
   //发送页面详情请求
@@ -162,7 +171,9 @@ Page({
            // console.log("getPur:"+JSON.stringify(res));
             var statusName="";
            var pur=res.data.fyPurchase;
-
+          that.setData({
+              expertReward:pur.expertReward
+          })
           var _appStatusList=app.globalData.statusList;
            if(pur.status==_appStatusList.tobenegotiated){
               statusName="等待议价";//  都没改
@@ -376,6 +387,7 @@ Page({
                       "expertRecommendation":"",
                       "highestQuotation":"",
                       "shortSupplyCycle":"",
+                      "expertAgreeCounts":map_list[0].expertAgreeCounts//专家推荐都人数
                     }
               
               // console.log("if====1")
@@ -415,6 +427,7 @@ Page({
                       "expertRecommendation":"",
                       "highestQuotation":"",
                       "shortSupplyCycle":"",
+                      "expertAgreeCounts":map_list[0].expertAgreeCounts//专家推荐都人数
                     }
               
                  
@@ -931,6 +944,20 @@ Page({
   //专家评审
   getExpertReview(e){
     //console.log("专家评审："+JSON.stringify(e));
+    //订单id
+    var _purId=this.data.id; 
+    //公司id
+    var _supplierId =e.target.dataset.index;
+    //公司名称
+    var _supplierName=e.target.dataset.name;
+    //评审奖励
+    var _expertReward=this.data.expertReward;
+    //是否为单商家采购
+    var _multimerchant= this.data.multimerchant;
+    var bigDataUrl="/pages/purchase/workbench/negotiatedPrice/expertInvolvedOnRead/expertInvolvedOnRead?supplierId="+_supplierId+"&purId="+_purId+"&supplierName="+_supplierName+"&multimerchant="+_multimerchant+"&expertReward="+_expertReward;
+    dd.navigateTo({
+        url:bigDataUrl,
+    });  
   },
 
   //多商家采购开关
@@ -1202,68 +1229,53 @@ Page({
 
   //提交数据
   submit(e){
-    //提交建议，修改状态即可
-    var _taskId=this.data.taskId;
-    var _processInsId=this.data.processInsId;
-    //判断是不是物料已经选择完毕
-    var _approverProposal=this.data.approverProposal;
-    if(_approverProposal.length<=0){
-     dd.alert({
-        content: '请填写审批建议 ！',
-      });
-      return;
-    }
-    //订单id
-    var _id =this.data.id;
-    //通过与否
-    var re=e.target.dataset.resu;
+    var that=this;
+    dd.showLoading({
+      content:'提交中...',
+      delay:0,
+      success:function(){
+        //提交建议，修改状态即可
+        var _taskId=that.data.taskId;
+        var _processInsId=that.data.processInsId;
+        //判断是不是物料已经选择完毕
+        var _approverProposal=that.data.approverProposal;
+        if(_approverProposal.length<=0){
+          dd.hideLoading();
+          dd.alert({
+            content: '请填写审批建议 ！',
+          });
+          return;
+        }
+        //订单id
+        var _id =that.data.id;
+        //通过与否
+        var re=e.target.dataset.resu;
 
-    
-    console.log("ddddd:",_taskId,_processInsId,re,_approverProposal)
-       dd.httpRequest({
-          url: app.globalData.domain+'/ac/complete',
-          method: 'POST',
-          data: {taskId:_taskId,processInsId:_processInsId,result:re,comment:_approverProposal},
-          headers: {
-            'eticket': app.globalData.eticket
-          },
-          dataType: 'json',
-          success: (res) => {
-            //修改缓存中的数据
-            //  dd.getStorage({
-            //     key:'myTask',
-            //     success:function(res){
-            //       var relist=res.data;
-            //       for(var i=0;i<relist.length;i++){
-            //         if(relist[i].id == _taskId){
-            //           relist.splice(i,1);
-            //         }
-            //       }
-            //      dd.setStorage({
-            //         key:'myTask',
-            //         data:relist,
-            //         success:function(){
-                      
-            //         },
-            //         fail: function(res){
-            //           dd.alert({content: res.errorMessage});
-            //         }
-            //      })
-            //     }
-            //  })
-             dd.alert({
-                content: res.data.result,
-                success: () => {
-                  //   dd.navigateBack({
-                  //   url:"/pages/purchase/workbench/tobeapproved/tobeapproved",
-                  // })
-                  dd.switchTab({
-                    url:'/pages/purchase/purchase'
-                  })
-                  }
-              });
-          }
+        
+        console.log("ddddd:",_taskId,_processInsId,re,_approverProposal)
+          dd.httpRequest({
+              url: app.globalData.domain+'/ac/complete',
+              method: 'POST',
+              data: {taskId:_taskId,processInsId:_processInsId,result:re,comment:_approverProposal},
+              headers: {
+                'eticket': app.globalData.eticket
+              },
+              dataType: 'json',
+              success: (res) => {
+                dd.hideLoading();
+                dd.alert({
+                    content: res.data.result,
+                    success: () => {
+                      dd.switchTab({
+                        url:'/pages/purchase/purchase'
+                      })
+                      }
+                  });
+              }
+        })
+      }
     })
+    
     
   }
 });

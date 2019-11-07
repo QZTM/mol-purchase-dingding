@@ -1,6 +1,9 @@
 let app = getApp();
 Page({
   data: {
+    pageNum:1,
+    pageSize:10,
+    none:false,
     appData: app.globalData,
     userid:'',
     orgid:'',
@@ -14,73 +17,49 @@ Page({
   },
   onLoad() {
     //获取登录用户
+    if(app.globalData.appUser==null){
+          dd.alert({content: "获取用户信息失败！"});
+    }
+    if(app.globalData.appOrg==null){
+          dd.alert({content: "获取用户信息失败！"});
+    }
       this.setData({
       //corpId: app.globalData.corpId,
-      userid: app.globalData.appUser.id,
-      orgid:app.globalData.appOrg.id
-    })
-    //获取公司的主要负责人的钉钉id
-    //var _orgid=this.data.orgid;
-    //this.getMainPerson(_orgid);
+        userid: app.globalData.appUser.id,
+        orgid:app.globalData.appOrg.id
+      })
   },
 
-  //获取公司的主要负责人的钉钉id
-  // getMainPerson(e){
-  //   var that=this;
-  //   var _orgid=e;
-  //   var userlist=[];
-  //     dd.httpRequest({
-  //         url: app.globalData.domain+'/negotiateding/getAppUser',
-  //         method: 'GET',
-  //         data: {orgId: _orgid},
-	// 	  headers: {
-	// 		  'eticket': app.globalData.eticket
-	// 	  },
-  //         dataType: 'json',
-  //         success: (res) => {
-  //           var list=res.data.result;
-  //           for(var i=0;i<list.length;i++){
-  //               userlist.push(list[i].ddUserId)
-  //           }
-  //            var _mainList ='mainList';
-
-  //           that.setData({
-  //             [_mainList]:userlist
-  //           })
-  //           },
-  //      })
-  // },
 
 
   onShow(e){
-    //获取公司Id
-    //var orgid="xiesi001";
-    var orgid=this.data.orgid;
-    var status=app.globalData.statusList.tobenegotiated;//-------------------*---------------------------------------最终结束改为 =4
-    var status_pass=app.globalData.statusList.pass;//-------------------*---------------------------------------最终结束改为 =4
-    var status_refuse=app.globalData.statusList.refuse;
-
-    var _userid=this.data.userid;
-
+    
+    var newArray=[];
+   
+    var _pageNum=this.data.pageNum;
+    var _pageSize=this.data.pageSize;
     //获取进行中的列表：
-    this.getlist(orgid,_userid);
+    this.getlist(_pageNum,_pageSize,newArray);
  },
 
 // 获取页面数据
-  getlist:function(orgid,_userid){
+  getlist:function(pageNum,pageSize,newArray){
+     var orgid=this.data.orgid;
+     var _userid=this.data.userid;
       var that=this;
-       dd.httpRequest({
+      dd.httpRequest({
           url: app.globalData.domain+'/scheRe/getList',
           method: 'GET',
-          data: {orgId: orgid,userId:_userid},
+          data: {orgId: orgid,userId:_userid,pageNum:pageNum, pageSize:pageSize},
 		  headers: {
 			  'eticket': app.globalData.eticket
 		  },
           dataType: 'json',
           success: (res) => {
-          (res.data)
+         // (res.data)
               var suList =res.data.result;
-              var newArray=[];
+              if(suList.length>0 && suList!=null){
+             
               for(var i=0;i<suList.length;i++){
                 var buyChannelName="";
                 var statusName="";
@@ -104,6 +83,9 @@ Page({
                 }
                 if(suList[i].status==app.globalData.statusList.tobenegotiated){
                     statusName="待议价"
+                }
+                if(suList[i].status==app.globalData.statusList.expertRev){
+                    statusName="专家审批"
                 }
                 if(suList[i].status==app.globalData.statusList.completeBargaining){
                     statusName="待审批"
@@ -129,8 +111,17 @@ Page({
               }
                var tr="schList.list"
                that.setData({
-                        [tr]: newArray,
-                      });
+                  [tr]: newArray,
+                });
+                dd.hideLoading();
+                dd.stopPullDownRefresh();//可以停止当前页面的下拉刷新
+              }else{
+                dd.hideLoading();
+                dd.stopPullDownRefresh();//可以停止当前页面的下拉刷新
+                that.setData({
+                  none:true
+                })
+              }
             },
            
        })
@@ -153,26 +144,55 @@ Page({
 
     var detailUrl="/pages/scheduleRepair/scheduleDetail/scheduleDetail?id="+_id;
 
-    
-    // //检验权限人员
-    // for(var i = 0;i<_mlist.length;i++){
-    //   if(_mlist[i]==userid){//是否为责任人
-         
-    //      dd.navigateTo({
-    //         url:detailUrl,
-    //     })
-
-    //   }else{
-    //     this.getNegotiatePersonList(_id,detailUrl);
-    //   }
-    // }
-
         dd.navigateTo({
             url:detailUrl,
         })
               
 
    },
+   //页面上拉加载更多
+   onReachBottom(){
+     var that=this;
+     dd.showLoading({
+        content: '拼命加载中...',
+        success:function(e){
+          var _list=that.data.schList.list;
+          var newArray=[];
+          if(_list.length>0 && _list!=null){
+            var newArray=_list;
+          }
+            var _num=that.data.pageNum;
+            var _size=that.data.pageSize;
+            _num++;
+            that.setData({
+              pageNum:_num
+            })
+            console.log("再次发送请求")
+            that.getlist(_num,_size,newArray);
+        },
+        fail:function(e){
+          dd.hideLoading();
+          dd.alert({content: "error！"});
+        }
+      });
+     
+   },
+   //下拉刷新（做这个标记的时候还没有使用这个功能）
+   onPullDownRefresh(){
+            //dd.alert({content: "刷新"});
+            var newArray=[];
+            var ss=this.data.schList.list;
+            this.setData({
+                [ss]:''
+            })
+            console.log("sch:")
+            console.log(JSON.stringify(this.data.schList));
+            var _num=1;
+            var _size=this.data.pageSize;
+            console.log("刷新..")
+            this.getlist(_num,_size,newArray);
+     
+   }
   //  getNegotiatePersonList(e,evl){
   //    var detailUrl=evl;
   //      dd.httpRequest({

@@ -33,7 +33,7 @@
           <view class="td1">{{ite.itemName}}</view>
           <view class="td1">{{ite.norms}}</view>
           <view class="td1_index">{{ite.count}}</view>
-          <view class="td1">{{ite.quote}}<text class="{{ite.priceboolean?'priceup':'pricedown'}}">{{ite.priceChange}}</text></view>
+          <view class="td1">{{ite.quote}}<text class="{{ite.priceboolean?'priceup':'pricedown'}}">{{ite.priceChange}}%</text></view>
           <view class="td1">{{ite.oneMoney}}</view>
             <!-- 多商家选择 -->
         <view class="{{multimerchant?'duoshangjChecked':'duoshangjNo'}}">

@@ -2,9 +2,9 @@ let app = getApp();
 Page({  
    data:{
         dates: '请选择日期',
-        times: '请选择时间',
         payList:["请选择","货到付款","在线支付"],
         index:0,
+        isExpert:false,
         items:[{name:true}],
         //type 标记 1=加工 2 = 维修
         type:1,
@@ -150,11 +150,29 @@ Page({
     },
     //技术支持电话
     technicalSupportTelephone:function(e){
-      console.log(e)
-      this.setData({
-        'arr.pageArray.technicalSupportTelephone':e.detail.value
-      })
+      // console.log(e)
+      // this.setData({
+      //   'arr.pageArray.technicalSupportTelephone':e.detail.value
+      // })
+      var _phone=e.detail.value;
+      var bo=this.checkPhoneNum(_phone);
+      if(bo){
+        this.setData({
+          'arr.pageArray.technicalSupportTelephone':_phone
+        })
+      }else{
+        dd.alert({content: "电话号码输入有误"});
+      }
     },
+
+    checkPhoneNum(para){
+      console.log("校验电话号码")
+      console.log(para)
+      var a =  /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^0\d{2,3}-?\d{7,8}$/;
+      return a.test(para);
+    },
+
+
     //专家评审
      radioChange: function(e) {
        var expertReviewDe=e.detail.value[0];
@@ -163,7 +181,8 @@ Page({
        }
        console.log('你选择的框架是：',expertReviewDe)
        this.setData({
-        'arr.pageArray.expertReview':expertReviewDe
+        'arr.pageArray.expertReview':expertReviewDe,
+        isExpert:expertReviewDe
       })
     },
     //评审奖励
@@ -185,19 +204,19 @@ Page({
       console.log('提交',this.data.arr.pageArray)
     },
 
-  //  点击时间组件确定事件  
-  bindTimeChange: function (e) {
-    console.log("谁哦按")
-    this.setData({
-      times: e.detail.value
-    })
-   var deal = this.data.dates+" "+this.data.times;
-    console.log("deadline:"+deal);
-    this.setData({
-      'arr.pageArray.deadLine':deal
-    })
+//  点击时间组件确定事件  
+  // bindTimeChange: function (e) {
+  //   console.log("谁哦按")
+  //   this.setData({
+  //     times: e.detail.value
+  //   })
+  //  var deal = this.data.dates+" "+this.data.times;
+  //   console.log("deadline:"+deal);
+  //   this.setData({
+  //     'arr.pageArray.deadLine':deal
+  //   })
     
-  },
+  // },
   //  点击日期组件确定事件  
   bindDateChange: function (e) {
      console.log(e.detail.value)
@@ -205,14 +224,13 @@ Page({
       dates: e.detail.value
     })
     console.log("ddd")
-    var deal = this.data.dates+" "+this.data.times;
+    var deal = this.data.dates;
     console.log("deadline:"+deal);
     this.setData({
       'arr.pageArray.deadLine':deal
     })
 
   },
-
   //  选择支付方式
   bindPayChange: function (e) {
      var index= e.detail.value;
@@ -238,53 +256,115 @@ Page({
     //提交
   
   submit(e){
-      var purlist=this.data.arr.pageArray.purchaseArray;
-      var _staId=app.globalData.appUser.id;
-      var _orgId=app.globalData.appOrg.id;
-      var _type=this.data.type;
-      for(var i =0;i<purlist.length;i++){
-        if(purlist[i].materialId==""){
-        dd.alert({content: "请选择采购物品"});
-        return;
-      }
-      }
-     if(this.data.index==0){
-         dd.alert({content: "请选择支付方式"});
-        return;
-      }
-      console.log("eeeee",JSON.stringify(this.data.arr.pageArray))
-      var _url =  app.globalData.domain+'/machining/start';
       var that=this;
-       dd.httpRequest({
-        headers: {
-          "Content-Type": "application/json",
-          'eticket': app.globalData.eticket
-            },
-          url:_url,
-          method: 'POST',
-          data:
-            JSON.stringify({
-            pageArray:that.data.arr.pageArray,orgId:_orgId,staffId:_staId,type:_type
-          }),
-          dataType: 'json',
-          success(res){
-            console.log("res",res)
-              dd.alert({content:'提交成功',
-              // success: () => {
-              //   dd.navigateTo({
-              //   url:'/pages/purchase/purchase'
-              // })
-              // },
-              });
-              var newPage= {applyCause:'',purchaseArray:[{ materialId:'',typeName: '',brandName:'',itemName: '',norms: '',count: 0,unit: '',}],quoteSellerNum:0,supplierSellerNum:0,remarks:''};
-              that.setData({
-                'arr.pageArray':newPage
-              })
-              dd.switchTab({
-                url:'/pages/purchase/purchase'
-              })
+      dd.showLoading({
+        content:'提交中...',
+        delay:0,
+        success:function(){
+          var purlist=that.data.arr.pageArray.purchaseArray;
+          var _staId=app.globalData.appUser.id;
+          var _orgId=app.globalData.appOrg.id;
+          var _type=that.data.type;
+          for(var i =0;i<purlist.length;i++){
+            console.log("物品")
+            console.log(purlist[i])
+            if(purlist[i].itemName=="" || purlist[i].norms=="" || purlist[i].count=="" || purlist[i].unit==""){
+            dd.hideLoading();
+            dd.alert({content: "请填写加工物品信息"});
+            return;
           }
-       })
+          }
+          if(that.data.index==0){
+            dd.hideLoading();
+            dd.alert({content: "请选择支付方式"});
+            return;
+          }
+          //申请事由
+          var _applyCause=that.data.arr.pageArray.applyCause;
+          if(_applyCause==''){
+            dd.hideLoading();
+            dd.alert({content: "申请事由不能为空"});
+            return;
+          }
+          //截止日期**
+          var _data=that.data.arr.pageArray.deadLine;
+          //console.log(_data)
+          if(_data==''){
+            dd.hideLoading();
+            dd.alert({content: "请选择截止日期"});
+            return;
+          }
+          //供货周期
+          var _supplyCycle=that.data.arr.pageArray.supplyCycle;
+          if(_supplyCycle==''){
+            dd.hideLoading();
+            dd.alert({content: "请填写供货周期"});
+            return;
+          }
+          //技术支持电话
+          var _tst=that.data.arr.pageArray.technicalSupportTelephone;
+          if(_tst=='' && that.technicalSupportTelephone){
+            dd.hideLoading();
+            dd.alert({content: "请填写技术支持电话"});
+            return;
+          }
+          //需求备注
+          var _remarks=that.data.arr.pageArray.remarks;
+          if(_remarks==''){
+            dd.hideLoading();
+            dd.alert({content: "请填写需求备注"});
+            return;
+          }
+          //专家
+          var _expertReview=that.data.arr.pageArray.expertReview;
+          var _expertReward=that.data.arr.pageArray.expertReward;
+          if(_expertReview==true){
+            if(_expertReward==''){
+              dd.hideLoading();
+              dd.alert({content: "请填写推荐金额"});
+              return;
+            }
+          }
+          console.log("eeeee",JSON.stringify(that.data.arr.pageArray))
+          var _url =  app.globalData.domain+'/machining/start';
+          dd.httpRequest({
+            headers: {
+              "Content-Type": "application/json",
+              'eticket': app.globalData.eticket
+                },
+              url:_url,
+              method: 'POST',
+              data:
+                JSON.stringify({
+                pageArray:that.data.arr.pageArray,orgId:_orgId,staffId:_staId,type:_type
+              }),
+              dataType: 'json',
+              success(res){
+                dd.hideLoading();
+                var back=res.data.message
+                console.log("res",res)
+                  dd.alert({content:back,
+                  // success: () => {
+                  //   dd.navigateTo({
+                  //   url:'/pages/purchase/purchase'
+                  // })
+                  // },
+                  });
+                  var newPage= {applyCause:'',purchaseArray:[{ materialId:'',typeName: '',brandName:'',itemName: '',norms: '',count: 0,unit: '',}],quoteSellerNum:0,supplierSellerNum:0,remarks:''};
+                  that.setData({
+                    'arr.pageArray':newPage
+                  })
+                  dd.switchTab({
+                    url:'/pages/purchase/purchase'
+                  })
+              },
+              fail(){
+                dd.hideLoading();
+                dd.alert({content:'提交失败' })
+              }
+          })
+        },
+      })
     },
 
 

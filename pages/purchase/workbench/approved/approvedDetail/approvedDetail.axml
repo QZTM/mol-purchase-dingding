@@ -88,10 +88,10 @@
 </view>
 
 <!-- 审批人建议 -->
-<view style="border:1px solid #dddddd;clear:both;">
+<!-- <view style="border:1px solid #dddddd;clear:both;">
    <view class="shiping_text">建议：</view>
    <textarea placeholder="{{pur.approverProposal}}"  placeholder-class="pl"  disabled="disabled" />
-</view>
+</view> -->
 
 <view style="border:1px solid #dddddd;clear:both;" a:for="{{appvoverList}}" >
    <view class="shiping_text">{{item.userid}}(已审核人意见)：</view>

@@ -51,8 +51,11 @@ Page({
    targetObj:{
     purId:'',
     explain:'',
-    materIdToSupplierId:[]
-   }
+    materIdToSupplierId:[],
+    supplierToExpert:[],
+   },
+   //评审奖励
+   expertReward:"",
   },
   onLoad(option) {
     //获取登录用户
@@ -139,7 +142,10 @@ Page({
             // console.log("getPur:"+JSON.stringify(res));
             var statusName="";
            var pur=res.data.fyPurchase;
-          //  console.log("pur"+JSON.stringify(pur))
+           that.setData({
+              expertReward:pur.expertReward
+           })
+            console.log("pur"+JSON.stringify(pur))
            if(pur.status==4){
               statusName="等待议价";
            }
@@ -227,7 +233,7 @@ Page({
 
           
           for(var key in map){
-             console.log("key："+key+"map:"+JSON.stringify(map))
+             //console.log("key："+key+"map:"+JSON.stringify(map))
             var map_list=map[key];
               totalMoney=0;
               // console.log("map_list"+JSON.stringify(map_list))
@@ -690,9 +696,11 @@ Page({
     var _supplierId =e.target.dataset.index;
     //公司名称
     var _supplierName=e.target.dataset.name;
+    //评审奖励
+    var _expertReward=this.data.expertReward;
     //是否为单商家采购
     var _multimerchant= this.data.multimerchant;
-    var bigDataUrl="/pages/purchase/workbench/negotiatedPrice/expertInvolved/expertInvolved?supplierId="+_supplierId+"&purId="+_purId+"&supplierName="+_supplierName+"&multimerchant="+_multimerchant;
+    var bigDataUrl="/pages/purchase/workbench/negotiatedPrice/expertInvolved/expertInvolved?supplierId="+_supplierId+"&purId="+_purId+"&supplierName="+_supplierName+"&multimerchant="+_multimerchant+"&expertReward="+_expertReward;
     dd.navigateTo({
         url:bigDataUrl,
     });  
@@ -965,161 +973,129 @@ Page({
     console.log("负责人说明1："+JSON.stringify(this.data.explainCache))
     console.log("tar"+JSON.stringify(this.data.targetObj))
 
-    //缓存中获取数据
-
-    var that=this;
-    var _purId=that.data.id;
-    dd.getStorage({
-      key: _purId,
-      success: function(res) {
-        //dd.alert({content: '获取成功：' + res.data.cityName});
-        console.log("缓存第一级");
-        console.log(res.data);
-        var _list=res.data.supplierList;
-        for(var i=0;i<_list.length;i++){
-            dd.getStorage({
-              key: _list[i],
-              success: function(res) {
-                //dd.alert({content: '获取成功：' + res.data.cityName});
-                console.log("缓存第二季");
-                console.log(res.data)
-              },
-              fail: function(res){
-                dd.alert({content: res.errorMessage});
-              }
-            });
-        }
-      },
-      fail: function(res){
-        dd.alert({content: res.errorMessage});
-      }
-    });
+   
   },
 
   //清除缓存
   clear(){
-    var that=this;
-    var _purId=that.data.id;
-    dd.getStorage({
-      key: _purId,
-      success: function(res) {
-        //dd.alert({content: '获取成功：' + res.data.cityName});
-        console.log("缓存第一级:"+_purId);
-        console.log(res.data);
-        
-        if(res.data!=null ){
-          var _list=res.data.supplierList;
-          for(var i=0;i<_list.length;i++){
-           dd.removeStorageSync({
-            key: _list[i],
-          });
-          }
-        }
-         dd.removeStorageSync({
-            key: _purId,
-          });
-        
-      },
-      fail: function(res){
-        dd.alert({content: res.errorMessage});
-      }
-    });
+   console.log("清除1")
+
+   var appExpertCheckedList = app.globalData.expertCheckedList;
+   appExpertCheckedList=[];
+   app.globalData.expertCheckedList = appExpertCheckedList;
+   console.log("清除2")
+   console.log(app.globalData.expertCheckedList )
   },
 
+  //提交时获取的数据
+  getCache(){
+      var  appExpertCheckedList = app.globalData.expertCheckedList;
+      return appExpertCheckedList;
+
+  },
+
+  
   //提交数据
   submit(e){
-    //获取app.js中工作流的key
-    var _processKey=app.globalData.processKey;
-    //订单id
-    var _id =this.data.id;
-    var _materId=this.data.targetObj;
-    console.log("负责人说明1："+_processKey)
-    //判断是不是物料已经选择完毕
-    var _mCount=this.data.materielList.quoteSupplierList[0][1].length;
-    var _oCount=_materId.materIdToSupplierId.length;
+   var that=this;
+   dd.showLoading({
+     content:'提交中...',
+     delay:0,
+     success:function(){
+        //获取app.js中工作流的key
+        var _processKey=app.globalData.processKey;
+        //订单id
+        var _id =that.data.id;
+        var _materId=that.data.targetObj;
+        console.log("负责人说明1："+_processKey)
+        //判断是不是物料已经选择完毕
+        var _mCount=that.data.materielList.quoteSupplierList[0][1].length;
+        var _oCount=_materId.materIdToSupplierId.length;
 
-    var _explainCache=this.data.explainCache;
-    if(_explainCache.length<=0){
-     dd.alert({
-        content: '请填写负责人说明！',
-      });
-      return;
-    }
-    _materId.explain=_explainCache
-    if(_mCount!=_oCount){
-    //   dd.confirm({
-    //   title: '温馨提示',
-    //   content: '尚有未选择报价的物品！',
-    //   confirmButtonText: '暂不需要',
-    //   cancelButtonText: '马上添加',
-    //   success: (result) => {
-    //     console.log("resu：",result)
-    //     if(result.confirm){
-    //       //提交数据
-    //     console.log("提交2：",JSON.stringify(_materId))
-    //     }else{
-    //       //完善数据
-    //     return;
-    //     }
-    //   },
-    // });
-    return;
-    }
-    dd.httpRequest({
-          url: app.globalData.domain+'/negotiateding/save',
-          method: 'POST',
-          data:JSON.stringify({
-              purId:_materId.purId,explain:_materId.explain,materIdToSupplierId:_materId.materIdToSupplierId
-          }),
-          headers: {
-              "Content-Type": "application/json",
-            'eticket': app.globalData.eticket
-          },
-          dataType: 'json',
-          success: (res) => {
-            console.log("下面工作流")
-             //开启工作流
-             dd.httpRequest({
-                  url: app.globalData.domain+'/ac/start',
-                  method: 'POST',
-                  data:{
-                      processKey:_processKey,
-                      businessKey:_id
-                  },
-                  headers: {
-                     
-                      'eticket': app.globalData.eticket
-                  },
-                  dataType: 'json',
-                  success: (cs) => {
-                        console.log("res:"+JSON.stringify(res))
-                        if(res.data.success){
-                          dd.alert({
-                          content: res.data.result,
-                            success: () => {
-                              dd.navigateBack({
-                              url:"/pages/purchase/workbench/tobenegotiated/tobenegotiated",
-                            })
-                            }
-                        });
-                        }else{
-                          dd.alert({
-                          content: res.data.message,
-                          success: () => {
-                              dd.navigateBack({
-                              url:"/pages/purchase/workbench/tobenegotiated/tobenegotiated",
-                            })
-                            }
-                        });
-                      
-                        }  
-                  }
-               })
-               //---工作流
-             
-              
-          }
-    })
+        var _explainCache=that.data.explainCache;
+        if(_explainCache.length<=0){
+          dd.hideLoading();
+          dd.alert({
+              content: '请填写负责人说明！',
+            });
+            return;
+        }
+        _materId.explain=_explainCache
+        if(_mCount!=_oCount){
+      
+        return;
+        }
+        var flag= that.getCache();
+        console.log("4")
+        if(flag!=null){
+          console.log(flag)
+          that.clear();
+          console.log("缓存删除成功！");
+        }
+        dd.httpRequest({
+              url: app.globalData.domain+'/negotiateding/save',
+              method: 'POST',
+              data:JSON.stringify({
+                  purId:_materId.purId,explain:_materId.explain,materIdToSupplierId:_materId.materIdToSupplierId,supplierToExpert:flag
+              }),
+              headers: {
+                  "Content-Type": "application/json",
+                'eticket': app.globalData.eticket
+              },
+              dataType: 'json',
+              success: (res) => {
+                console.log("下面工作流")
+                //开启工作流
+                dd.httpRequest({
+                      url: app.globalData.domain+'/ac/start',
+                      method: 'POST',
+                      data:{
+                          processKey:_processKey,
+                          businessKey:_id
+                      },
+                      headers: {
+                        
+                          'eticket': app.globalData.eticket
+                      },
+                      dataType: 'json',
+                      success: (cs) => {
+                            dd.hideLoading();
+                            console.log("res:"+JSON.stringify(res))
+                            if(res.data.success){
+                              dd.alert({
+                              content: res.data.result,
+                                success: () => {
+                                //   dd.navigateBack({
+                                //   url:"/pages/purchase/workbench/tobenegotiated/tobenegotiated",
+                                // })
+                                dd.switchTab({
+                                  url:'/pages/purchase/purchase'
+                                })
+                                }
+                            });
+                            }else{
+                              dd.alert({
+                              content: res.data.message,
+                              success: () => {
+                                //   dd.navigateBack({
+                                //   url:"/pages/purchase/workbench/tobenegotiated/tobenegotiated",
+                                // })
+                                dd.switchTab({
+                                  url:'/pages/purchase/purchase'
+                                })
+                                }
+                            });
+                          
+                            }  
+                      }
+                  })
+                  //---工作流
+                
+                  
+              }
+        })
+     }
+   })
     
 
     

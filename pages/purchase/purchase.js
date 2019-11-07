@@ -1,6 +1,8 @@
 let app = getApp();
 Page({
   data: {
+    pageNum:1,
+    pageSize:6,
     isAjax:true,
     userid:'',
     orgid:'',
@@ -162,6 +164,7 @@ Page({
            orgid:app.globalData.appOrg.id,
            userName:app.globalData.appUser.userName,
          });
+
           //调用方法查询count
         var _id=that.data.id;
         var _orgid=that.data.orgid;
@@ -276,7 +279,7 @@ Page({
     dd.httpRequest({
       url: app.globalData.domain+'/negotiateding/getList',
       method: 'GET',
-      data: {orgId:x,status: y,secondStatus:z,userId:m},
+      data: {orgId:x,status: y,secondStatus:z,userId:m,pageNum:1,pageSize:1000},
       headers: {
         'eticket': app.globalData.eticket
       },
@@ -290,6 +293,8 @@ Page({
             that.setData({
               [st]:res.data.length,
             })
+            console.log(n)
+            
           }
         }
 
@@ -299,6 +304,8 @@ Page({
   },
   //待审批
   showCount_shengPi(e,n){
+      var _pageNum=this.data.pageNum;
+      var _pageSize=this.data.pageSize;
       var aj=this.data.isAjax;
       if(aj){
         this.setData({
@@ -315,7 +322,7 @@ Page({
       dd.httpRequest({
             url: app.globalData.domain+'/ac/task',
             method: 'GET',
-            data: {assignee:id},
+            data: {assignee:id,pageNum:_pageNum,pageSize:100},
             headers: {
               'eticket': app.globalData.eticket
             },
@@ -323,7 +330,10 @@ Page({
             success: (res) => {
                 var reList=res.data.result;
                 var _list =that.data.workbenchPur.list;
-                
+                console.log("reList")
+                console.log(reList)
+                console.log("_list")
+                console.log(_list)
                 //设置数量
                 for(var i=0;i<_list.length;i++){
                   if(_list[i].text == "待审批" && _list[i].status==n ){
@@ -343,11 +353,13 @@ Page({
                       dd.alert({content: res.errorMessage});
                     }
                   })
-                    
-                   
+                
                   }
                 }
             }
       })
-  }
+  },
+
+
+ 
 })

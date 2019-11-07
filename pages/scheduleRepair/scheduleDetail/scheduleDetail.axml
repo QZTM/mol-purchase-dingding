@@ -6,7 +6,7 @@
   <view class="top_right">当前进度：<text style='color:red'>{{statusName}}</text></view>
 </view>
 
-<view style='clear:both;border:1px solid #dddddd;margin-top:30px;'>
+<view style='clear:both;border-top:1px solid #dddddd;margin-top:30px;'>
     <view class="big">审核流程</view>
     <template is="showApproveList" data="{{callListUsers}}"/>
 </view>
@@ -42,7 +42,6 @@
 <!-- <view a:if="{{isPass==true}}">
   <template is="quoteTable" data="{{...supplier,isShow}}" />
 </view> -->
-
- <block a:for="{{supplier}}" a:for-item="item" a:for-index="ix">
-        <template is="quoteTable" data="{{item,ix}}">
-</block>
+    <block a:for="{{supplier}}" a:for-item="item" a:for-index="ix">
+            <template is="quoteTable" data="{{item,ix}}">
+    </block>

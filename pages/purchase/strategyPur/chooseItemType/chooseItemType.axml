@@ -1,4 +1,14 @@
+<!-- <import src="/pages/biz/pages/underlinepage/itemTypeTemplate/itemTypeTemplate"/>
+
+<view style="width:{{systemInfo.windowWidth}}px;background-color:#fff;padding-left:20px;">
+    <template is="itemTypeTemp" data="{{...itemTypes}}"></template>
+   
+  </view> -->
 <import src="/pages/biz/pages/underlinepage/itemTypeTemplate/itemTypeTemplate"/>
+<view class="search-out-view">
+  <image mode="scaleToFill" src="/images/search.png" class="search-image" onTap="searchItemType"/>
+  <input placeholder="搜索" class="search-input" id="searchInputId" onBlur="changeSearchValue" onInput="searchInputInput"/>
+</view>
 <view style="width:{{systemInfo.windowWidth}}px;background-color:#fff;padding-left:20px;">
     <template is="itemTypeTemp" data="{{...itemTypes}}"></template>
     <!-- <view class="mix-tree-list">

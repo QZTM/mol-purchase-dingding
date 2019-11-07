@@ -80,4 +80,7 @@
 .notAdmin{
   display: none;
 }
+.but{
+  margin:0px;
+}
 

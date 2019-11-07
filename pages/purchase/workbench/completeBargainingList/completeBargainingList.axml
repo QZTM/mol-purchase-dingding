@@ -1,6 +1,9 @@
 <import src="../templet/list_addwancheng/list.axml"/>
 <view class="page-section">
-      <view class="page-section-demo schOne">
-        <template is="schList" data={{...schList}}>
-      </view>
-    </view>
+  <view class="page-section-demo schOne">
+    <template is="schList" data={{...schList}}>
+  </view>
+</view>
+<view a:if="{{none==true}}" style="text-align:center;margin-top:6px;margin-bottom:6px;">
+  没有可以加载的了
+</view>

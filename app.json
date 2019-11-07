@@ -60,7 +60,8 @@
     "pages/scheduleRepair/scheduleRepair",
     "pages/scheduleRepair/scheduleDetail/scheduleDetail",
     "pages/scheduleRepair/templet/quoteTable/quoteTable",
-    "pages/purchase/workbench/negotiatedPrice/expertInvolved/expertInvolved"
+    "pages/purchase/workbench/negotiatedPrice/expertInvolved/expertInvolved",
+    "pages/purchase/workbench/negotiatedPrice/expertInvolvedOnRead/expertInvolvedOnRead"
   ],
   "window": {
     "enableWK": "YES",
@@ -95,9 +96,8 @@
       }
     ]
   },
-  
-"networkTimeout": {
+  "networkTimeout": {
     "request": 20000
-},
+  },
   "debug": true
 }

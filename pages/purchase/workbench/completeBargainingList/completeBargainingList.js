@@ -1,6 +1,9 @@
 let app = getApp();
 Page({
   data: {
+    pageNum:1,
+    pageSize:10,
+    none:false,
     userid:'',
     orgid:'',
     schList:{
@@ -53,22 +56,23 @@ Page({
 
 
   onShow(e){
-    //获取公司Id
-    //var orgid="xiesi001";
-    var orgid=this.data.orgid;
-    var status=app.globalData.statusList.completeBargaining;//-------------------*---------------------------------------最终结束改为 =4
-    var _userid=this.data.userid;
+    var _pageNum=this.data.pageNum;
+    var _pageSize=this.data.pageSize;
     //获取进行中的列表：
-    this.getlist(orgid,status,_userid);
+    this.getlist(_pageNum,_pageSize);
  },
 
 // 获取页面数据
-  getlist:function(orgid,status,_userid){
+  getlist:function(pageNum,pageSize){
+      //获取公司Id
+      var orgid=this.data.orgid;
+      var status=app.globalData.statusList.completeBargaining;//-------------------*---------------------------------------最终结束改为 =4
+      var _userid=this.data.userid;
       var that=this;
        dd.httpRequest({
           url: app.globalData.domain+'/negotiateding/getList',
           method: 'GET',
-          data: {orgId: orgid,status:status,userId:_userid},
+          data: {orgId: orgid,status:status,userId:_userid,pageNum:pageNum,pageSize:pageSize},
 		  headers: {
 			  'eticket': app.globalData.eticket
 		  },
@@ -76,40 +80,52 @@ Page({
           success: (res) => {
           console.log(res.data)
               var suList =res.data;
-              var newArray=[];
-              for(var i=0;i<suList.length;i++){
-                var buyChannelName="";
-                var statusName="";
-                if(suList[i].buyChannelId==3){
-                    buyChannelName="战略采购"
-                }
-                if(suList[i].buyChannelId==4){
-                    buyChannelName="询价采购"
-                }
-                if(suList[i].buyChannelId==5){
-                    buyChannelName="单一来源"
-                }
-                if(suList[i].status==status){
-                    statusName="议价完成"
-                }
-                
-                  newArray.push({
-                    "id":suList[i].id,
-                    "title":suList[i].applyCause,
-                    "orderNumber":suList[i].orderNumber,
-                    "buyChannelId":suList[i].buyChannelId,
-                    "goodsType":suList[i].goodsType,
-                    "status":suList[i].status,
-                    "buyChannelName":buyChannelName,
-                    "statusName":statusName,
-                    "createTime":suList[i].createTime
-                  })
+              if(suList.length>0 && suList!=null){
+                 var _list=that.data.schList.list;
+                  var newArray=[];
+                  if(_list.length>0 && _list!=null){
+                    var newArray=_list;
+                  }
+                  for(var i=0;i<suList.length;i++){
+                    var buyChannelName="";
+                    var statusName="";
+                    if(suList[i].buyChannelId==3){
+                        buyChannelName="战略采购"
+                    }
+                    if(suList[i].buyChannelId==4){
+                        buyChannelName="询价采购"
+                    }
+                    if(suList[i].buyChannelId==5){
+                        buyChannelName="单一来源"
+                    }
+                    if(suList[i].status==status){
+                        statusName="议价完成"
+                    }
+                    
+                      newArray.push({
+                        "id":suList[i].id,
+                        "title":suList[i].applyCause,
+                        "orderNumber":suList[i].orderNumber,
+                        "buyChannelId":suList[i].buyChannelId,
+                        "goodsType":suList[i].goodsType,
+                        "status":suList[i].status,
+                        "buyChannelName":buyChannelName,
+                        "statusName":statusName,
+                        "createTime":suList[i].createTime
+                      })
+                  }
+                  var tr="schList.list"
+                  that.setData({
+                      [tr]: newArray,
+                    });
+                    console.log(this.data)
+                    dd.hideLoading();
+              }else{
+                dd.hideLoading();
+                that.setData({
+                  none:true
+                })
               }
-               var tr="schList.list"
-               that.setData({
-                        [tr]: newArray,
-                      });
-                       console.log(this.data)
             },
            
        })
@@ -187,5 +203,27 @@ Page({
             },
            
        })
-   }
+   },
+   //页面上拉加载更多
+   onReachBottom(){
+     var that=this;
+     dd.showLoading({
+        content: '拼命加载中...',
+        success:function(e){
+            var _num=that.data.pageNum;
+            var _size=that.data.pageSize;
+            _num++;
+            that.setData({
+              pageNum:_num
+            })
+            console.log("再次发送请求")
+            that.getlist(_num,_size);
+        },
+        fail:function(e){
+          dd.hideLoading();
+          dd.alert({content: "error！"});
+        }
+      });
+     
+   },
 });
