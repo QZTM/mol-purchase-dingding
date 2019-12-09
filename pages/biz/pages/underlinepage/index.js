@@ -353,6 +353,8 @@ uploadImg(url){
 
         var promiseArray = [];
         for (var i = 0; i < urls.length; i++) {
+            console.log("++url:")
+            console.log(urls[i])
             promiseArray.push(that.uploadImg(urls[i]));
         }
         Promise.all(promiseArray).then(function(data) {

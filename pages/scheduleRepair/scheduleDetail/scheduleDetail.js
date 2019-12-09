@@ -4,6 +4,8 @@ Page({
   data: {
     //订单id
     id:'',
+    //屏幕宽度
+    width:'',
     //展示
     isShow:true,
     //订单是否通过（展示确认供应商的条件）
@@ -28,14 +30,28 @@ Page({
       
     ],
     //订单是否需要专家推荐
-    expertReview:''
+    expertReview:'',
+
+    //合同list
+    filePathArr:[
+      // {
+      //   id:"1178121287646588928",
+      //   arr:["http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg","http://img1.imgtn.bdimg.com/it/u=2018939532,1617516463&fm=26&gp=0.jpg"],
+      // }
+      
+    ],
 
   },
   onLoad(option) {
     var that=this;
+    
     dd.showLoading({
       content: '加载中...',
       success:function(){
+        var _width=app.globalData.systemInfo.windowWidth;
+        that.setData({
+          width:_width
+        })
         that.setData({
           id:option.id
         });
@@ -49,16 +65,18 @@ Page({
 
       }
     });
-    
+    console.log("data:")
+    console.log(that.data)
   },
   //获取流程审核人
   getShengHeRen(){
-    var _org=app.globalData.appOrg.id;
+    //var _org=app.globalData.appOrg.id;
+    var _purId=this.data.id;
     var that=this;
       dd.httpRequest({
           url: app.globalData.domain+'/scheRe/getApproveList',
           method: 'GET',
-          data: {orgId: _org},
+          data: {purId: _purId},
           headers: {
             'eticket': app.globalData.eticket
           },
@@ -140,11 +158,12 @@ Page({
           dataType: 'json',
           success: (res) => {
               var pur=res.data.result.pur;
-              console.log("res")
+              
+              console.log("订单res")
               console.log(res)
-              // that.setData({
-              //   pur:pur
-              // });
+              that.setData({
+                pur:pur
+              });
               var statusName='';
               var buyChannelName='';
               if(pur.buyChannelId==3){
@@ -271,12 +290,13 @@ Page({
     console.log("点击联系供应商")
     console.log(e)
     var that=this;
-    var _expertR=that.data.expertReview;
+    var _expertReview=that.data.expertReview;
     //公司id
     var _id=e.target.dataset.id;
     var _purId=that.data.id;
+    var _electronicContract=that.data.pur.electronicContract
     //判断订单是否有专家推荐
-    if(_expertR){
+    if(_expertReview=='true' || _electronicContract=='true'){
       //2.有，判断供应商是否已经支付
       dd.httpRequest({
               url: app.globalData.domain+'/scheRe/getPayresult',
@@ -381,7 +401,156 @@ Page({
 
 
   //上传合同
+  checkImg(e){
+    console.log("上传合同")
+    console.log(e.target.dataset.id)
+    //dd.alert({content: "等待开发"});
+
+    var that =this;
+    var _id=e.target.dataset.id;
+    var _filePathArr=that.data.filePathArr;
+
+    var chickFile=[];
+    console.log("准备：")
+    console.log(_filePathArr)
+    console.log(chickFile)
+    dd.chooseImage({
+      count:50,
+      success: (res) => {
+        chickFile=res.filePaths;
+        console.log("选择图片：")
+        console.log(chickFile);
+        if(_filePathArr.length==0){
+          //空，直接创建
+          console.log("空，直接创建");
+          _filePathArr.push({'id':_id,'arr':chickFile})
+        }else{
+          for(var i=0;i<_filePathArr.length;i++){
+            console.log(_filePathArr[i])
+            if(_filePathArr[i].id ==_id){
+              //有 用存在的
+              console.log("已经存在Arr");
+              var a=_filePathArr[i].arr;
+              for(var j=0;j<chickFile.length;j++){
+                a.push(chickFile[j]);
+              }
+              //a.concat(chickFile);
+              _filePathArr[i].arr=a;
+              // var a=_filePathArr[i].arr.concat(chickFile);
+              // _filePathArr[i].arr=a;
+              chickFile=[];
+              break;
+            }else{
+              if(i==_filePathArr.length-1){
+                //如果没有该公司的arr，创建
+                console.log("没有该公司的arr")
+                var o={id:_id,arr:chickFile};
+                console.log(o)
+                _filePathArr.push(o);
+                chickFile=[];
+              }
+            }
+          }
+        }
+        console.log("+")
+        console.log(_filePathArr)
+        that.setData({
+          filePathArr:_filePathArr
+        })
+        console.log("最终的filePatharr")
+        console.log(that.data.filePathArr)
+      },
+    });
+  },
+
+
+  //预览图片
+  preViewImage(e){
+      var that=this;
+      console.log("预览图片")
+      console.log(e)
+      var _id=e.target.dataset.id;
+      dd.previewImage({
+        current: 1,
+        urls:[_id],
+      });
+  },
+
+
+
+
+  //上传合同
   upload(e){
-    dd.alert({content: "等待开发"});
+    console.log(e)
+    console.log("上传")
+    var that =this;
+    var _id=e.target.dataset.id;
+    var _filePathArr=that.data.filePathArr;
+    if(_filePathArr ==null){
+      dd.alert({content: "请选择合同照片"});
+    }
+    var _arr=[];
+    for(var i=0;i<_filePathArr.length;i++){
+      if(_filePathArr[i].id==_id){
+          _arr=_filePathArr[i].arr;
+      }
+    }
+
+    for(var k=0;k<_arr.length;k++){
+      that.uploads(_arr[k]);
+    }
+    console.log("arr")
+    console.log(_arr)
+    console.log("公司id")
+    console.log(_id)
+
+    
+  },
+
+  //上传
+  uploads(url){
+    var that=this;
+    var _id=that.data.id;
+    var _orgId=app.globalData.appOrg.id;
+    dd.uploadFile({
+      url:app.globalData.domain+'/scheRe/upLoadContractPictures',
+      method: 'POST',
+      headers: {
+        'eticket': app.globalData.eticket
+      },
+      formData:{
+        purId:_id,
+        orgId:_orgId
+      },
+      fileType: 'image',
+      fileName: 'file',
+      filePath: url,
+      success: (res) => {
+        
+      },
+    });
+  },
+
+  
+
+  //删除合同
+  delImage(e){
+    console.log("删除合同照片")
+    console.log(e);
+    var that=this;
+    var _imageIndex=e.target.dataset.imageIndex;
+    var _suppId=e.target.dataset.suppId;
+    var _filePathArr=that.data.filePathArr;
+    for(var i=0;i<_filePathArr.length;i++){
+      if(_filePathArr[i].id==_suppId){
+        var _a=_filePathArr[i].arr;
+        _a.splice(_imageIndex,1)
+        _filePathArr[i].arr=_a;
+      }
+    }
+    that.setData({
+      filePathArr:_filePathArr
+    })
+
   }
 });

@@ -77,14 +77,14 @@
   
 <view style="border:1px solid #dddddd;clear:both">
   <view class="shiping_text">视频议价讨论</view>
-  <template is="showCallUsers" placeholder-class="pl" data="{{...manager,callListUsers}}"/>
+  <template is='showCallUsers' placeholder-class="pl" data="{{...manager,callListUsers}}"/>
 </view>
 <!-- 负责人说明 -->
-<view style="border:1px solid #dddddd;clear:both;">
+<view style="border:1px solid #dddddd;clear:both;" class="fuze">
    <view class="shiping_text">负责人说明：</view>
    <!-- <textarea  disabled="disabled" style="heigh:80px;" onBlur="explain">{{negotiatedExplain}}</textarea> -->
   <!-- <input placeholder="{{negotiatedExplain}}" placeholder-class="pl" disabled="disabled"/> -->
-   <textarea placeholder="{{negotiatedExplain}}"  placeholder-class="pl"  disabled="disabled" />
+   <textarea value="{{negotiatedExplain}}" style="padding-bottom:0px;padding-top:0px;"  disabled="disabled" />
 </view>
 
 <!-- 审批人建议 -->
@@ -93,13 +93,18 @@
    <textarea placeholder="{{pur.approverProposal}}"  placeholder-class="pl"  disabled="disabled" />
 </view> -->
 
-<view style="border:1px solid #dddddd;clear:both;" a:for="{{appvoverList}}" >
+<!-- <view style="border:1px solid #dddddd;clear:both;" a:for="{{appvoverList}}" >
    <view class="shiping_text">{{item.userid}}(已审核人意见)：</view>
    <textarea  placeholder="{{item.message}}" placeholder-class="placeholder"   disabled="disabled" ></textarea>
-  <!-- <input disabled="disabled"/> -->
+</view> -->
+
+<view style="border:1px solid #dddddd;clear:both;" a:for="{{appvoverList}}" >
+   <view class="shiping_text">{{item.userid}}(已审核人意见)：</view>
+   <textarea  value="{{item.message}}" style="padding-bottom:0px;padding-top:0px;"  disabled="disabled" ></textarea>
 </view>
 
-<view style="color:red;font-size:12px;margin-top:20px;margin-bottom:10px;text-align:center;" a:if="{{pur.status==statusPass}}">已通过</view>
-<view style="color:green;font-size:12px;margin-top:20px;margin-bottom:10px;text-align:center;" a:if="{{pur.status==statusRefuse}}">已拒绝</view>
+<view style="color:red;font-size:18px;padding-top:20px;padding-bottom:10px;text-align:center;" a:if="{{pur.status==statusPass}}">已通过</view>
+<view style="color:green;font-size:18
+px;padding-top:20px;padding-bottom:10px;text-align:center;" a:if="{{pur.status==statusRefuse}}">已拒绝</view>
 
 

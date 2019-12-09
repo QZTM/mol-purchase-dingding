@@ -30,7 +30,7 @@ App({//E应用逻辑
       "refuse":8
     },
     //工作流的key
-    processKey:'全新'
+    processKey:'sing'
   },
   
   onLaunch(options) {
@@ -42,8 +42,8 @@ App({//E应用逻辑
         //that.globalData.domain='http://127.0.0.1:8082';
         //that.globalData.domain='http://127.0.0.1:8083';
         //that.globalData.domain='http://2a529045z1.qicp.vip';
-        //that.globalData.domain='http://fyycg1.vaiwan.com';
-        that.globalData.domain='http://140.249.22.202:8082';
+        that.globalData.domain='http://fyycg1.vaiwan.com';
+        //that.globalData.domain='http://140.249.22.202:8082';
         // 第一次打开，监听E应用初始化	当E应用初始化完成时触发，全局只触发一次
         // options.query == {number:1}
         console.info('app.js...onLaunch()...');
@@ -97,7 +97,7 @@ App({//E应用逻辑
         })
       },
       fail:function(e){
-
+          dd.alert({ content: JSON.stringify(err) })
       }
     })
   },
@@ -115,7 +115,7 @@ App({//E应用逻辑
                     }else if("1" == resultState){
                       resultStateName = "等待审批";
                     }else if("2" == resultState){
-                        resultStateName = "审批通过";
+                      resultStateName = "审批通过";
                     }
                     else if("3" == resultState){
                         resultStateName = "驳回";

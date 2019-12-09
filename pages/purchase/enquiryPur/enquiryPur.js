@@ -23,6 +23,8 @@ Page({
         expertReview:"",
         //评审奖励
         expertReward:"",
+        //电子合同
+        electronicContract:true,
         //采购物品数组
         purchaseArray:[
           {
@@ -81,7 +83,7 @@ Page({
        this.data.arr.pageArray.purchaseArray.push({ materialId:'',typeName: '',brandName:'',itemName: '',norms: '',count: 0,unit: '',});
       this.setData({
           'arr.pageArray.purchaseArray':this.data.arr.pageArray.purchaseArray,
-           'arr.pageArray.supplierSellerNum':0,
+           'arr.pageArray.supplierSellerNum':'',
       })
     },
     addUnderlinepageTempleCenter(){
@@ -163,39 +165,7 @@ Page({
     this.setData({  [unit]: newItemUnit?newItemUnit : '' });
     this.setData({  [count]: 1 });
     console.log("变---------",this.data.arr.pageArray.purchaseArray)
-    //爬取数据
-   
-    var _url=app.globalData.domain+"/shopping/getSupplierNum"
-    var that=this;
-    dd.httpRequest({
-       headers: {  
-           "Content-Type": "application/json",
-		      'eticket': app.globalData.eticket
-        },
-          url:_url,
-          method: 'POST',
-          data:
-            JSON.stringify({
-            pageArray:that.data.arr.pageArray
-          }),
-          dataType: 'json',
-          success(res){
-            console.log("响应",res)
-            var supp = res.data.result;
-            console.log("supp",supp)
-            if(supp!=null){
-                 console.log("supp",supp)
-                var supp_supplierSellerNum =supp
-                that.setData({
-                'arr.pageArray.supplierSellerNum':supp_supplierSellerNum,
-                })
-                console.log("sss",that.data.arr.pageArray)
-            }else{
-            dd.alert({content:'未查询到相关的供应商数量'});
-            }
-           
-          }
-    })
+
 
     },
     //规格
@@ -367,7 +337,15 @@ Page({
   },
   
   
-
+  //电子合同选项
+   switchChange (e){
+    console.log('switchChange 事件，值:', e.detail.value);
+    var that =this;
+    that.setData({
+      'arr.pageArray.electronicContract':e.detail.value
+    })
+    console.log(that.data.arr)
+   },
 
     //提交
   
@@ -473,7 +451,7 @@ Page({
                 })
                 },
                 });
-                var newPage= {applyCause:'',purchaseArray:[{ materialId:'',typeName: '',brandName:'',itemName: '',norms: '',count: 0,unit: '',}],quoteSellerNum:0,supplierSellerNum:0,remarks:''};
+                var newPage= {applyCause:'',purchaseArray:[{ materialId:'',typeName: '',brandName:'',itemName: '',norms: '',count: 0,unit: '',}],quoteSellerNum:0,supplierSellerNum:'',remarks:''};
                 that.setData({
                   'arr.pageArray':newPage
                 })
@@ -517,6 +495,44 @@ Page({
       },
       onShow() {
         // 页面显示
+
+        //查询相关的商家数量
+        var that=this;
+        var arr =that.data.arr.pageArray.purchaseArray;
+        console.log("arr:")
+        console.log(arr)
+        var pkmar;
+        if(arr!=null){
+            pkmar=arr[0].typeIndex;
+        }
+        // var pkmar=that.data.arr.purchaseArray[0].typeIndex;;
+        console.log("pkmar:")
+        console.log(pkmar)
+        //拿到第一组
+        if(pkmar!=null && pkmar!=""){
+          dd.httpRequest({
+            headers: {  
+                'eticket': app.globalData.eticket
+              },
+                url:app.globalData.domain+"/shopping/getSupplierNum",
+                method: 'GET',
+                data:{
+                  pkMarclassId:pkmar,
+                  isNorml:"1"
+                },
+                dataType: 'json',
+                success(res){
+                  console.log("res")
+                  console.log(res)
+                  var supp = res.data.result;
+                 
+                  that.setData({
+                    'arr.pageArray.supplierSellerNum':supp
+                  })                
+                }
+            })
+        }
+
       },
       onHide() {
         // 页面隐藏
@@ -542,16 +558,19 @@ Page({
         };
       },
       goToChooseItemType(e){
-    var iddx = e.target.dataset.iddx;
-    var iddxx = e.target.dataset.iddxx;
-    // this.setData({
-    //   goIddx: iddx,
-    //   goIddxx: iddxx,
-    // })
-    dd.navigateTo({
-     // url:'/pages/biz/pages/underlinepage/chooseItemType/chooseItemType'+"?iddx="+iddx+"&iddxx="+iddxx
-      url:'/pages/purchase/strategyPur/chooseItemType/chooseItemType'+"?iddx="+iddx
-    })
-  }
+        var iddx = e.target.dataset.iddx;
+        var iddxx = e.target.dataset.iddxx;
+        // this.setData({
+        //   goIddx: iddx,
+        //   goIddxx: iddxx,
+        // })
+        dd.navigateTo({
+        // url:'/pages/biz/pages/underlinepage/chooseItemType/chooseItemType'+"?iddx="+iddx+"&iddxx="+iddxx
+          url:'/pages/purchase/strategyPur/chooseItemType/chooseItemType'+"?iddx="+iddx
+        })
+      }
+
+
+
 });
 

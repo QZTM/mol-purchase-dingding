@@ -82,7 +82,7 @@
 <!-- 负责人说明 -->
 <view style="border:1px solid #dddddd;clear:both;">
    <view class="shiping_text">负责人说明：</view>
-   <textarea  disabled="disabled" placeholder="{{negotiatedExplain}}" placeholder-class="pl"/>
+   <textarea  disabled="disabled" value="{{negotiatedExplain}}" style="padding-bottom:0px;padding-top:0px"/>
 </view>
 
 <button size="default" type="primary" onTap="submit" disabled="disabled">已完成</button>

@@ -98,6 +98,23 @@
   </view>
 </view>
 
+
+<view class="input_spec">
+  <view class="sl">电子合同</view>
+  <view  class="sr1">
+   
+    <view class="page" style="margin-top:-9px">
+      <view class="switch-list">
+        <view class="switch-item">
+          <switch checked onChange="switchChange"/>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+</view>
+
+
 <view>
   <view class="need" >需求备注</view>
   <textarea class="need_text" placeholder="备注：" auto-height onBlur="remakeFun" ></textarea>

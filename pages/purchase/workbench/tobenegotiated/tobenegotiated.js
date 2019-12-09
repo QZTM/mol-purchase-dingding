@@ -13,6 +13,8 @@ Page({
     },
     //可操作用户id
     mainList:[],
+    //用户操作是否是上拉刷新
+    upFlush:false,
   },
   onLoad() {
     //获取登录用户
@@ -23,47 +25,48 @@ Page({
     })
     //获取公司的主要负责人的钉钉id
     var _orgid=this.data.orgid;
-    this.getMainPerson(_orgid);
+    //this.getMainPerson(_orgid);
     console.log("....:",888)
   },
 
   //获取公司的主要负责人的钉钉id
-  getMainPerson(e){
-    var that=this;
-    var _orgid=e;
-    var userlist=[];
-      dd.httpRequest({
-          url: app.globalData.domain+'/negotiateding/getAppUser',
-          method: 'GET',
-          data: {orgId: _orgid},
-		  headers: {
-			  'eticket': app.globalData.eticket
-		  },
-          dataType: 'json',
-          success: (res) => {
-            var list=res.data.result;
-            for(var i=0;i<list.length;i++){
-                userlist.push(list[i].ddUserId)
-            }
-             var _mainList ='mainList';
+  // getMainPerson(e){
+  //   var that=this;
+  //   var _orgid=e;
+  //   var userlist=[];
+  //     dd.httpRequest({
+  //         url: app.globalData.domain+'/negotiateding/getAppUser',
+  //         method: 'GET',
+  //         data: {orgId: _orgid},
+	// 	  headers: {
+	// 		  'eticket': app.globalData.eticket
+	// 	  },
+  //         dataType: 'json',
+  //         success: (res) => {
+  //           var list=res.data.result;
+  //           for(var i=0;i<list.length;i++){
+  //               userlist.push(list[i].ddUserId)
+  //           }
+  //            var _mainList ='mainList';
 
-            that.setData({
-              [_mainList]:userlist
-            })
-            },
-       })
-  },
+  //           that.setData({
+  //             [_mainList]:userlist
+  //           })
+  //           },
+  //      })
+  // },
 
 
   onShow(e){
     var _pageNum=this.data.pageNum;
     var _pageSize=this.data.pageSize;
+    var _upFlush=this.data.upFlush;
     //获取进行中的列表：
-    this.getlist(_pageNum,_pageSize);
+    this.getlist(_pageNum,_pageSize,_upFlush);
  },
 
 // 获取页面数据
-  getlist:function(pageNum,pageSize){
+  getlist:function(pageNum,pageSize,upFlush){
       //获取公司Id
       //var orgid="xiesi001";
       var orgid=this.data.orgid;
@@ -73,7 +76,7 @@ Page({
        dd.httpRequest({
           url: app.globalData.domain+'/negotiateding/getList',
           method: 'GET',
-          data: {orgId: orgid,status:status,userId:_userid,pageNum,pageSize},
+          data: {orgId:orgid,status:status,userId:_userid,pageNum:pageNum,pageSize:pageSize},
 		  headers: {
 			  'eticket': app.globalData.eticket
 		  },
@@ -85,7 +88,12 @@ Page({
                 var _list=that.data.schList.list;
                 var newArray=[];
                 if(_list.length>0 && _list!=null){
-                  var newArray=_list;
+                  //var newArray=_list;
+                    console.log("原始数据不为空")
+                    if(upFlush!=false){
+                      console.log("上拉刷新操作")
+                      newArray=_list;
+                    }
                 }
                 for(var i=0;i<suList.length;i++){
                   var buyChannelName="";
@@ -118,6 +126,8 @@ Page({
                       "createTime":suList[i].createTime
                     })
                 }
+                console.log("ssssss:")
+                console.log(newArray)
                 var tr="schList.list"
                   that.setData({
                       [tr]: newArray,
@@ -211,6 +221,8 @@ Page({
    //页面上拉加载更多
    onReachBottom(){
      var that=this;
+     var _upFlush=that.data.upFlush;
+     _upFlush=!_upFlush;
      dd.showLoading({
         content: '拼命加载中...',
         success:function(e){
@@ -221,7 +233,7 @@ Page({
               pageNum:_num
             })
             console.log("再次发送请求")
-            that.getlist(_num,_size);
+            that.getlist(_num,_size,_upFlush);
         },
         fail:function(e){
           dd.hideLoading();

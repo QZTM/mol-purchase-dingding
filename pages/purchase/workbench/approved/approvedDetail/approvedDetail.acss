@@ -7,7 +7,7 @@
   font-weight: bold;
   color: black;
   border-bottom: 1px solid #dddddd;
-  padding-bottom: 9px;
+  /* padding-bottom: 9px; */
 }
 .onestep{
   clear: both;
@@ -98,5 +98,6 @@
 .pl{
   font-size: 12px;
   color: black;
+  padding-top: 3px
 }
 

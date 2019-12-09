@@ -25,6 +25,8 @@ Page({
         expertReview:"",
         //评审奖励
         expertReward:"",
+        //电子合同
+        electronicContract:true,
         //采购物品数组
         purchaseArray:[
           {
@@ -252,7 +254,15 @@ Page({
   },
   
   
-
+  //电子合同选项
+   switchChange (e){
+    console.log('switchChange 事件，值:', e.detail.value);
+    var that =this;
+    that.setData({
+      'arr.pageArray.electronicContract':e.detail.value
+    })
+    console.log(that.data.arr)
+   },
 
     //提交
   

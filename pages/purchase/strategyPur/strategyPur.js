@@ -23,6 +23,8 @@ Page({
         expertReview:"",
          //评审奖励
         expertReward:"",
+        //电子合同
+        electronicContract:true,
         //采购物品数组
         purchaseArray:[
           {
@@ -365,6 +367,16 @@ Page({
   },
 
 
+  //电子合同选项
+   switchChange (e){
+    console.log('switchChange 事件，值:', e.detail.value);
+    var that =this;
+    that.setData({
+      'arr.pageArray.electronicContract':e.detail.value
+    })
+    console.log(that.data.arr)
+   },
+
     //提交
   
   submit(e){
@@ -500,6 +512,43 @@ Page({
       },
       onShow() {
         // 页面显示
+        
+        //查询相关的商家数量
+        var that=this;
+        var arr =that.data.arr.pageArray.purchaseArray;
+        console.log("arr:")
+        console.log(arr)
+        var pkmar;
+        if(arr!=null){
+            pkmar=arr[0].typeIndex;
+        }
+        // var pkmar=that.data.arr.purchaseArray[0].typeIndex;;
+        console.log("pkmar:")
+        console.log(pkmar)
+        //拿到第一组
+        if(pkmar!=null && pkmar!=""){
+          dd.httpRequest({
+            headers: {  
+                'eticket': app.globalData.eticket
+              },
+                url:app.globalData.domain+"/shopping/getSupplierNum",
+                method: 'GET',
+                data:{
+                  pkMarclassId:pkmar,
+                  isStrategy:"1"
+                },
+                dataType: 'json',
+                success(res){
+                  console.log("res")
+                  console.log(res)
+                  var supp = res.data.result;
+                 
+                  that.setData({
+                    'arr.pageArray.supplierSellerNum':supp
+                  })                
+                }
+            })
+        }
       },
       onHide() {
         // 页面隐藏

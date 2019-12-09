@@ -68,7 +68,7 @@
 <!-- 视频议价 -->
 <view class="{{isAdmin?'':'notAdmin'}}">
   
-<view style="border:1px solid #dddddd;margin-top:230px">
+<view style="border:1px solid #dddddd;clear:both">
   <view class="shiping_text">视频议价讨论</view>
   <template is="getCallUsers" data="{{approversList}}"/>
 </view>

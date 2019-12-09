@@ -41,11 +41,43 @@
       </block>
       <view class="tr bg-g1">
           <view class="td2" >总价</view>
-          <view class="td2_r">{{item.totalMoney}}<text>元</view>
+          <view class="td2_r">{{item.totalMoney}}<text>元</text></view>
       </view>
   </view>
 
-  <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="upload">上传合同</button>
+
+  <view a:if="{{pur.electronicContract=='false'}}">  
+      <view a:if="{{filePathArr!=null}}">
+          <block a:for="{{filePathArr}}" a:for-item="files" a:for-index="idfis">
+            <view a:if="{{files.id==item.pkSupplier}}" style="float:left">
+              <block a:for="{{files.arr}}" a:for-item="file" a:for-index="idfi">
+                <!-- <image mode="scaleToFill" class="del" src="/images/sch/del.png" data-imageIndex="{{idfi}}" data-suppId="{{item.pkSupplier}}" onTap="delImage"/> -->
+                <image mode="scaleToFill" src="{{file}}" class="img" style="width:{{width/6}}px;height:{{width/6}}px" data-id="{{file}}" onTap="preViewImage"/>
+              </block>
+            </view>
+            <view a:if="{{files.id==item.pkSupplier && files.arr!=null}}">
+              <button size="default" class="up" data-id="{{item.pkSupplier}}" onTap="upload">上传</button>
+            </view>
+          </block>
+      </view>
+  </view>
+  
+  
+  <!-- <view a:if="{{pur.electronicContract=='true'}}" style="clear:both">
+      <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="sendEcontract">发起电子合同</button>
+      <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="callSupp">联系供应商</button>
+  </view> -->
+
+<!-- <view style="clear:both" a:if="{{pur.electronicContract=='false'}}">
+  <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="checkImg">选择合同</button>
   <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="callSupp">联系供应商</button>
+</view> -->
+  
+  <view style="clear:both" >
+    <button a:if="{{pur.electronicContract=='false'}}" size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="checkImg">选择合同</button>
+    <button size="default" class="callSupp" data-id="{{item.pkSupplier}}" onTap="callSupp">联系供应商</button>
+  </view>
+
+  </view>
 </template>
 

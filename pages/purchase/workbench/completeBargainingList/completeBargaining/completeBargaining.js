@@ -108,11 +108,12 @@ Page({
     var that=this;
     var _orgid=e;
     var _appUserId=this.data.appUserId;
+    var _purId=this.data.id;
 
     dd.httpRequest({
-          url: app.globalData.domain+'/negotiateding/getAppUser',
+          url: app.globalData.domain+'/negotiateding/findMainPerson',
           method: 'GET',
-          data: {orgId:_orgid},
+          data: {purId:_purId},
           headers: {
             'eticket': app.globalData.eticket
           },

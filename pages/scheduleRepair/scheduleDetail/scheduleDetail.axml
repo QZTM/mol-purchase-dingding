@@ -22,8 +22,8 @@
     <view class="new">
        <view class="big">审核评论:</view>
         <view style="margin:6px 0px 0px 26px;" a:for="{{appvoverList}}">
-          <view>姓名：{{item.userid}}</view>
-          <textarea placeholder="{{item.message}}" style='margin-left:30px;' disabled="disabled"></textarea>
+          <view>{{item.userid}}：</view>
+          <textarea  style='margin-left:30px;font-size:12px;padding-bottom:0px;pdding-top:0px' disabled="disabled" value="{{item.message}}"></textarea>
         </view>
     </view>
  
@@ -43,5 +43,5 @@
   <template is="quoteTable" data="{{...supplier,isShow}}" />
 </view> -->
     <block a:for="{{supplier}}" a:for-item="item" a:for-index="ix">
-            <template is="quoteTable" data="{{item,ix}}">
+            <template is="quoteTable" data="{{item,ix,filePathArr,width,pur}}">
     </block>

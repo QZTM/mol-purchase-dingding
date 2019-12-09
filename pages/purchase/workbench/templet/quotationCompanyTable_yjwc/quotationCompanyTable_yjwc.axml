@@ -54,7 +54,7 @@
 </block> 
        
 <block a:for="{{item[0]}}" a:for-item="top" a:for-index="ix">
-      <view style="clear:both;margin:6px 0px 250px 0px">
+      <view >
          <!-- 左边 -->
           <view style="float:left;width:70%;">
               <!-- <view class="click_zhineng_you" a:if="{{top.recoReason}}">
